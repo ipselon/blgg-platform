@@ -1,0 +1,30 @@
+{
+  "name": "blgg-platform",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:ipselon/blgg-platform.git",
+    "directory": "."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "AGPL-3.0",
+  "workspaces": [
+    "platform/*"
+  ],
+  "scripts": {
+    "build-platform": "turbo run build --verbosity=2",
+    "deploy-platform": "turbo run deploy --verbosity=2",
+    "destroy-platform": "turbo run destroy --verbosity=2",
+    "admin-pwa": "turbo run dev --filter=admin-pwa",
+    "admin-pwa-server": "turbo run preview --filter=admin-pwa",
+    "admin-api-server": "turbo run preview --filter=admin-api"
+  },
+  "engines": {
+    "node": "18.x"
+  },
+  "dependencies": {
+    "turbo": "^1.10.16"
+  }
+}

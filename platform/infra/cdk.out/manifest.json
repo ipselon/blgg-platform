@@ -1,0 +1,257 @@
+{
+  "version": "34.0.0",
+  "artifacts": {
+    "BlggPlatformStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "BlggPlatformStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "BlggPlatformStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "BlggPlatformStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/58bb480dee082031b73a6197b74950022fba8f18b6a54c67c1fd8adc2312c393.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "BlggPlatformStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "BlggPlatformStack.assets"
+      ],
+      "metadata": {
+        "/BlggPlatformStack/AdminApiConstruct/ProbeTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdminApiConstructProbeTable28254D2A"
+          }
+        ],
+        "/BlggPlatformStack/AdminApiConstruct/ProbeTableNameParameter/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdminApiConstructProbeTableNameParameter25D7E148"
+          }
+        ],
+        "/BlggPlatformStack/AdminApiConstruct/AdminApiProbeLambda/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdminApiConstructAdminApiProbeLambdaServiceRole6F250827"
+          }
+        ],
+        "/BlggPlatformStack/AdminApiConstruct/AdminApiProbeLambda/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdminApiConstructAdminApiProbeLambdaServiceRoleDefaultPolicy9DE0A0FB"
+          }
+        ],
+        "/BlggPlatformStack/AdminApiConstruct/AdminApiProbeLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdminApiConstructAdminApiProbeLambda455B4C8C"
+          }
+        ],
+        "/BlggPlatformStack/AdminApiConstruct/AdminApi/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdminApiConstructAdminApiC5F590AD"
+          }
+        ],
+        "/BlggPlatformStack/AdminApiConstruct/AdminApi/DefaultStage/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdminApiConstructAdminApiDefaultStage005A9C67"
+          }
+        ],
+        "/BlggPlatformStack/AdminApiConstruct/AdminApi/GET--api--probe/AdminApiProbeLambdaIntegration/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdminApiConstructAdminApiGETapiprobeAdminApiProbeLambdaIntegration39D129A6"
+          }
+        ],
+        "/BlggPlatformStack/AdminApiConstruct/AdminApi/GET--api--probe/AdminApiProbeLambdaIntegration-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdminApiConstructAdminApiGETapiprobeAdminApiProbeLambdaIntegrationPermission465078AC"
+          }
+        ],
+        "/BlggPlatformStack/AdminApiConstruct/AdminApi/GET--api--probe/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdminApiConstructAdminApiGETapiprobe3FFFA77B"
+          }
+        ],
+        "/BlggPlatformStack/AdminApiConstruct/AdminApiUrl": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdminApiConstructAdminApiUrl360CE42B"
+          }
+        ],
+        "/BlggPlatformStack/AdminPwaBucketConstruct/AdminPwaBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdminPwaBucketConstructAdminPwaBucketB616072B"
+          }
+        ],
+        "/BlggPlatformStack/AdminPwaBucketConstruct/AdminPwaBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdminPwaBucketConstructAdminPwaBucketPolicyC8228857"
+          }
+        ],
+        "/BlggPlatformStack/AdminPwaBucketConstruct/AdminPwaBucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdminPwaBucketConstructAdminPwaBucketAutoDeleteObjectsCustomResource576FA340"
+          }
+        ],
+        "/BlggPlatformStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+          }
+        ],
+        "/BlggPlatformStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+          }
+        ],
+        "/BlggPlatformStack/WebsiteBucketConstruct/WebsiteBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WebsiteBucketConstructWebsiteBucketF0C8142D"
+          }
+        ],
+        "/BlggPlatformStack/WebsiteBucketConstruct/WebsiteBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WebsiteBucketConstructWebsiteBucketPolicy23C9D957"
+          }
+        ],
+        "/BlggPlatformStack/WebsiteBucketConstruct/WebsiteBucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WebsiteBucketConstructWebsiteBucketAutoDeleteObjectsCustomResourceE4893254"
+          }
+        ],
+        "/BlggPlatformStack/EntryPointConstruct/WebsiteOAI/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EntryPointConstructWebsiteOAIB7161001"
+          }
+        ],
+        "/BlggPlatformStack/EntryPointConstruct/AdminPwaOAI/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EntryPointConstructAdminPwaOAIAB77CD98"
+          }
+        ],
+        "/BlggPlatformStack/EntryPointConstruct/AdminRewriteFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EntryPointConstructAdminRewriteFunction62DF9626"
+          }
+        ],
+        "/BlggPlatformStack/EntryPointConstruct/EntryPointDistribution/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EntryPointConstructEntryPointDistribution138597BF"
+          }
+        ],
+        "/BlggPlatformStack/WebsiteDeploymentConstruct/WebsiteDeployment/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WebsiteDeploymentConstructWebsiteDeploymentAwsCliLayerA1375BAA"
+          }
+        ],
+        "/BlggPlatformStack/WebsiteDeploymentConstruct/WebsiteDeployment/CustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WebsiteDeploymentConstructWebsiteDeploymentCustomResourceFCECB036"
+          }
+        ],
+        "/BlggPlatformStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+          }
+        ],
+        "/BlggPlatformStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF"
+          }
+        ],
+        "/BlggPlatformStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536"
+          }
+        ],
+        "/BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdminPwaDeploymentConstructAdminPwaDeploymentAwsCliLayerEBBF52BF"
+          }
+        ],
+        "/BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/CustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdminPwaDeploymentConstructAdminPwaDeploymentCustomResourceB5FE4610"
+          }
+        ],
+        "/BlggPlatformStack/DistributionDomainName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DistributionDomainName"
+          }
+        ],
+        "/BlggPlatformStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/BlggPlatformStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/BlggPlatformStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/BlggPlatformStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "BlggPlatformStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

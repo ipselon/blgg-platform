@@ -1,0 +1,50 @@
+
+> @pagemosaic/infra@1.0.0 deploy /Users/alex/Development/projects/ipselon/blgg-platform/platform/infra
+> bash -c 'source ../../env.sh && ./scripts/deploy.sh'
+
+The AWS session is still valid.
+Admin API Path:  /Users/alex/Development/projects/ipselon/blgg-platform/platform/admin-api/dist
+Website Path:  /Users/alex/Development/projects/ipselon/blgg-platform/website/dist
+Admin PWA Path:  /Users/alex/Development/projects/ipselon/blgg-platform/platform/admin-pwa/dist
+
+✨  Synthesis time: 4.36s
+
+BlggPlatformStack:  start: Building 550c183033d13fdbbfe3148602acf6dd0d4a60952d3dc973fc0c585d711a1132:current_account-current_region
+BlggPlatformStack:  success: Built 550c183033d13fdbbfe3148602acf6dd0d4a60952d3dc973fc0c585d711a1132:current_account-current_region
+BlggPlatformStack:  start: Building 58bb480dee082031b73a6197b74950022fba8f18b6a54c67c1fd8adc2312c393:current_account-current_region
+BlggPlatformStack:  success: Built 58bb480dee082031b73a6197b74950022fba8f18b6a54c67c1fd8adc2312c393:current_account-current_region
+BlggPlatformStack:  start: Publishing 550c183033d13fdbbfe3148602acf6dd0d4a60952d3dc973fc0c585d711a1132:current_account-current_region
+BlggPlatformStack:  start: Publishing 58bb480dee082031b73a6197b74950022fba8f18b6a54c67c1fd8adc2312c393:current_account-current_region
+BlggPlatformStack:  success: Published 58bb480dee082031b73a6197b74950022fba8f18b6a54c67c1fd8adc2312c393:current_account-current_region
+BlggPlatformStack:  success: Published 550c183033d13fdbbfe3148602acf6dd0d4a60952d3dc973fc0c585d711a1132:current_account-current_region
+BlggPlatformStack: deploying... [1/1]
+BlggPlatformStack: creating CloudFormation changeset...
+BlggPlatformStack | 0/5 | 4:16:41 PM | UPDATE_IN_PROGRESS   | AWS::CloudFront::Function                       | EntryPointConstruct/AdminRewriteFunction (EntryPointConstructAdminRewriteFunction62DF9626) 
+BlggPlatformStack | 0/5 | 4:16:36 PM | UPDATE_IN_PROGRESS   | AWS::CloudFormation::Stack                      | BlggPlatformStack User Initiated
+BlggPlatformStack | 0/5 | 4:16:43 PM | UPDATE_IN_PROGRESS   | AWS::CloudFront::Function                       | EntryPointConstruct/AdminRewriteFunction (EntryPointConstructAdminRewriteFunction62DF9626) Requested update requires the creation of a new physical resource; hence creating one.
+BlggPlatformStack | 0/5 | 4:16:48 PM | UPDATE_IN_PROGRESS   | AWS::CloudFront::Function                       | EntryPointConstruct/AdminRewriteFunction (EntryPointConstructAdminRewriteFunction62DF9626) Resource creation Initiated
+BlggPlatformStack | 1/5 | 4:16:48 PM | UPDATE_COMPLETE      | AWS::CloudFront::Function                       | EntryPointConstruct/AdminRewriteFunction (EntryPointConstructAdminRewriteFunction62DF9626) 
+BlggPlatformStack | 1/5 | 4:16:51 PM | UPDATE_IN_PROGRESS   | AWS::CloudFront::Distribution                   | EntryPointConstruct/EntryPointDistribution (EntryPointConstructEntryPointDistribution138597BF) 
+1/5 Currently in progress: BlggPlatformStack, EntryPointConstructEntryPointDistribution138597BF
+BlggPlatformStack | 2/5 | 4:20:29 PM | UPDATE_COMPLETE      | AWS::CloudFront::Distribution                   | EntryPointConstruct/EntryPointDistribution (EntryPointConstructEntryPointDistribution138597BF) 
+BlggPlatformStack | 2/5 | 4:20:33 PM | UPDATE_IN_PROGRESS   | Custom::CDKBucketDeployment                     | AdminPwaDeploymentConstruct/AdminPwaDeployment/CustomResource/Default (AdminPwaDeploymentConstructAdminPwaDeploymentCustomResourceB5FE4610) 
+2/5 Currently in progress: BlggPlatformStack, AdminPwaDeploymentConstructAdminPwaDeploymentCustomResourceB5FE4610
+BlggPlatformStack | 3/5 | 4:22:45 PM | UPDATE_COMPLETE      | Custom::CDKBucketDeployment                     | AdminPwaDeploymentConstruct/AdminPwaDeployment/CustomResource/Default (AdminPwaDeploymentConstructAdminPwaDeploymentCustomResourceB5FE4610) 
+BlggPlatformStack | 4/5 | 4:22:48 PM | UPDATE_COMPLETE_CLEA | AWS::CloudFormation::Stack                      | BlggPlatformStack 
+BlggPlatformStack | 4/5 | 4:22:49 PM | DELETE_IN_PROGRESS   | AWS::CloudFront::Function                       | EntryPointConstruct/AdminRewriteFunction (EntryPointConstructAdminRewriteFunction62DF9626) 
+BlggPlatformStack | 3/5 | 4:22:53 PM | DELETE_COMPLETE      | AWS::CloudFront::Function                       | EntryPointConstruct/AdminRewriteFunction (EntryPointConstructAdminRewriteFunction62DF9626) 
+BlggPlatformStack | 4/5 | 4:22:54 PM | UPDATE_COMPLETE      | AWS::CloudFormation::Stack                      | BlggPlatformStack 
+
+ ✅  BlggPlatformStack
+
+✨  Deployment time: 405.34s
+
+Outputs:
+BlggPlatformStack.AdminApiConstructAdminApiUrl360CE42B = https://nxk7pwzxae.execute-api.eu-west-1.amazonaws.com
+BlggPlatformStack.DistributionDomainName = d1e3grztyj9vbd.cloudfront.net
+Stack ARN:
+arn:aws:cloudformation:eu-west-1:537663360039:stack/BlggPlatformStack/d7a2cf20-8142-11ee-b43e-0a58938c591d
+
+✨  Total time: 409.69s
+
+
