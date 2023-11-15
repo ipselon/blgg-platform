@@ -7,8 +7,10 @@ import * as apigwv2 from '@aws-cdk/aws-apigatewayv2-alpha';
 
 export interface EntryPointConstructProps {
     adminHttpApi: apigwv2.HttpApi;
+    webAppHttpApi: apigwv2.HttpApi;
     adminPwaBucket: s3.Bucket;
-    websiteBucket: s3.Bucket;
+    // websiteBucket: s3.Bucket;
+    webAppBucket: s3.Bucket;
 }
 
 export class EntryPointConstruct extends Construct {
@@ -18,16 +20,44 @@ export class EntryPointConstruct extends Construct {
         super(scope, id);
 
         // Define the OAIs for CloudFront to access the S3 buckets
-        const websiteOriginAccessIdentity = new cloudfront.OriginAccessIdentity(this, 'WebsiteOAI');
-        props.websiteBucket.grantRead(websiteOriginAccessIdentity);
+        // const websiteOriginAccessIdentity = new cloudfront.OriginAccessIdentity(this, 'WebsiteOAI');
+        // props.websiteBucket.grantRead(websiteOriginAccessIdentity);
         const adminPwaOriginAccessIdentity = new cloudfront.OriginAccessIdentity(this, 'AdminPwaOAI');
         props.adminPwaBucket.grantRead(adminPwaOriginAccessIdentity);
+        const webAppOriginAccessIdentity = new cloudfront.OriginAccessIdentity(this, 'WebAppOAI');
+        props.webAppBucket.grantRead(webAppOriginAccessIdentity);
 
-        // Define the HTTP API Gateway endpoint as a custom origin
-        const apiId = props.adminHttpApi.apiId;
         const region = cdk.Stack.of(this).region;
-        const httpApiGatewayOrigin = new origins.HttpOrigin(`${apiId}.execute-api.${region}.amazonaws.com`, {
+        // Define the HTTP Admin API Gateway endpoint as a custom origin
+        const adminApiId = props.adminHttpApi.apiId;
+        const adminHttpApiGatewayOrigin = new origins.HttpOrigin(`${adminApiId}.execute-api.${region}.amazonaws.com`, {
             // Optionally, configure origin properties like custom headers, SSL protocols, etc.
+            // If you have a custom domain name for your CloudFront distribution
+            // and you want your application to be aware of this custom domain,
+            // you should set the X-Forwarded-Host header to this custom domain name.
+            // customHeaders: {
+            //     'X-Forwarded-Host': hostValue
+            // }
+        });
+        // Define the HTTP WebApp API Gateway endpoint as a custom origin
+        const webAppApiId = props.webAppHttpApi.apiId;
+        const webAppHttpApiGatewayOrigin = new origins.HttpOrigin(`${webAppApiId}.execute-api.${region}.amazonaws.com`, {
+            // Optionally, configure origin properties like custom headers, SSL protocols, etc.
+            // If you have a custom domain name for your CloudFront distribution
+            // and you want your application to be aware of this custom domain,
+            // you should set the X-Forwarded-Host header to this custom domain name.
+            // customHeaders: {
+            //     'X-Forwarded-Host': hostValue
+            // }
+        });
+
+        // Create a cache policy for the WebApp HttpApi
+        const webAppApiCachePolicy = new cloudfront.CachePolicy(this, 'WebAppApiApiCachePolicy', {
+            minTtl: cdk.Duration.seconds(600),
+            defaultTtl: cdk.Duration.seconds(600),
+            maxTtl: cdk.Duration.seconds(600),
+            cachePolicyName: 'WebAppApiApiCachePolicy',
+            comment: 'Cache policy for WebApp HttpApi with 10 minutes TTL',
         });
 
         const adminRewriteFunction = new cloudfront.Function(this, 'AdminRewriteFunction', {
@@ -49,11 +79,11 @@ export class EntryPointConstruct extends Construct {
         // Create the CloudFront distribution
         this.distribution = new cloudfront.Distribution(this, 'EntryPointDistribution', {
             defaultBehavior: {
-                origin: new origins.S3Origin(props.websiteBucket, {
-                    originAccessIdentity: websiteOriginAccessIdentity
-                }),
+                origin: webAppHttpApiGatewayOrigin,
+                allowedMethods: cloudfront.AllowedMethods.ALLOW_ALL,
+                viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
                 responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT_AND_SECURITY_HEADERS,
-                viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS
+                cachePolicy: webAppApiCachePolicy,
             },
             additionalBehaviors: {
                 '/admin': {
@@ -79,12 +109,19 @@ export class EntryPointConstruct extends Construct {
                     }],
                 },
                 '/api/*': {
-                    origin: httpApiGatewayOrigin,
+                    origin: adminHttpApiGatewayOrigin,
+                    viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+                    responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT_AND_SECURITY_HEADERS,
+                    cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED
+                },
+                '/static/*': {
+                    origin: new origins.S3Origin(props.webAppBucket, {
+                        originAccessIdentity: webAppOriginAccessIdentity
+                    }),
                     viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
                     responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT_AND_SECURITY_HEADERS,
                 },
-            },
-            defaultRootObject: 'index.html',
+            }
         });
     }
 }

@@ -19,7 +19,9 @@
     "destroy-platform": "turbo run destroy --verbosity=2",
     "admin-pwa": "turbo run dev --filter=admin-pwa",
     "admin-pwa-server": "turbo run preview --filter=admin-pwa",
-    "admin-api-server": "turbo run preview --filter=admin-api"
+    "admin-api-server": "turbo run preview --filter=admin-api",
+    "web-app": "turbo run dev --filter=web-app",
+    "web-app-server": "turbo run start --filter=web-app"
   },
   "engines": {
     "node": "18.x"

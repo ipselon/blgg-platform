@@ -4,6 +4,9 @@ import json from '@rollup/plugin-json';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
+import {readFileSync} from "fs";
+
+const pkg = JSON.parse(readFileSync('./package.json', 'utf8'));
 
 // Dynamically find all `dirName.handler.ts` files in src/lambdas
 function findHandlers(dir) {
@@ -39,9 +42,7 @@ const result = entryPoints.map(entry => {
                 format: 'cjs',
             },
         ],
-        external: [
-            'util', 'stream'
-        ],
+        external: Object.keys(pkg.devDependencies || {}),
         plugins: [
             json(),
             resolve({preferBuiltins: false, exportConditions: ['node']}),

@@ -8,17 +8,17 @@
         "id": "BlggPlatformStack",
         "path": "BlggPlatformStack",
         "children": {
-          "AdminApiConstruct": {
-            "id": "AdminApiConstruct",
-            "path": "BlggPlatformStack/AdminApiConstruct",
+          "DynamoDbTablesConstruct": {
+            "id": "DynamoDbTablesConstruct",
+            "path": "BlggPlatformStack/DynamoDbTablesConstruct",
             "children": {
               "ProbeTable": {
                 "id": "ProbeTable",
-                "path": "BlggPlatformStack/AdminApiConstruct/ProbeTable",
+                "path": "BlggPlatformStack/DynamoDbTablesConstruct/ProbeTable",
                 "children": {
                   "Resource": {
                     "id": "Resource",
-                    "path": "BlggPlatformStack/AdminApiConstruct/ProbeTable/Resource",
+                    "path": "BlggPlatformStack/DynamoDbTablesConstruct/ProbeTable/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
                       "aws:cdk:cloudformation:props": {
@@ -37,7 +37,8 @@
                         "provisionedThroughput": {
                           "readCapacityUnits": 5,
                           "writeCapacityUnits": 5
-                        }
+                        },
+                        "tableName": "ProbeItems"
                       }
                     },
                     "constructInfo": {
@@ -47,7 +48,7 @@
                   },
                   "ScalingRole": {
                     "id": "ScalingRole",
-                    "path": "BlggPlatformStack/AdminApiConstruct/ProbeTable/ScalingRole",
+                    "path": "BlggPlatformStack/DynamoDbTablesConstruct/ProbeTable/ScalingRole",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.105.0"
@@ -58,35 +59,17 @@
                   "fqn": "aws-cdk-lib.aws_dynamodb.Table",
                   "version": "2.105.0"
                 }
-              },
-              "ProbeTableNameParameter": {
-                "id": "ProbeTableNameParameter",
-                "path": "BlggPlatformStack/AdminApiConstruct/ProbeTableNameParameter",
-                "children": {
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "BlggPlatformStack/AdminApiConstruct/ProbeTableNameParameter/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
-                      "aws:cdk:cloudformation:props": {
-                        "name": "probe-table-name",
-                        "type": "String",
-                        "value": {
-                          "Ref": "AdminApiConstructProbeTable28254D2A"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
-                      "version": "2.105.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
-                  "version": "2.105.0"
-                }
-              },
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.3.0"
+            }
+          },
+          "AdminApiConstruct": {
+            "id": "AdminApiConstruct",
+            "path": "BlggPlatformStack/AdminApiConstruct",
+            "children": {
               "AdminApiProbeLambda": {
                 "id": "AdminApiProbeLambda",
                 "path": "BlggPlatformStack/AdminApiConstruct/AdminApiProbeLambda",
@@ -193,7 +176,7 @@
                                       "Resource": [
                                         {
                                           "Fn::GetAtt": [
-                                            "AdminApiConstructProbeTable28254D2A",
+                                            "DynamoDbTablesConstructProbeTable085E6DDA",
                                             "Arn"
                                           ]
                                         },
@@ -266,7 +249,7 @@
                           "s3Bucket": {
                             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                           },
-                          "s3Key": "f8cf08821e3494e8584b24f874ef112786871cdd46b22b604ac6487dd15b6562.zip"
+                          "s3Key": "8fe0404824552862b2ef8062dbc648be56531cb203c57b82752a3b20dcfdf0b4.zip"
                         },
                         "handler": "probe.handler",
                         "memorySize": 256,
@@ -464,6 +447,398 @@
               "AdminApiUrl": {
                 "id": "AdminApiUrl",
                 "path": "BlggPlatformStack/AdminApiConstruct/AdminApiUrl",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.105.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.3.0"
+            }
+          },
+          "WebAppApiConstruct": {
+            "id": "WebAppApiConstruct",
+            "path": "BlggPlatformStack/WebAppApiConstruct",
+            "children": {
+              "WebAppAdapterLambda": {
+                "id": "WebAppAdapterLambda",
+                "path": "BlggPlatformStack/WebAppApiConstruct/WebAppAdapterLambda",
+                "children": {
+                  "ServiceRole": {
+                    "id": "ServiceRole",
+                    "path": "BlggPlatformStack/WebAppApiConstruct/WebAppAdapterLambda/ServiceRole",
+                    "children": {
+                      "ImportServiceRole": {
+                        "id": "ImportServiceRole",
+                        "path": "BlggPlatformStack/WebAppApiConstruct/WebAppAdapterLambda/ServiceRole/ImportServiceRole",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.Resource",
+                          "version": "2.105.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "BlggPlatformStack/WebAppApiConstruct/WebAppAdapterLambda/ServiceRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "lambda.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "managedPolicyArns": [
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                                  ]
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.105.0"
+                        }
+                      },
+                      "DefaultPolicy": {
+                        "id": "DefaultPolicy",
+                        "path": "BlggPlatformStack/WebAppApiConstruct/WebAppAdapterLambda/ServiceRole/DefaultPolicy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "BlggPlatformStack/WebAppApiConstruct/WebAppAdapterLambda/ServiceRole/DefaultPolicy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": [
+                                        "ssm:GetParameter",
+                                        "ssm:GetParameters",
+                                        "ssm:GetParametersByPath"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Fn::Join": [
+                                          "",
+                                          [
+                                            "arn:aws:ssm:",
+                                            {
+                                              "Ref": "AWS::Region"
+                                            },
+                                            ":",
+                                            {
+                                              "Ref": "AWS::AccountId"
+                                            },
+                                            ":parameter/*"
+                                          ]
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "Action": [
+                                        "dynamodb:BatchGetItem",
+                                        "dynamodb:ConditionCheckItem",
+                                        "dynamodb:DescribeTable",
+                                        "dynamodb:GetItem",
+                                        "dynamodb:GetRecords",
+                                        "dynamodb:GetShardIterator",
+                                        "dynamodb:Query",
+                                        "dynamodb:Scan"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": [
+                                        {
+                                          "Fn::GetAtt": [
+                                            "DynamoDbTablesConstructProbeTable085E6DDA",
+                                            "Arn"
+                                          ]
+                                        },
+                                        {
+                                          "Ref": "AWS::NoValue"
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "WebAppApiConstructWebAppAdapterLambdaServiceRoleDefaultPolicy7D2A2975",
+                                "roles": [
+                                  {
+                                    "Ref": "WebAppApiConstructWebAppAdapterLambdaServiceRole6C77E01C"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                              "version": "2.105.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Policy",
+                          "version": "2.105.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.105.0"
+                    }
+                  },
+                  "Code": {
+                    "id": "Code",
+                    "path": "BlggPlatformStack/WebAppApiConstruct/WebAppAdapterLambda/Code",
+                    "children": {
+                      "Stage": {
+                        "id": "Stage",
+                        "path": "BlggPlatformStack/WebAppApiConstruct/WebAppAdapterLambda/Code/Stage",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.AssetStaging",
+                          "version": "2.105.0"
+                        }
+                      },
+                      "AssetBucket": {
+                        "id": "AssetBucket",
+                        "path": "BlggPlatformStack/WebAppApiConstruct/WebAppAdapterLambda/Code/AssetBucket",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                          "version": "2.105.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                      "version": "2.105.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "BlggPlatformStack/WebAppApiConstruct/WebAppAdapterLambda/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                      "aws:cdk:cloudformation:props": {
+                        "code": {
+                          "s3Bucket": {
+                            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                          },
+                          "s3Key": "471042869f52351a388be0ede9a6fdeb01fe2f044129da97d68ec6595e712c75.zip"
+                        },
+                        "handler": "index.handler",
+                        "memorySize": 256,
+                        "role": {
+                          "Fn::GetAtt": [
+                            "WebAppApiConstructWebAppAdapterLambdaServiceRole6C77E01C",
+                            "Arn"
+                          ]
+                        },
+                        "runtime": "nodejs18.x"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                      "version": "2.105.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.Function",
+                  "version": "2.105.0"
+                }
+              },
+              "WebAppApi": {
+                "id": "WebAppApi",
+                "path": "BlggPlatformStack/WebAppApiConstruct/WebAppApi",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "BlggPlatformStack/WebAppApiConstruct/WebAppApi/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Api",
+                      "aws:cdk:cloudformation:props": {
+                        "name": "WebAppApi",
+                        "protocolType": "HTTP"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnApi",
+                      "version": "2.105.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "BlggPlatformStack/WebAppApiConstruct/WebAppApi/DefaultRoute",
+                    "children": {
+                      "WebAppAdapterLambdaIntegration": {
+                        "id": "WebAppAdapterLambdaIntegration",
+                        "path": "BlggPlatformStack/WebAppApiConstruct/WebAppApi/DefaultRoute/WebAppAdapterLambdaIntegration",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "BlggPlatformStack/WebAppApiConstruct/WebAppApi/DefaultRoute/WebAppAdapterLambdaIntegration/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Integration",
+                              "aws:cdk:cloudformation:props": {
+                                "apiId": {
+                                  "Ref": "WebAppApiConstructWebAppApi94B8E891"
+                                },
+                                "integrationType": "AWS_PROXY",
+                                "integrationUri": {
+                                  "Fn::GetAtt": [
+                                    "WebAppApiConstructWebAppAdapterLambda643C244D",
+                                    "Arn"
+                                  ]
+                                },
+                                "payloadFormatVersion": "2.0"
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnIntegration",
+                              "version": "2.105.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpIntegration",
+                          "version": "2.105.0-alpha.0"
+                        }
+                      },
+                      "WebAppAdapterLambdaIntegration-Permission": {
+                        "id": "WebAppAdapterLambdaIntegration-Permission",
+                        "path": "BlggPlatformStack/WebAppApiConstruct/WebAppApi/DefaultRoute/WebAppAdapterLambdaIntegration-Permission",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                          "aws:cdk:cloudformation:props": {
+                            "action": "lambda:InvokeFunction",
+                            "functionName": {
+                              "Fn::GetAtt": [
+                                "WebAppApiConstructWebAppAdapterLambda643C244D",
+                                "Arn"
+                              ]
+                            },
+                            "principal": "apigateway.amazonaws.com",
+                            "sourceArn": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "arn:",
+                                  {
+                                    "Ref": "AWS::Partition"
+                                  },
+                                  ":execute-api:",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  ":",
+                                  {
+                                    "Ref": "AWS::AccountId"
+                                  },
+                                  ":",
+                                  {
+                                    "Ref": "WebAppApiConstructWebAppApi94B8E891"
+                                  },
+                                  "/*/*"
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                          "version": "2.105.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "BlggPlatformStack/WebAppApiConstruct/WebAppApi/DefaultRoute/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Route",
+                          "aws:cdk:cloudformation:props": {
+                            "apiId": {
+                              "Ref": "WebAppApiConstructWebAppApi94B8E891"
+                            },
+                            "authorizationType": "NONE",
+                            "routeKey": "$default",
+                            "target": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "integrations/",
+                                  {
+                                    "Ref": "WebAppApiConstructWebAppApiDefaultRouteWebAppAdapterLambdaIntegrationB0DB3A17"
+                                  }
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnRoute",
+                          "version": "2.105.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpRoute",
+                      "version": "2.105.0-alpha.0"
+                    }
+                  },
+                  "DefaultStage": {
+                    "id": "DefaultStage",
+                    "path": "BlggPlatformStack/WebAppApiConstruct/WebAppApi/DefaultStage",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "BlggPlatformStack/WebAppApiConstruct/WebAppApi/DefaultStage/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Stage",
+                          "aws:cdk:cloudformation:props": {
+                            "apiId": {
+                              "Ref": "WebAppApiConstructWebAppApi94B8E891"
+                            },
+                            "autoDeploy": true,
+                            "stageName": "$default"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnStage",
+                          "version": "2.105.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpStage",
+                      "version": "2.105.0-alpha.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpApi",
+                  "version": "2.105.0-alpha.0"
+                }
+              },
+              "WebAppApiUrl": {
+                "id": "WebAppApiUrl",
+                "path": "BlggPlatformStack/WebAppApiConstruct/WebAppApiUrl",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnOutput",
                   "version": "2.105.0"
@@ -704,17 +1079,17 @@
               "version": "2.105.0"
             }
           },
-          "WebsiteBucketConstruct": {
-            "id": "WebsiteBucketConstruct",
-            "path": "BlggPlatformStack/WebsiteBucketConstruct",
+          "WebAppBucketConstruct": {
+            "id": "WebAppBucketConstruct",
+            "path": "BlggPlatformStack/WebAppBucketConstruct",
             "children": {
-              "WebsiteBucket": {
-                "id": "WebsiteBucket",
-                "path": "BlggPlatformStack/WebsiteBucketConstruct/WebsiteBucket",
+              "WebAppBucket": {
+                "id": "WebAppBucket",
+                "path": "BlggPlatformStack/WebAppBucketConstruct/WebAppBucket",
                 "children": {
                   "Resource": {
                     "id": "Resource",
-                    "path": "BlggPlatformStack/WebsiteBucketConstruct/WebsiteBucket/Resource",
+                    "path": "BlggPlatformStack/WebAppBucketConstruct/WebAppBucket/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
                       "aws:cdk:cloudformation:props": {
@@ -724,7 +1099,7 @@
                             "value": "true"
                           },
                           {
-                            "key": "aws-cdk:cr-owned:646200cc",
+                            "key": "aws-cdk:cr-owned:static:95ee0f39",
                             "value": "true"
                           }
                         ]
@@ -737,16 +1112,16 @@
                   },
                   "Policy": {
                     "id": "Policy",
-                    "path": "BlggPlatformStack/WebsiteBucketConstruct/WebsiteBucket/Policy",
+                    "path": "BlggPlatformStack/WebAppBucketConstruct/WebAppBucket/Policy",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "BlggPlatformStack/WebsiteBucketConstruct/WebsiteBucket/Policy/Resource",
+                        "path": "BlggPlatformStack/WebAppBucketConstruct/WebAppBucket/Policy/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::S3::BucketPolicy",
                           "aws:cdk:cloudformation:props": {
                             "bucket": {
-                              "Ref": "WebsiteBucketConstructWebsiteBucketF0C8142D"
+                              "Ref": "WebAppBucketConstructWebAppBucket838A9798"
                             },
                             "policyDocument": {
                               "Statement": [
@@ -769,7 +1144,7 @@
                                   "Resource": [
                                     {
                                       "Fn::GetAtt": [
-                                        "WebsiteBucketConstructWebsiteBucketF0C8142D",
+                                        "WebAppBucketConstructWebAppBucket838A9798",
                                         "Arn"
                                       ]
                                     },
@@ -779,7 +1154,7 @@
                                         [
                                           {
                                             "Fn::GetAtt": [
-                                              "WebsiteBucketConstructWebsiteBucketF0C8142D",
+                                              "WebAppBucketConstructWebAppBucket838A9798",
                                               "Arn"
                                             ]
                                           },
@@ -799,7 +1174,7 @@
                                   "Principal": {
                                     "CanonicalUser": {
                                       "Fn::GetAtt": [
-                                        "EntryPointConstructWebsiteOAIB7161001",
+                                        "EntryPointConstructWebAppOAI266F5E53",
                                         "S3CanonicalUserId"
                                       ]
                                     }
@@ -807,7 +1182,7 @@
                                   "Resource": [
                                     {
                                       "Fn::GetAtt": [
-                                        "WebsiteBucketConstructWebsiteBucketF0C8142D",
+                                        "WebAppBucketConstructWebAppBucket838A9798",
                                         "Arn"
                                       ]
                                     },
@@ -817,7 +1192,7 @@
                                         [
                                           {
                                             "Fn::GetAtt": [
-                                              "WebsiteBucketConstructWebsiteBucketF0C8142D",
+                                              "WebAppBucketConstructWebAppBucket838A9798",
                                               "Arn"
                                             ]
                                           },
@@ -833,7 +1208,7 @@
                                   "Principal": {
                                     "CanonicalUser": {
                                       "Fn::GetAtt": [
-                                        "EntryPointConstructWebsiteOAIB7161001",
+                                        "EntryPointConstructWebAppOAI266F5E53",
                                         "S3CanonicalUserId"
                                       ]
                                     }
@@ -844,7 +1219,7 @@
                                       [
                                         {
                                           "Fn::GetAtt": [
-                                            "WebsiteBucketConstructWebsiteBucketF0C8142D",
+                                            "WebAppBucketConstructWebAppBucket838A9798",
                                             "Arn"
                                           ]
                                         },
@@ -871,11 +1246,11 @@
                   },
                   "AutoDeleteObjectsCustomResource": {
                     "id": "AutoDeleteObjectsCustomResource",
-                    "path": "BlggPlatformStack/WebsiteBucketConstruct/WebsiteBucket/AutoDeleteObjectsCustomResource",
+                    "path": "BlggPlatformStack/WebAppBucketConstruct/WebAppBucket/AutoDeleteObjectsCustomResource",
                     "children": {
                       "Default": {
                         "id": "Default",
-                        "path": "BlggPlatformStack/WebsiteBucketConstruct/WebsiteBucket/AutoDeleteObjectsCustomResource/Default",
+                        "path": "BlggPlatformStack/WebAppBucketConstruct/WebAppBucket/AutoDeleteObjectsCustomResource/Default",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.CfnResource",
                           "version": "2.105.0"
@@ -903,32 +1278,6 @@
             "id": "EntryPointConstruct",
             "path": "BlggPlatformStack/EntryPointConstruct",
             "children": {
-              "WebsiteOAI": {
-                "id": "WebsiteOAI",
-                "path": "BlggPlatformStack/EntryPointConstruct/WebsiteOAI",
-                "children": {
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "BlggPlatformStack/EntryPointConstruct/WebsiteOAI/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
-                      "aws:cdk:cloudformation:props": {
-                        "cloudFrontOriginAccessIdentityConfig": {
-                          "comment": "Allows CloudFront to reach the bucket"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_cloudfront.CfnCloudFrontOriginAccessIdentity",
-                      "version": "2.105.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_cloudfront.OriginAccessIdentity",
-                  "version": "2.105.0"
-                }
-              },
               "AdminPwaOAI": {
                 "id": "AdminPwaOAI",
                 "path": "BlggPlatformStack/EntryPointConstruct/AdminPwaOAI",
@@ -952,6 +1301,75 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_cloudfront.OriginAccessIdentity",
+                  "version": "2.105.0"
+                }
+              },
+              "WebAppOAI": {
+                "id": "WebAppOAI",
+                "path": "BlggPlatformStack/EntryPointConstruct/WebAppOAI",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "BlggPlatformStack/EntryPointConstruct/WebAppOAI/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+                      "aws:cdk:cloudformation:props": {
+                        "cloudFrontOriginAccessIdentityConfig": {
+                          "comment": "Allows CloudFront to reach the bucket"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudfront.CfnCloudFrontOriginAccessIdentity",
+                      "version": "2.105.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cloudfront.OriginAccessIdentity",
+                  "version": "2.105.0"
+                }
+              },
+              "WebAppApiApiCachePolicy": {
+                "id": "WebAppApiApiCachePolicy",
+                "path": "BlggPlatformStack/EntryPointConstruct/WebAppApiApiCachePolicy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "BlggPlatformStack/EntryPointConstruct/WebAppApiApiCachePolicy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::CloudFront::CachePolicy",
+                      "aws:cdk:cloudformation:props": {
+                        "cachePolicyConfig": {
+                          "name": "WebAppApiApiCachePolicy",
+                          "comment": "Cache policy for WebApp HttpApi with 10 minutes TTL",
+                          "minTtl": 600,
+                          "maxTtl": 600,
+                          "defaultTtl": 600,
+                          "parametersInCacheKeyAndForwardedToOrigin": {
+                            "cookiesConfig": {
+                              "cookieBehavior": "none"
+                            },
+                            "headersConfig": {
+                              "headerBehavior": "none"
+                            },
+                            "enableAcceptEncodingGzip": false,
+                            "enableAcceptEncodingBrotli": false,
+                            "queryStringsConfig": {
+                              "queryStringBehavior": "none"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudfront.CfnCachePolicy",
+                      "version": "2.105.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cloudfront.CachePolicy",
                   "version": "2.105.0"
                 }
               },
@@ -1041,6 +1459,14 @@
                       "version": "10.3.0"
                     }
                   },
+                  "Origin5": {
+                    "id": "Origin5",
+                    "path": "BlggPlatformStack/EntryPointConstruct/EntryPointDistribution/Origin5",
+                    "constructInfo": {
+                      "fqn": "constructs.Construct",
+                      "version": "10.3.0"
+                    }
+                  },
                   "Resource": {
                     "id": "Resource",
                     "path": "BlggPlatformStack/EntryPointConstruct/EntryPointDistribution/Resource",
@@ -1052,24 +1478,26 @@
                           "origins": [
                             {
                               "domainName": {
-                                "Fn::GetAtt": [
-                                  "WebsiteBucketConstructWebsiteBucketF0C8142D",
-                                  "RegionalDomainName"
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    {
+                                      "Ref": "WebAppApiConstructWebAppApi94B8E891"
+                                    },
+                                    ".execute-api.",
+                                    {
+                                      "Ref": "AWS::Region"
+                                    },
+                                    ".amazonaws.com"
+                                  ]
                                 ]
                               },
                               "id": "BlggPlatformStackEntryPointConstructEntryPointDistributionOrigin1AE8BCE6F",
-                              "s3OriginConfig": {
-                                "originAccessIdentity": {
-                                  "Fn::Join": [
-                                    "",
-                                    [
-                                      "origin-access-identity/cloudfront/",
-                                      {
-                                        "Ref": "EntryPointConstructWebsiteOAIB7161001"
-                                      }
-                                    ]
-                                  ]
-                                }
+                              "customOriginConfig": {
+                                "originSslProtocols": [
+                                  "TLSv1.2"
+                                ],
+                                "originProtocolPolicy": "https-only"
                               }
                             },
                             {
@@ -1139,12 +1567,45 @@
                                 ],
                                 "originProtocolPolicy": "https-only"
                               }
+                            },
+                            {
+                              "domainName": {
+                                "Fn::GetAtt": [
+                                  "WebAppBucketConstructWebAppBucket838A9798",
+                                  "RegionalDomainName"
+                                ]
+                              },
+                              "id": "BlggPlatformStackEntryPointConstructEntryPointDistributionOrigin5EEAD22A7",
+                              "s3OriginConfig": {
+                                "originAccessIdentity": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "origin-access-identity/cloudfront/",
+                                      {
+                                        "Ref": "EntryPointConstructWebAppOAI266F5E53"
+                                      }
+                                    ]
+                                  ]
+                                }
+                              }
                             }
                           ],
                           "defaultCacheBehavior": {
                             "pathPattern": "*",
                             "targetOriginId": "BlggPlatformStackEntryPointConstructEntryPointDistributionOrigin1AE8BCE6F",
-                            "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+                            "allowedMethods": [
+                              "GET",
+                              "HEAD",
+                              "OPTIONS",
+                              "PUT",
+                              "PATCH",
+                              "POST",
+                              "DELETE"
+                            ],
+                            "cachePolicyId": {
+                              "Ref": "EntryPointConstructWebAppApiApiCachePolicy33D4742A"
+                            },
                             "compress": true,
                             "responseHeadersPolicyId": "eaab4381-ed33-4a86-88ca-d9558dc6cd63",
                             "viewerProtocolPolicy": "redirect-to-https"
@@ -1191,13 +1652,20 @@
                             {
                               "pathPattern": "/api/*",
                               "targetOriginId": "BlggPlatformStackEntryPointConstructEntryPointDistributionOrigin4FDF44514",
+                              "cachePolicyId": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad",
+                              "compress": true,
+                              "responseHeadersPolicyId": "eaab4381-ed33-4a86-88ca-d9558dc6cd63",
+                              "viewerProtocolPolicy": "redirect-to-https"
+                            },
+                            {
+                              "pathPattern": "/static/*",
+                              "targetOriginId": "BlggPlatformStackEntryPointConstructEntryPointDistributionOrigin5EEAD22A7",
                               "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
                               "compress": true,
                               "responseHeadersPolicyId": "eaab4381-ed33-4a86-88ca-d9558dc6cd63",
                               "viewerProtocolPolicy": "redirect-to-https"
                             }
                           ],
-                          "defaultRootObject": "index.html",
                           "httpVersion": "http2",
                           "ipv6Enabled": true
                         }
@@ -1220,25 +1688,25 @@
               "version": "10.3.0"
             }
           },
-          "WebsiteDeploymentConstruct": {
-            "id": "WebsiteDeploymentConstruct",
-            "path": "BlggPlatformStack/WebsiteDeploymentConstruct",
+          "AdminPwaDeploymentConstruct": {
+            "id": "AdminPwaDeploymentConstruct",
+            "path": "BlggPlatformStack/AdminPwaDeploymentConstruct",
             "children": {
-              "WebsiteDeployment": {
-                "id": "WebsiteDeployment",
-                "path": "BlggPlatformStack/WebsiteDeploymentConstruct/WebsiteDeployment",
+              "AdminPwaDeployment": {
+                "id": "AdminPwaDeployment",
+                "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment",
                 "children": {
                   "AwsCliLayer": {
                     "id": "AwsCliLayer",
-                    "path": "BlggPlatformStack/WebsiteDeploymentConstruct/WebsiteDeployment/AwsCliLayer",
+                    "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/AwsCliLayer",
                     "children": {
                       "Code": {
                         "id": "Code",
-                        "path": "BlggPlatformStack/WebsiteDeploymentConstruct/WebsiteDeployment/AwsCliLayer/Code",
+                        "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/AwsCliLayer/Code",
                         "children": {
                           "Stage": {
                             "id": "Stage",
-                            "path": "BlggPlatformStack/WebsiteDeploymentConstruct/WebsiteDeployment/AwsCliLayer/Code/Stage",
+                            "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/AwsCliLayer/Code/Stage",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.AssetStaging",
                               "version": "2.105.0"
@@ -1246,7 +1714,7 @@
                           },
                           "AssetBucket": {
                             "id": "AssetBucket",
-                            "path": "BlggPlatformStack/WebsiteDeploymentConstruct/WebsiteDeployment/AwsCliLayer/Code/AssetBucket",
+                            "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/AwsCliLayer/Code/AssetBucket",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                               "version": "2.105.0"
@@ -1260,7 +1728,7 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "BlggPlatformStack/WebsiteDeploymentConstruct/WebsiteDeployment/AwsCliLayer/Resource",
+                        "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/AwsCliLayer/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::Lambda::LayerVersion",
                           "aws:cdk:cloudformation:props": {
@@ -1286,7 +1754,7 @@
                   },
                   "CustomResourceHandler": {
                     "id": "CustomResourceHandler",
-                    "path": "BlggPlatformStack/WebsiteDeploymentConstruct/WebsiteDeployment/CustomResourceHandler",
+                    "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/CustomResourceHandler",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_lambda.SingletonFunction",
                       "version": "2.105.0"
@@ -1294,11 +1762,11 @@
                   },
                   "Asset1": {
                     "id": "Asset1",
-                    "path": "BlggPlatformStack/WebsiteDeploymentConstruct/WebsiteDeployment/Asset1",
+                    "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/Asset1",
                     "children": {
                       "Stage": {
                         "id": "Stage",
-                        "path": "BlggPlatformStack/WebsiteDeploymentConstruct/WebsiteDeployment/Asset1/Stage",
+                        "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/Asset1/Stage",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.AssetStaging",
                           "version": "2.105.0"
@@ -1306,7 +1774,7 @@
                       },
                       "AssetBucket": {
                         "id": "AssetBucket",
-                        "path": "BlggPlatformStack/WebsiteDeploymentConstruct/WebsiteDeployment/Asset1/AssetBucket",
+                        "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/Asset1/AssetBucket",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                           "version": "2.105.0"
@@ -1320,11 +1788,11 @@
                   },
                   "CustomResource": {
                     "id": "CustomResource",
-                    "path": "BlggPlatformStack/WebsiteDeploymentConstruct/WebsiteDeployment/CustomResource",
+                    "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/CustomResource",
                     "children": {
                       "Default": {
                         "id": "Default",
-                        "path": "BlggPlatformStack/WebsiteDeploymentConstruct/WebsiteDeployment/CustomResource/Default",
+                        "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/CustomResource/Default",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.CfnResource",
                           "version": "2.105.0"
@@ -1479,7 +1947,7 @@
                                     },
                                     {
                                       "Fn::GetAtt": [
-                                        "WebsiteBucketConstructWebsiteBucketF0C8142D",
+                                        "WebAppBucketConstructWebAppBucket838A9798",
                                         "Arn"
                                       ]
                                     },
@@ -1503,7 +1971,7 @@
                                         [
                                           {
                                             "Fn::GetAtt": [
-                                              "WebsiteBucketConstructWebsiteBucketF0C8142D",
+                                              "WebAppBucketConstructWebAppBucket838A9798",
                                               "Arn"
                                             ]
                                           },
@@ -1595,7 +2063,7 @@
                     "handler": "index.handler",
                     "layers": [
                       {
-                        "Ref": "WebsiteDeploymentConstructWebsiteDeploymentAwsCliLayerA1375BAA"
+                        "Ref": "AdminPwaDeploymentConstructAdminPwaDeploymentAwsCliLayerEBBF52BF"
                       }
                     ],
                     "role": {
@@ -1619,25 +2087,25 @@
               "version": "2.105.0"
             }
           },
-          "AdminPwaDeploymentConstruct": {
-            "id": "AdminPwaDeploymentConstruct",
-            "path": "BlggPlatformStack/AdminPwaDeploymentConstruct",
+          "WebAppDeploymentConstruct": {
+            "id": "WebAppDeploymentConstruct",
+            "path": "BlggPlatformStack/WebAppDeploymentConstruct",
             "children": {
-              "AdminPwaDeployment": {
-                "id": "AdminPwaDeployment",
-                "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment",
+              "WebAppBucketDeployment": {
+                "id": "WebAppBucketDeployment",
+                "path": "BlggPlatformStack/WebAppDeploymentConstruct/WebAppBucketDeployment",
                 "children": {
                   "AwsCliLayer": {
                     "id": "AwsCliLayer",
-                    "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/AwsCliLayer",
+                    "path": "BlggPlatformStack/WebAppDeploymentConstruct/WebAppBucketDeployment/AwsCliLayer",
                     "children": {
                       "Code": {
                         "id": "Code",
-                        "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/AwsCliLayer/Code",
+                        "path": "BlggPlatformStack/WebAppDeploymentConstruct/WebAppBucketDeployment/AwsCliLayer/Code",
                         "children": {
                           "Stage": {
                             "id": "Stage",
-                            "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/AwsCliLayer/Code/Stage",
+                            "path": "BlggPlatformStack/WebAppDeploymentConstruct/WebAppBucketDeployment/AwsCliLayer/Code/Stage",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.AssetStaging",
                               "version": "2.105.0"
@@ -1645,7 +2113,7 @@
                           },
                           "AssetBucket": {
                             "id": "AssetBucket",
-                            "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/AwsCliLayer/Code/AssetBucket",
+                            "path": "BlggPlatformStack/WebAppDeploymentConstruct/WebAppBucketDeployment/AwsCliLayer/Code/AssetBucket",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                               "version": "2.105.0"
@@ -1659,7 +2127,7 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/AwsCliLayer/Resource",
+                        "path": "BlggPlatformStack/WebAppDeploymentConstruct/WebAppBucketDeployment/AwsCliLayer/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::Lambda::LayerVersion",
                           "aws:cdk:cloudformation:props": {
@@ -1685,7 +2153,7 @@
                   },
                   "CustomResourceHandler": {
                     "id": "CustomResourceHandler",
-                    "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/CustomResourceHandler",
+                    "path": "BlggPlatformStack/WebAppDeploymentConstruct/WebAppBucketDeployment/CustomResourceHandler",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_lambda.SingletonFunction",
                       "version": "2.105.0"
@@ -1693,11 +2161,11 @@
                   },
                   "Asset1": {
                     "id": "Asset1",
-                    "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/Asset1",
+                    "path": "BlggPlatformStack/WebAppDeploymentConstruct/WebAppBucketDeployment/Asset1",
                     "children": {
                       "Stage": {
                         "id": "Stage",
-                        "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/Asset1/Stage",
+                        "path": "BlggPlatformStack/WebAppDeploymentConstruct/WebAppBucketDeployment/Asset1/Stage",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.AssetStaging",
                           "version": "2.105.0"
@@ -1705,7 +2173,7 @@
                       },
                       "AssetBucket": {
                         "id": "AssetBucket",
-                        "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/Asset1/AssetBucket",
+                        "path": "BlggPlatformStack/WebAppDeploymentConstruct/WebAppBucketDeployment/Asset1/AssetBucket",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                           "version": "2.105.0"
@@ -1719,11 +2187,11 @@
                   },
                   "CustomResource": {
                     "id": "CustomResource",
-                    "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/CustomResource",
+                    "path": "BlggPlatformStack/WebAppDeploymentConstruct/WebAppBucketDeployment/CustomResource",
                     "children": {
                       "Default": {
                         "id": "Default",
-                        "path": "BlggPlatformStack/AdminPwaDeploymentConstruct/AdminPwaDeployment/CustomResource/Default",
+                        "path": "BlggPlatformStack/WebAppDeploymentConstruct/WebAppBucketDeployment/CustomResource/Default",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.CfnResource",
                           "version": "2.105.0"

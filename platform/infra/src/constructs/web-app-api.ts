@@ -7,22 +7,22 @@ import * as iam from 'aws-cdk-lib/aws-iam';
 import * as apigwv2 from '@aws-cdk/aws-apigatewayv2-alpha';
 import * as apigwv2Integrations from '@aws-cdk/aws-apigatewayv2-integrations-alpha';
 
-export interface AdminApiConstructProps {
+export interface WebAppApiConstructProps {
     probeTable: dynamodb.Table;
 }
 
-export class AdminApiConstruct extends Construct {
+export class WebAppApiConstruct extends Construct {
     public readonly httpApi: apigwv2.HttpApi;
 
-    constructor(scope: Construct, id: string, props: AdminApiConstructProps) {
+    constructor(scope: Construct, id: string, props: WebAppApiConstructProps) {
         super(scope, id);
         const {probeTable} = props;
 
-        console.log('Admin API Path: ', resolve('../admin-api/dist'));
-        const lambdaHandler = new lambda.Function(this, 'AdminApiProbeLambda', {
+        console.log('WebApp API Path: ', resolve('../web-app/dist'));
+        const lambdaHandler = new lambda.Function(this, 'WebAppAdapterLambda', {
             runtime: lambda.Runtime.NODEJS_18_X,
-            handler: 'probe.handler',
-            code: lambda.Code.fromAsset(resolve('../admin-api/dist')),
+            handler: 'index.handler',
+            code: lambda.Code.fromAsset(resolve('../web-app/dist')),
             memorySize: 256
         });
 
@@ -37,19 +37,15 @@ export class AdminApiConstruct extends Construct {
 
         // Define the HTTP API resource with the Lambda integration
         const lambdaIntegration = new apigwv2Integrations.HttpLambdaIntegration(
-            'AdminApiProbeLambdaIntegration', lambdaHandler
+            'WebAppAdapterLambdaIntegration', lambdaHandler
         );
 
-        this.httpApi = new apigwv2.HttpApi(this, 'AdminApi');
-
-        this.httpApi.addRoutes({
-            path: '/api/probe',
-            methods: [ apigwv2.HttpMethod.GET ],
-            integration: lambdaIntegration,
+        this.httpApi = new apigwv2.HttpApi(this, 'WebAppApi', {
+            defaultIntegration: lambdaIntegration
         });
 
         // Output the HTTP API URL to the stack outputs
-        new cdk.CfnOutput(this, 'AdminApiUrl', {
+        new cdk.CfnOutput(this, 'WebAppApiUrl', {
             value: this.httpApi.apiEndpoint,
         });
     }
