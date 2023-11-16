@@ -3,12 +3,12 @@ import {handler} from './lambdas/probe/probe.handler';
 import {APIGatewayProxyEventV2, APIGatewayProxyResultV2} from 'aws-lambda';
 
 const app = express();
-const port = 3000;
+const port = 3030;
 
 // Middleware to parse JSON body
 app.use(express.json());
 
-app.get('/probe', async (req, res) => {
+app.get('/api/probe', async (req, res) => {
     try {
         // Constructing the event object
         const event: APIGatewayProxyEventV2 = {

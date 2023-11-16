@@ -3,11 +3,9 @@
 	"pipeline": {
 		"build": {
 			"dependsOn": ["^build"],
-			"outputs": ["dist/**", "cdk.out/**"]
+			"outputs": ["dist/**", "cdk.out/**", "build/**", "static/**"]
 		},
-		"deploy": {
-			"dependsOn": ["build"]
-		},
+		"deploy": {},
 		"destroy": {},
 		"preview": {
 			"dependsOn": ["build"]

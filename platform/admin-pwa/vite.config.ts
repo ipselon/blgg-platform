@@ -16,7 +16,7 @@ export default defineConfig({
     cors: {
       origin: '*'
     },
-    port: 3030,
+    port: 8080,
   },
   preview: {
     host: '0.0.0.0',

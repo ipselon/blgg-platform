@@ -14,9 +14,9 @@
     "platform/*"
   ],
   "scripts": {
-    "build-platform": "turbo run build --verbosity=2",
-    "deploy-platform": "turbo run deploy --verbosity=2",
-    "destroy-platform": "turbo run destroy --verbosity=2",
+    "build-platform": "turbo run build",
+    "deploy-platform": "turbo run build && turbo run deploy",
+    "destroy-platform": "turbo run destroy",
     "admin-pwa": "turbo run dev --filter=admin-pwa",
     "admin-pwa-server": "turbo run preview --filter=admin-pwa",
     "admin-api-server": "turbo run preview --filter=admin-api",

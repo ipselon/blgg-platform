@@ -1,15 +1,14 @@
 {
-  "name": "@pagemosaic/infra",
+  "name": "infra",
   "version": "1.0.0",
   "scripts": {
-    "deploy": "bash -c 'source ../../env.sh && ./scripts/deploy.sh'",
-    "destroy": "bash -c 'source ../../env.sh && ./scripts/destroy.sh'",
-    "build_1": "tsc",
-    "watch_1": "tsc -w"
+    "deploy": "scripts node ./scripts/deploy.js",
+    "destroy": "scripts node ./scripts/destroy.js"
   },
   "devDependencies": {
+    "scripts": "workspace:*",
+    "@aws-sdk/client-ssm": "3.451.0",
     "@types/node": "20.8.10",
-    "aws-cdk": "2.105.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   },

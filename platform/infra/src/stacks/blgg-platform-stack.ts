@@ -2,15 +2,12 @@ import * as cdk from 'aws-cdk-lib';
 import {Stack} from 'aws-cdk-lib/core';
 import {Construct} from 'constructs';
 import {AdminApiConstruct} from '../constructs/admin-api';
-import {AdminPwaBucketConstruct} from '../constructs/admin-pwa-bucket';
-// import {WebsiteBucketConstruct} from '../constructs/website-bucket';
 import {EntryPointConstruct} from '../constructs/entry-point';
-// import {WebsiteDeploymentConstruct} from '../constructs/website-deployment';
-import {AdminPwaDeploymentConstruct} from '../constructs/admin-pwa-deployment';
 import {DynamoDbTablesConstruct} from '../constructs/dynamo-db-tables';
-import {WebAppBucketConstruct} from '../constructs/web-app-bucket';
 import {WebAppApiConstruct} from '../constructs/web-app-api';
-import {WebAppDeploymentConstruct} from '../constructs/web-app-deployment';
+import {SystemBucketConstruct} from '../constructs/system-bucket';
+import {PreviewPointConstruct} from '../constructs/preview-point';
+import {SystemBucketDeploymentConstruct} from '../constructs/system-bucket-deployment';
 
 export interface BlggPlatformStackProps {
 
@@ -27,36 +24,34 @@ export class BlggPlatformStack extends Stack {
             probeTable: dynamoDbTablesConstruct.table
         });
 
-        const adminPwaBucketConstruct = new AdminPwaBucketConstruct(this, 'AdminPwaBucketConstruct');
-        // const websiteBucketConstruct = new WebsiteBucketConstruct(this, 'WebsiteBucketConstruct');
-        const webAppBucketConstruct = new WebAppBucketConstruct(this, 'WebAppBucketConstruct');
+        const systemBucketConstruct = new SystemBucketConstruct(this, 'SystemBucketConstruct');
 
         const entryPointConstruct = new EntryPointConstruct(this, 'EntryPointConstruct', {
-            adminPwaBucket: adminPwaBucketConstruct.bucket,
-            webAppBucket: webAppBucketConstruct.bucket,
-            // websiteBucket: websiteBucketConstruct.bucket,
-            adminHttpApi: adminApiConstruct.httpApi,
-            webAppHttpApi: webAppApiConstruct.httpApi
+            systemBucket: systemBucketConstruct.bucket,
+            systemBucketOAI: systemBucketConstruct.bucketOAI,
+            adminHttpApiGatewayOrigin: adminApiConstruct.httpApiGatewayOrigin,
+            webAppHttpApiGatewayOrigin: webAppApiConstruct.httpApiGatewayOrigin
         });
 
-        // new WebsiteDeploymentConstruct(this, 'WebsiteDeploymentConstruct', {
-        //     entryPointDistribution: entryPointConstruct.distribution,
-        //     websiteBucket: websiteBucketConstruct.bucket
-        // });
-
-        new AdminPwaDeploymentConstruct(this, 'AdminPwaDeploymentConstruct', {
-            entryPointDistribution: entryPointConstruct.distribution,
-            adminPwaBucket: adminPwaBucketConstruct.bucket
+        const previewPointConstruct = new PreviewPointConstruct(this, 'PreviewPointConstruct', {
+            systemBucket: systemBucketConstruct.bucket,
+            systemBucketOAI: systemBucketConstruct.bucketOAI,
+            webAppHttpApiGatewayOrigin: webAppApiConstruct.httpApiGatewayOrigin
         });
 
-        new WebAppDeploymentConstruct(this, 'WebAppDeploymentConstruct', {
+        new SystemBucketDeploymentConstruct(this, 'SystemBucketDeploymentConstruct', {
             entryPointDistribution: entryPointConstruct.distribution,
-            webAppBucket: webAppBucketConstruct.bucket
+            previewPointDistribution: previewPointConstruct.distribution,
+            systemBucket: systemBucketConstruct.bucket
         });
 
         // Output the distribution domain name so it can be easily accessed
-        new cdk.CfnOutput(this, 'DistributionDomainName', {
+        new cdk.CfnOutput(this, 'EntryPointDomainName', {
             value: entryPointConstruct.distribution.distributionDomainName,
+        });
+        // Output the distribution domain name so it can be easily accessed
+        new cdk.CfnOutput(this, 'PreviewPointDomainName', {
+            value: previewPointConstruct.distribution.distributionDomainName,
         });
     }
 }

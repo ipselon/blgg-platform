@@ -4,10 +4,11 @@
   "types": "dist/types",
   "scripts": {
     "build": "NODE_ENV='production' rollup -c rollup.config.mjs",
-    "preview": "bash -c 'source ../../env.sh && ts-node ./src/server.ts'",
+    "preview": "scripts ts-node ./src/server.ts",
     "clean": "del ./dist"
   },
   "devDependencies": {
+    "scripts": "workspace:*",
     "@aws-sdk/client-ssm": "3.445.0",
     "@aws-sdk/client-dynamodb": "3.445.0",
     "@rollup/plugin-commonjs": "24.0.0",

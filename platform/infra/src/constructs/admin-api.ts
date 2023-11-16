@@ -6,6 +6,7 @@ import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as apigwv2 from '@aws-cdk/aws-apigatewayv2-alpha';
 import * as apigwv2Integrations from '@aws-cdk/aws-apigatewayv2-integrations-alpha';
+import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
 
 export interface AdminApiConstructProps {
     probeTable: dynamodb.Table;
@@ -13,6 +14,7 @@ export interface AdminApiConstructProps {
 
 export class AdminApiConstruct extends Construct {
     public readonly httpApi: apigwv2.HttpApi;
+    public readonly httpApiGatewayOrigin: origins.HttpOrigin;
 
     constructor(scope: Construct, id: string, props: AdminApiConstructProps) {
         super(scope, id);
@@ -48,9 +50,22 @@ export class AdminApiConstruct extends Construct {
             integration: lambdaIntegration,
         });
 
-        // Output the HTTP API URL to the stack outputs
-        new cdk.CfnOutput(this, 'AdminApiUrl', {
-            value: this.httpApi.apiEndpoint,
+        // Define the HTTP Admin API Gateway endpoint as a custom origin
+        const region = cdk.Stack.of(this).region;
+        const adminApiId = this.httpApi.apiId;
+        this.httpApiGatewayOrigin = new origins.HttpOrigin(`${adminApiId}.execute-api.${region}.amazonaws.com`, {
+            // Optionally, configure origin properties like custom headers, SSL protocols, etc.
+            // If you have a custom domain name for your CloudFront distribution
+            // and you want your application to be aware of this custom domain,
+            // you should set the X-Forwarded-Host header to this custom domain name.
+            // customHeaders: {
+            //     'X-Forwarded-Host': hostValue
+            // }
         });
+
+        // Output the HTTP API URL to the stack outputs
+        // new cdk.CfnOutput(this, 'AdminApiUrl', {
+        //     value: this.httpApi.apiEndpoint,
+        // });
     }
 }

@@ -11,6 +11,7 @@ export async function getProbeItems() {
 
     // Read items from the DynamoDB table
     const items = await getItemsFromDynamoDbTable(tableName);
+    console.log('Items: ', JSON.stringify(items, null, 4));
     return items;
 }
 
