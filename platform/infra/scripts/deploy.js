@@ -6,13 +6,15 @@ const AWS_PROFILE_NAME = process.env.AWS_PROFILE_NAME; // Get AWS profile name f
 const awsAccessKeyId = process.env.AWS_ACCESS_KEY_ID;
 const awsSecretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
 const awsSessionToken = process.env.AWS_SESSION_TOKEN; // This might be optional, depending on your setup
+const stackName = process.env.STACK_NAME;
 
 console.log('Please wait. Deploying resources...');
 // Proceed with the CDK deployment
 const CDK_OUTPUT_FILE = 'cdk-outputs.json';
-const log = openSync('cdk-deploy-log.txt', 'a');
-execSync(`cdk deploy --require-approval never --auto-approve --outputs-file ${CDK_OUTPUT_FILE} --profile ${AWS_PROFILE_NAME}`, {stdio: ['ignore', log, log]});
-closeSync(log);
+// const log = openSync('cdk-deploy-log.txt', 'a');
+// execSync(`cdk deploy --require-approval never --auto-approve --outputs-file ${CDK_OUTPUT_FILE} --profile ${AWS_PROFILE_NAME}`, {stdio: ['ignore', log, log]});
+// closeSync(log);
+execSync(`cdk deploy --require-approval never --auto-approve --outputs-file ${CDK_OUTPUT_FILE} --profile ${AWS_PROFILE_NAME}`, {stdio: 'inherit'});
 
 console.log('Reading output.');
 // Check if the output file was created
@@ -23,7 +25,6 @@ if (!existsSync(CDK_OUTPUT_FILE)) {
 
 // Read and parse the CDK output file
 const cdkOutputs = JSON.parse(readFileSync(CDK_OUTPUT_FILE, 'utf8'));
-const stackName = 'BlggPlatformStack';
 const entryPointDomainName = cdkOutputs[stackName].EntryPointDomainName;
 const previewPointDomainName = cdkOutputs[stackName].PreviewPointDomainName;
 

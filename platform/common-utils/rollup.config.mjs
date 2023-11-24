@@ -11,6 +11,10 @@ export default {
     output: [
         {
             file: pkg.main,
+            format: 'cjs'
+        },
+        {
+            file: pkg.module,
             format: 'es'
         }
     ],
@@ -20,10 +24,11 @@ export default {
         replace({
             preventAssignment: true,
             values: {
-                'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+                'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+                'process.env.STACK_NAME': JSON.stringify(process.env.STACK_NAME || '')
             }
         }),
         commonjs(),
-        typescript(),
+        typescript()
     ],
 };

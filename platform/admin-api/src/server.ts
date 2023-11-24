@@ -1,9 +1,8 @@
-import express, { Request } from 'express';
-import {handler} from './lambdas/probe/probe.handler';
-import {APIGatewayProxyEventV2, APIGatewayProxyResultV2} from 'aws-lambda';
+import express from 'express';
+import {handler} from './functions/probe.ts';
+import {APIGatewayProxyEventV2} from 'aws-lambda';
 
 const app = express();
-const port = 3030;
 
 // Middleware to parse JSON body
 app.use(express.json());
@@ -52,6 +51,4 @@ app.get('/api/probe', async (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
-});
+export const viteNodeApp = app;

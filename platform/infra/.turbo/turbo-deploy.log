@@ -1,10 +1,171 @@
 
-> @pagemosaic/infra@1.0.0 deploy /Users/alex/Development/projects/ipselon/blgg-platform/platform/infra
-> bash -c 'source ../../env.sh && node ./scripts/deploy.js'
+> infra@1.0.0 deploy /Users/alex/Development/projects/ipselon/blgg-platform/platform/infra
+> node ./scripts/deploy.js
 
-The AWS session is still valid.
-The AWS session is still valid.
 Please wait. Deploying resources...
+Admin API Path:  /Users/alex/Development/projects/ipselon/blgg-platform/platform/admin-api/dist/functions
+WebApp API Path:  /Users/alex/Development/projects/ipselon/blgg-platform/platform/web-app/dist
+Admin PWA Path:  /Users/alex/Development/projects/ipselon/blgg-platform/platform/admin-pwa/dist
+WebApp Public Path:  /Users/alex/Development/projects/ipselon/blgg-platform/platform/web-app/public
+WebApp Assets Path:  /Users/alex/Development/projects/ipselon/blgg-platform/platform/web-app/static
+WebApp Assets uploaded
+
+✨  Synthesis time: 1.39s
+
+BlggWebsiteStack:  start: Building 27417689a4589c2e627f03c50898f4c53b262d2954d8d0c7424cb32b04854753:current_account-current_region
+BlggWebsiteStack:  success: Built 27417689a4589c2e627f03c50898f4c53b262d2954d8d0c7424cb32b04854753:current_account-current_region
+BlggWebsiteStack:  start: Publishing 27417689a4589c2e627f03c50898f4c53b262d2954d8d0c7424cb32b04854753:current_account-current_region
+BlggWebsiteStack:  success: Published 27417689a4589c2e627f03c50898f4c53b262d2954d8d0c7424cb32b04854753:current_account-current_region
+BlggWebsiteStack: deploying... [1/1]
+BlggWebsiteStack: creating CloudFormation changeset...
+BlggWebsiteStack |  0/44 | 6:05:05 PM | REVIEW_IN_PROGRESS   | AWS::CloudFormation::Stack                      | BlggWebsiteStack User Initiated
+BlggWebsiteStack |  0/44 | 6:05:17 PM | CREATE_IN_PROGRESS   | AWS::CloudFormation::Stack                      | BlggWebsiteStack User Initiated
+BlggWebsiteStack |  0/44 | 6:05:23 PM | CREATE_IN_PROGRESS   | AWS::IAM::Role                                  | WebAppApiConstruct/WebAppAdapterLambda/ServiceRole (WebAppApiConstructWebAppAdapterLambdaServiceRole6C77E01C) 
+BlggWebsiteStack |  0/44 | 6:05:23 PM | CREATE_IN_PROGRESS   | AWS::Lambda::LayerVersion                       | SystemBucketDeploymentConstruct/AdminPwaDeployment/AwsCliLayer (SystemBucketDeploymentConstructAdminPwaDeploymentAwsCliLayer2090DF76) 
+BlggWebsiteStack |  0/44 | 6:05:23 PM | CREATE_IN_PROGRESS   | AWS::CloudFront::CloudFrontOriginAccessIdentity | SystemBucketConstruct/SystemBucketOAI (SystemBucketConstructSystemBucketOAI25EB3FA4) 
+BlggWebsiteStack |  0/44 | 6:05:23 PM | CREATE_IN_PROGRESS   | AWS::CloudFront::Function                       | EntryPointConstruct/AdminRewriteFunction (EntryPointConstructAdminRewriteFunction62DF9626) 
+BlggWebsiteStack |  0/44 | 6:05:23 PM | CREATE_IN_PROGRESS   | AWS::CloudFront::CachePolicy                    | EntryPointConstruct/WebAppApiApiCachePolicy (EntryPointConstructWebAppApiApiCachePolicy33D4742A) 
+BlggWebsiteStack |  0/44 | 6:05:23 PM | CREATE_IN_PROGRESS   | AWS::Lambda::LayerVersion                       | SystemBucketDeploymentConstruct/WebAppStaticBucketDeployment/AwsCliLayer (SystemBucketDeploymentConstructWebAppStaticBucketDeploymentAwsCliLayer326E6EC7) 
+BlggWebsiteStack |  0/44 | 6:05:23 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Api                          | AdminApiConstruct/AdminApi (AdminApiConstructAdminApiC5F590AD) 
+BlggWebsiteStack |  0/44 | 6:05:23 PM | CREATE_IN_PROGRESS   | AWS::IAM::Role                                  | AdminApiConstruct/AdminApiLambda_probe/ServiceRole (AdminApiConstructAdminApiLambdaprobeServiceRole2D604FC4) 
+BlggWebsiteStack |  0/44 | 6:05:23 PM | CREATE_IN_PROGRESS   | AWS::IAM::Role                                  | AWS679f53fac002430cb0da5b7982bd2287/ServiceRole (AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2) 
+BlggWebsiteStack |  0/44 | 6:05:23 PM | CREATE_IN_PROGRESS   | AWS::S3::Bucket                                 | SystemBucketConstruct/SystemBucket (SystemBucketConstructSystemBucketEA96EAA7) 
+BlggWebsiteStack |  0/44 | 6:05:23 PM | CREATE_IN_PROGRESS   | AWS::DynamoDB::Table                            | DynamoDbTablesConstruct/BlggWebsiteStackProbeItems (DynamoDbTablesConstructBlggWebsiteStackProbeItemsF79B6D37) 
+BlggWebsiteStack |  0/44 | 6:05:23 PM | CREATE_IN_PROGRESS   | AWS::IAM::Role                                  | Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole (CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265) 
+BlggWebsiteStack |  0/44 | 6:05:23 PM | CREATE_IN_PROGRESS   | AWS::CDK::Metadata                              | CDKMetadata/Default (CDKMetadata) 
+BlggWebsiteStack |  0/44 | 6:05:23 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Api                          | WebAppApiConstruct/WebAppApi (WebAppApiConstructWebAppApi94B8E891) 
+BlggWebsiteStack |  0/44 | 6:05:23 PM | CREATE_IN_PROGRESS   | AWS::IAM::Role                                  | Custom::S3AutoDeleteObjectsCustomResourceProvider/Role (CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092) 
+BlggWebsiteStack |  0/44 | 6:05:23 PM | CREATE_IN_PROGRESS   | AWS::Lambda::LayerVersion                       | SystemBucketDeploymentConstruct/WebAppPublicBucketDeployment/AwsCliLayer (SystemBucketDeploymentConstructWebAppPublicBucketDeploymentAwsCliLayer973B5C22) 
+BlggWebsiteStack |  0/44 | 6:05:24 PM | CREATE_IN_PROGRESS   | AWS::CDK::Metadata                              | CDKMetadata/Default (CDKMetadata) Resource creation Initiated
+BlggWebsiteStack |  1/44 | 6:05:24 PM | CREATE_COMPLETE      | AWS::CDK::Metadata                              | CDKMetadata/Default (CDKMetadata) 
+BlggWebsiteStack |  1/44 | 6:05:24 PM | CREATE_IN_PROGRESS   | AWS::IAM::Role                                  | Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole (CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265) Resource creation Initiated
+BlggWebsiteStack |  1/44 | 6:05:24 PM | CREATE_IN_PROGRESS   | AWS::DynamoDB::Table                            | DynamoDbTablesConstruct/BlggWebsiteStackProbeItems (DynamoDbTablesConstructBlggWebsiteStackProbeItemsF79B6D37) Resource creation Initiated
+BlggWebsiteStack |  1/44 | 6:05:24 PM | CREATE_IN_PROGRESS   | AWS::IAM::Role                                  | WebAppApiConstruct/WebAppAdapterLambda/ServiceRole (WebAppApiConstructWebAppAdapterLambdaServiceRole6C77E01C) Resource creation Initiated
+BlggWebsiteStack |  1/44 | 6:05:24 PM | CREATE_IN_PROGRESS   | AWS::IAM::Role                                  | AWS679f53fac002430cb0da5b7982bd2287/ServiceRole (AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2) Resource creation Initiated
+BlggWebsiteStack |  1/44 | 6:05:24 PM | CREATE_IN_PROGRESS   | AWS::IAM::Role                                  | Custom::S3AutoDeleteObjectsCustomResourceProvider/Role (CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092) Resource creation Initiated
+BlggWebsiteStack |  1/44 | 6:05:24 PM | CREATE_IN_PROGRESS   | AWS::IAM::Role                                  | AdminApiConstruct/AdminApiLambda_probe/ServiceRole (AdminApiConstructAdminApiLambdaprobeServiceRole2D604FC4) Resource creation Initiated
+BlggWebsiteStack |  1/44 | 6:05:25 PM | CREATE_IN_PROGRESS   | AWS::CloudFront::CachePolicy                    | EntryPointConstruct/WebAppApiApiCachePolicy (EntryPointConstructWebAppApiApiCachePolicy33D4742A) Resource creation Initiated
+BlggWebsiteStack |  1/44 | 6:05:25 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Api                          | WebAppApiConstruct/WebAppApi (WebAppApiConstructWebAppApi94B8E891) Resource creation Initiated
+BlggWebsiteStack |  2/44 | 6:05:25 PM | CREATE_COMPLETE      | AWS::CloudFront::CachePolicy                    | EntryPointConstruct/WebAppApiApiCachePolicy (EntryPointConstructWebAppApiApiCachePolicy33D4742A) 
+BlggWebsiteStack |  3/44 | 6:05:25 PM | CREATE_COMPLETE      | AWS::ApiGatewayV2::Api                          | WebAppApiConstruct/WebAppApi (WebAppApiConstructWebAppApi94B8E891) 
+BlggWebsiteStack |  3/44 | 6:05:25 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Api                          | AdminApiConstruct/AdminApi (AdminApiConstructAdminApiC5F590AD) Resource creation Initiated
+BlggWebsiteStack |  3/44 | 6:05:25 PM | CREATE_IN_PROGRESS   | AWS::CloudFront::CloudFrontOriginAccessIdentity | SystemBucketConstruct/SystemBucketOAI (SystemBucketConstructSystemBucketOAI25EB3FA4) Resource creation Initiated
+BlggWebsiteStack |  4/44 | 6:05:26 PM | CREATE_COMPLETE      | AWS::ApiGatewayV2::Api                          | AdminApiConstruct/AdminApi (AdminApiConstructAdminApiC5F590AD) 
+BlggWebsiteStack |  5/44 | 6:05:26 PM | CREATE_COMPLETE      | AWS::CloudFront::CloudFrontOriginAccessIdentity | SystemBucketConstruct/SystemBucketOAI (SystemBucketConstructSystemBucketOAI25EB3FA4) 
+BlggWebsiteStack |  5/44 | 6:05:26 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Stage                        | WebAppApiConstruct/WebAppApi/DefaultStage (WebAppApiConstructWebAppApiDefaultStage37D37754) 
+BlggWebsiteStack |  5/44 | 6:05:26 PM | CREATE_IN_PROGRESS   | AWS::S3::Bucket                                 | SystemBucketConstruct/SystemBucket (SystemBucketConstructSystemBucketEA96EAA7) Resource creation Initiated
+BlggWebsiteStack |  5/44 | 6:05:26 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Stage                        | AdminApiConstruct/AdminApi/DefaultStage (AdminApiConstructAdminApiDefaultStage005A9C67) 
+BlggWebsiteStack |  5/44 | 6:05:27 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Stage                        | WebAppApiConstruct/WebAppApi/DefaultStage (WebAppApiConstructWebAppApiDefaultStage37D37754) Resource creation Initiated
+BlggWebsiteStack |  5/44 | 6:05:27 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Stage                        | AdminApiConstruct/AdminApi/DefaultStage (AdminApiConstructAdminApiDefaultStage005A9C67) Resource creation Initiated
+BlggWebsiteStack |  6/44 | 6:05:27 PM | CREATE_COMPLETE      | AWS::ApiGatewayV2::Stage                        | WebAppApiConstruct/WebAppApi/DefaultStage (WebAppApiConstructWebAppApiDefaultStage37D37754) 
+BlggWebsiteStack |  7/44 | 6:05:27 PM | CREATE_COMPLETE      | AWS::ApiGatewayV2::Stage                        | AdminApiConstruct/AdminApi/DefaultStage (AdminApiConstructAdminApiDefaultStage005A9C67) 
+BlggWebsiteStack |  7/44 | 6:05:28 PM | CREATE_IN_PROGRESS   | AWS::CloudFront::Function                       | EntryPointConstruct/AdminRewriteFunction (EntryPointConstructAdminRewriteFunction62DF9626) Resource creation Initiated
+BlggWebsiteStack |  8/44 | 6:05:28 PM | CREATE_COMPLETE      | AWS::CloudFront::Function                       | EntryPointConstruct/AdminRewriteFunction (EntryPointConstructAdminRewriteFunction62DF9626) 
+BlggWebsiteStack |  8/44 | 6:05:31 PM | CREATE_IN_PROGRESS   | AWS::Lambda::LayerVersion                       | SystemBucketDeploymentConstruct/AdminPwaDeployment/AwsCliLayer (SystemBucketDeploymentConstructAdminPwaDeploymentAwsCliLayer2090DF76) Resource creation Initiated
+BlggWebsiteStack |  9/44 | 6:05:31 PM | CREATE_COMPLETE      | AWS::Lambda::LayerVersion                       | SystemBucketDeploymentConstruct/AdminPwaDeployment/AwsCliLayer (SystemBucketDeploymentConstructAdminPwaDeploymentAwsCliLayer2090DF76) 
+BlggWebsiteStack |  9/44 | 6:05:31 PM | CREATE_IN_PROGRESS   | AWS::Lambda::LayerVersion                       | SystemBucketDeploymentConstruct/WebAppStaticBucketDeployment/AwsCliLayer (SystemBucketDeploymentConstructWebAppStaticBucketDeploymentAwsCliLayer326E6EC7) Resource creation Initiated
+BlggWebsiteStack |  9/44 | 6:05:31 PM | CREATE_IN_PROGRESS   | AWS::Lambda::LayerVersion                       | SystemBucketDeploymentConstruct/WebAppPublicBucketDeployment/AwsCliLayer (SystemBucketDeploymentConstructWebAppPublicBucketDeploymentAwsCliLayer973B5C22) Resource creation Initiated
+BlggWebsiteStack | 10/44 | 6:05:32 PM | CREATE_COMPLETE      | AWS::Lambda::LayerVersion                       | SystemBucketDeploymentConstruct/WebAppStaticBucketDeployment/AwsCliLayer (SystemBucketDeploymentConstructWebAppStaticBucketDeploymentAwsCliLayer326E6EC7) 
+BlggWebsiteStack | 11/44 | 6:05:32 PM | CREATE_COMPLETE      | AWS::Lambda::LayerVersion                       | SystemBucketDeploymentConstruct/WebAppPublicBucketDeployment/AwsCliLayer (SystemBucketDeploymentConstructWebAppPublicBucketDeploymentAwsCliLayer973B5C22) 
+BlggWebsiteStack | 12/44 | 6:05:35 PM | CREATE_COMPLETE      | AWS::DynamoDB::Table                            | DynamoDbTablesConstruct/BlggWebsiteStackProbeItems (DynamoDbTablesConstructBlggWebsiteStackProbeItemsF79B6D37) 
+BlggWebsiteStack | 13/44 | 6:05:40 PM | CREATE_COMPLETE      | AWS::IAM::Role                                  | Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole (CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265) 
+BlggWebsiteStack | 14/44 | 6:05:40 PM | CREATE_COMPLETE      | AWS::IAM::Role                                  | Custom::S3AutoDeleteObjectsCustomResourceProvider/Role (CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092) 
+BlggWebsiteStack | 15/44 | 6:05:41 PM | CREATE_COMPLETE      | AWS::IAM::Role                                  | WebAppApiConstruct/WebAppAdapterLambda/ServiceRole (WebAppApiConstructWebAppAdapterLambdaServiceRole6C77E01C) 
+BlggWebsiteStack | 16/44 | 6:05:41 PM | CREATE_COMPLETE      | AWS::IAM::Role                                  | AWS679f53fac002430cb0da5b7982bd2287/ServiceRole (AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2) 
+BlggWebsiteStack | 17/44 | 6:05:41 PM | CREATE_COMPLETE      | AWS::IAM::Role                                  | AdminApiConstruct/AdminApiLambda_probe/ServiceRole (AdminApiConstructAdminApiLambdaprobeServiceRole2D604FC4) 
+BlggWebsiteStack | 17/44 | 6:05:41 PM | CREATE_IN_PROGRESS   | AWS::IAM::Policy                                | SystemBucketDeploymentConstruct/EntryPointDistributionInvalidation/CacheInvalidationResource/CustomResourcePolicy (SystemBucketDeploymentConstructEntryPointDistributionInvalidationCacheInvalidationResourceCustomResourcePolicy21F7436B) 
+BlggWebsiteStack | 17/44 | 6:05:41 PM | CREATE_IN_PROGRESS   | AWS::IAM::Policy                                | SystemBucketDeploymentConstruct/PreviewPointDistributionInvalidation/CacheInvalidationResource/CustomResourcePolicy (SystemBucketDeploymentConstructPreviewPointDistributionInvalidationCacheInvalidationResourceCustomResourcePolicyAF9534F8) 
+BlggWebsiteStack | 17/44 | 6:05:42 PM | CREATE_IN_PROGRESS   | AWS::IAM::Policy                                | WebAppApiConstruct/WebAppAdapterLambda/ServiceRole/DefaultPolicy (WebAppApiConstructWebAppAdapterLambdaServiceRoleDefaultPolicy7D2A2975) 
+BlggWebsiteStack | 17/44 | 6:05:42 PM | CREATE_IN_PROGRESS   | AWS::IAM::Policy                                | AdminApiConstruct/AdminApiLambda_probe/ServiceRole/DefaultPolicy (AdminApiConstructAdminApiLambdaprobeServiceRoleDefaultPolicy217803DE) 
+BlggWebsiteStack | 17/44 | 6:05:42 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Function                           | AWS679f53fac002430cb0da5b7982bd2287 (AWS679f53fac002430cb0da5b7982bd22872D164C4C) 
+BlggWebsiteStack | 17/44 | 6:05:43 PM | CREATE_IN_PROGRESS   | AWS::IAM::Policy                                | SystemBucketDeploymentConstruct/PreviewPointDistributionInvalidation/CacheInvalidationResource/CustomResourcePolicy (SystemBucketDeploymentConstructPreviewPointDistributionInvalidationCacheInvalidationResourceCustomResourcePolicyAF9534F8) Resource creation Initiated
+BlggWebsiteStack | 17/44 | 6:05:43 PM | CREATE_IN_PROGRESS   | AWS::IAM::Policy                                | SystemBucketDeploymentConstruct/EntryPointDistributionInvalidation/CacheInvalidationResource/CustomResourcePolicy (SystemBucketDeploymentConstructEntryPointDistributionInvalidationCacheInvalidationResourceCustomResourcePolicy21F7436B) Resource creation Initiated
+BlggWebsiteStack | 17/44 | 6:05:43 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Function                           | AWS679f53fac002430cb0da5b7982bd2287 (AWS679f53fac002430cb0da5b7982bd22872D164C4C) Resource creation Initiated
+BlggWebsiteStack | 17/44 | 6:05:43 PM | CREATE_IN_PROGRESS   | AWS::IAM::Policy                                | WebAppApiConstruct/WebAppAdapterLambda/ServiceRole/DefaultPolicy (WebAppApiConstructWebAppAdapterLambdaServiceRoleDefaultPolicy7D2A2975) Resource creation Initiated
+BlggWebsiteStack | 17/44 | 6:05:43 PM | CREATE_IN_PROGRESS   | AWS::IAM::Policy                                | AdminApiConstruct/AdminApiLambda_probe/ServiceRole/DefaultPolicy (AdminApiConstructAdminApiLambdaprobeServiceRoleDefaultPolicy217803DE) Resource creation Initiated
+BlggWebsiteStack | 18/44 | 6:05:49 PM | CREATE_COMPLETE      | AWS::Lambda::Function                           | AWS679f53fac002430cb0da5b7982bd2287 (AWS679f53fac002430cb0da5b7982bd22872D164C4C) 
+BlggWebsiteStack | 19/44 | 6:05:51 PM | CREATE_COMPLETE      | AWS::S3::Bucket                                 | SystemBucketConstruct/SystemBucket (SystemBucketConstructSystemBucketEA96EAA7) 
+BlggWebsiteStack | 19/44 | 6:05:53 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Function                           | Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler (CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F) 
+BlggWebsiteStack | 19/44 | 6:05:54 PM | CREATE_IN_PROGRESS   | AWS::CloudFront::Distribution                   | PreviewPointConstruct/PreviewPointDistribution (PreviewPointConstructPreviewPointDistribution875742C6) 
+BlggWebsiteStack | 19/44 | 6:05:54 PM | CREATE_IN_PROGRESS   | AWS::IAM::Policy                                | Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy (CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF) 
+BlggWebsiteStack | 19/44 | 6:05:54 PM | CREATE_IN_PROGRESS   | AWS::S3::BucketPolicy                           | SystemBucketConstruct/SystemBucket/Policy (SystemBucketConstructSystemBucketPolicy8B551A4F) 
+BlggWebsiteStack | 19/44 | 6:05:55 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Function                           | Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler (CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F) Resource creation Initiated
+BlggWebsiteStack | 19/44 | 6:05:55 PM | CREATE_IN_PROGRESS   | AWS::CloudFront::Distribution                   | EntryPointConstruct/EntryPointDistribution (EntryPointConstructEntryPointDistribution138597BF) 
+BlggWebsiteStack | 19/44 | 6:05:55 PM | CREATE_IN_PROGRESS   | AWS::IAM::Policy                                | Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy (CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF) Resource creation Initiated
+BlggWebsiteStack | 19/44 | 6:05:56 PM | CREATE_IN_PROGRESS   | AWS::S3::BucketPolicy                           | SystemBucketConstruct/SystemBucket/Policy (SystemBucketConstructSystemBucketPolicy8B551A4F) Resource creation Initiated
+BlggWebsiteStack | 20/44 | 6:05:56 PM | CREATE_COMPLETE      | AWS::S3::BucketPolicy                           | SystemBucketConstruct/SystemBucket/Policy (SystemBucketConstructSystemBucketPolicy8B551A4F) 
+BlggWebsiteStack | 20/44 | 6:05:57 PM | CREATE_IN_PROGRESS   | AWS::CloudFront::Distribution                   | PreviewPointConstruct/PreviewPointDistribution (PreviewPointConstructPreviewPointDistribution875742C6) Resource creation Initiated
+BlggWebsiteStack | 21/44 | 6:05:58 PM | CREATE_COMPLETE      | AWS::IAM::Policy                                | SystemBucketDeploymentConstruct/EntryPointDistributionInvalidation/CacheInvalidationResource/CustomResourcePolicy (SystemBucketDeploymentConstructEntryPointDistributionInvalidationCacheInvalidationResourceCustomResourcePolicy21F7436B) 
+BlggWebsiteStack | 22/44 | 6:05:58 PM | CREATE_COMPLETE      | AWS::IAM::Policy                                | SystemBucketDeploymentConstruct/PreviewPointDistributionInvalidation/CacheInvalidationResource/CustomResourcePolicy (SystemBucketDeploymentConstructPreviewPointDistributionInvalidationCacheInvalidationResourceCustomResourcePolicyAF9534F8) 
+BlggWebsiteStack | 23/44 | 6:05:59 PM | CREATE_COMPLETE      | AWS::IAM::Policy                                | WebAppApiConstruct/WebAppAdapterLambda/ServiceRole/DefaultPolicy (WebAppApiConstructWebAppAdapterLambdaServiceRoleDefaultPolicy7D2A2975) 
+BlggWebsiteStack | 24/44 | 6:05:59 PM | CREATE_COMPLETE      | AWS::IAM::Policy                                | AdminApiConstruct/AdminApiLambda_probe/ServiceRole/DefaultPolicy (AdminApiConstructAdminApiLambdaprobeServiceRoleDefaultPolicy217803DE) 
+BlggWebsiteStack | 24/44 | 6:05:59 PM | CREATE_IN_PROGRESS   | AWS::CloudFront::Distribution                   | EntryPointConstruct/EntryPointDistribution (EntryPointConstructEntryPointDistribution138597BF) Resource creation Initiated
+BlggWebsiteStack | 24/44 | 6:06:00 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Function                           | WebAppApiConstruct/WebAppAdapterLambda (WebAppApiConstructWebAppAdapterLambda643C244D) 
+BlggWebsiteStack | 24/44 | 6:06:00 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Function                           | AdminApiConstruct/AdminApiLambda_probe (AdminApiConstructAdminApiLambdaprobeABFF87C7) 
+BlggWebsiteStack | 25/44 | 6:06:00 PM | CREATE_COMPLETE      | AWS::Lambda::Function                           | Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler (CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F) 
+BlggWebsiteStack | 25/44 | 6:06:01 PM | CREATE_IN_PROGRESS   | Custom::S3AutoDeleteObjects                     | SystemBucketConstruct/SystemBucket/AutoDeleteObjectsCustomResource/Default (SystemBucketConstructSystemBucketAutoDeleteObjectsCustomResource4F2A0A49) 
+BlggWebsiteStack | 25/44 | 6:06:01 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Function                           | WebAppApiConstruct/WebAppAdapterLambda (WebAppApiConstructWebAppAdapterLambda643C244D) Resource creation Initiated
+BlggWebsiteStack | 25/44 | 6:06:01 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Function                           | AdminApiConstruct/AdminApiLambda_probe (AdminApiConstructAdminApiLambdaprobeABFF87C7) Resource creation Initiated
+BlggWebsiteStack | 25/44 | 6:06:04 PM | CREATE_IN_PROGRESS   | Custom::S3AutoDeleteObjects                     | SystemBucketConstruct/SystemBucket/AutoDeleteObjectsCustomResource/Default (SystemBucketConstructSystemBucketAutoDeleteObjectsCustomResource4F2A0A49) Resource creation Initiated
+BlggWebsiteStack | 26/44 | 6:06:04 PM | CREATE_COMPLETE      | Custom::S3AutoDeleteObjects                     | SystemBucketConstruct/SystemBucket/AutoDeleteObjectsCustomResource/Default (SystemBucketConstructSystemBucketAutoDeleteObjectsCustomResource4F2A0A49) 
+BlggWebsiteStack | 27/44 | 6:06:07 PM | CREATE_COMPLETE      | AWS::Lambda::Function                           | WebAppApiConstruct/WebAppAdapterLambda (WebAppApiConstructWebAppAdapterLambda643C244D) 
+BlggWebsiteStack | 28/44 | 6:06:07 PM | CREATE_COMPLETE      | AWS::Lambda::Function                           | AdminApiConstruct/AdminApiLambda_probe (AdminApiConstructAdminApiLambdaprobeABFF87C7) 
+BlggWebsiteStack | 28/44 | 6:06:08 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission                         | WebAppApiConstruct/WebAppApi/DefaultRoute/WebAppAdapterLambdaIntegration-Permission (WebAppApiConstructWebAppApiDefaultRouteWebAppAdapterLambdaIntegrationPermission70A7CBA9) 
+BlggWebsiteStack | 28/44 | 6:06:08 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Integration                  | WebAppApiConstruct/WebAppApi/DefaultRoute/WebAppAdapterLambdaIntegration (WebAppApiConstructWebAppApiDefaultRouteWebAppAdapterLambdaIntegrationB0DB3A17) 
+BlggWebsiteStack | 28/44 | 6:06:08 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission                         | AdminApiConstruct/AdminApi/GET--api--probe/AdminApiLambdaIntegration_probe-Permission (AdminApiConstructAdminApiGETapiprobeAdminApiLambdaIntegrationprobePermissionE1538F20) 
+BlggWebsiteStack | 28/44 | 6:06:08 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Integration                  | AdminApiConstruct/AdminApi/GET--api--probe/AdminApiLambdaIntegration_probe (AdminApiConstructAdminApiGETapiprobeAdminApiLambdaIntegrationprobe2073B4A5) 
+BlggWebsiteStack | 28/44 | 6:06:08 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Integration                  | WebAppApiConstruct/WebAppApi/DefaultRoute/WebAppAdapterLambdaIntegration (WebAppApiConstructWebAppApiDefaultRouteWebAppAdapterLambdaIntegrationB0DB3A17) Resource creation Initiated
+BlggWebsiteStack | 28/44 | 6:06:09 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission                         | WebAppApiConstruct/WebAppApi/DefaultRoute/WebAppAdapterLambdaIntegration-Permission (WebAppApiConstructWebAppApiDefaultRouteWebAppAdapterLambdaIntegrationPermission70A7CBA9) Resource creation Initiated
+BlggWebsiteStack | 29/44 | 6:06:09 PM | CREATE_COMPLETE      | AWS::ApiGatewayV2::Integration                  | WebAppApiConstruct/WebAppApi/DefaultRoute/WebAppAdapterLambdaIntegration (WebAppApiConstructWebAppApiDefaultRouteWebAppAdapterLambdaIntegrationB0DB3A17) 
+BlggWebsiteStack | 29/44 | 6:06:09 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Integration                  | AdminApiConstruct/AdminApi/GET--api--probe/AdminApiLambdaIntegration_probe (AdminApiConstructAdminApiGETapiprobeAdminApiLambdaIntegrationprobe2073B4A5) Resource creation Initiated
+BlggWebsiteStack | 29/44 | 6:06:09 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission                         | AdminApiConstruct/AdminApi/GET--api--probe/AdminApiLambdaIntegration_probe-Permission (AdminApiConstructAdminApiGETapiprobeAdminApiLambdaIntegrationprobePermissionE1538F20) Resource creation Initiated
+BlggWebsiteStack | 30/44 | 6:06:09 PM | CREATE_COMPLETE      | AWS::Lambda::Permission                         | WebAppApiConstruct/WebAppApi/DefaultRoute/WebAppAdapterLambdaIntegration-Permission (WebAppApiConstructWebAppApiDefaultRouteWebAppAdapterLambdaIntegrationPermission70A7CBA9) 
+BlggWebsiteStack | 31/44 | 6:06:09 PM | CREATE_COMPLETE      | AWS::ApiGatewayV2::Integration                  | AdminApiConstruct/AdminApi/GET--api--probe/AdminApiLambdaIntegration_probe (AdminApiConstructAdminApiGETapiprobeAdminApiLambdaIntegrationprobe2073B4A5) 
+BlggWebsiteStack | 32/44 | 6:06:09 PM | CREATE_COMPLETE      | AWS::Lambda::Permission                         | AdminApiConstruct/AdminApi/GET--api--probe/AdminApiLambdaIntegration_probe-Permission (AdminApiConstructAdminApiGETapiprobeAdminApiLambdaIntegrationprobePermissionE1538F20) 
+BlggWebsiteStack | 32/44 | 6:06:09 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route                        | WebAppApiConstruct/WebAppApi/DefaultRoute (WebAppApiConstructWebAppApiDefaultRoute5CA0A961) 
+BlggWebsiteStack | 32/44 | 6:06:10 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route                        | AdminApiConstruct/AdminApi/GET--api--probe (AdminApiConstructAdminApiGETapiprobe3FFFA77B) 
+BlggWebsiteStack | 32/44 | 6:06:10 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route                        | WebAppApiConstruct/WebAppApi/DefaultRoute (WebAppApiConstructWebAppApiDefaultRoute5CA0A961) Resource creation Initiated
+BlggWebsiteStack | 33/44 | 6:06:11 PM | CREATE_COMPLETE      | AWS::ApiGatewayV2::Route                        | WebAppApiConstruct/WebAppApi/DefaultRoute (WebAppApiConstructWebAppApiDefaultRoute5CA0A961) 
+BlggWebsiteStack | 33/44 | 6:06:11 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route                        | AdminApiConstruct/AdminApi/GET--api--probe (AdminApiConstructAdminApiGETapiprobe3FFFA77B) Resource creation Initiated
+BlggWebsiteStack | 34/44 | 6:06:11 PM | CREATE_COMPLETE      | AWS::IAM::Policy                                | Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy (CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF) 
+BlggWebsiteStack | 35/44 | 6:06:11 PM | CREATE_COMPLETE      | AWS::ApiGatewayV2::Route                        | AdminApiConstruct/AdminApi/GET--api--probe (AdminApiConstructAdminApiGETapiprobe3FFFA77B) 
+BlggWebsiteStack | 35/44 | 6:06:12 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Function                           | Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C (CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536) 
+BlggWebsiteStack | 35/44 | 6:06:18 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Function                           | Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C (CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536) Resource creation Initiated
+BlggWebsiteStack | 36/44 | 6:06:24 PM | CREATE_COMPLETE      | AWS::Lambda::Function                           | Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C (CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536) 
+BlggWebsiteStack | 36/44 | 6:06:25 PM | CREATE_IN_PROGRESS   | Custom::CDKBucketDeployment                     | SystemBucketDeploymentConstruct/AdminPwaDeployment/CustomResource/Default (SystemBucketDeploymentConstructAdminPwaDeploymentCustomResourceC8A3FD21) 
+BlggWebsiteStack | 36/44 | 6:06:25 PM | CREATE_IN_PROGRESS   | Custom::CDKBucketDeployment                     | SystemBucketDeploymentConstruct/WebAppPublicBucketDeployment/CustomResource/Default (SystemBucketDeploymentConstructWebAppPublicBucketDeploymentCustomResource581E6ED2) 
+BlggWebsiteStack | 36/44 | 6:06:25 PM | CREATE_IN_PROGRESS   | Custom::CDKBucketDeployment                     | SystemBucketDeploymentConstruct/WebAppStaticBucketDeployment/CustomResource/Default (SystemBucketDeploymentConstructWebAppStaticBucketDeploymentCustomResource9FBBCA26) 
+36/44 Currently in progress: BlggWebsiteStack, PreviewPointConstructPreviewPointDistribution875742C6, EntryPointConstructEntryPointDistribution138597BF, SystemBucketDeploymentConstructAdminPwaDeploymentCustomResourceC8A3FD21, SystemBucketDeploymentConstructWebAppPublicBucketDeploymentCustomResource581E6ED2, SystemBucketDeploymentConstructWebAppStaticBucketDeploymentCustomResource9FBBCA26
+BlggWebsiteStack | 36/44 | 6:07:10 PM | CREATE_IN_PROGRESS   | Custom::CDKBucketDeployment                     | SystemBucketDeploymentConstruct/AdminPwaDeployment/CustomResource/Default (SystemBucketDeploymentConstructAdminPwaDeploymentCustomResourceC8A3FD21) Resource creation Initiated
+BlggWebsiteStack | 37/44 | 6:07:11 PM | CREATE_COMPLETE      | Custom::CDKBucketDeployment                     | SystemBucketDeploymentConstruct/AdminPwaDeployment/CustomResource/Default (SystemBucketDeploymentConstructAdminPwaDeploymentCustomResourceC8A3FD21) 
+BlggWebsiteStack | 37/44 | 6:07:11 PM | CREATE_IN_PROGRESS   | Custom::CDKBucketDeployment                     | SystemBucketDeploymentConstruct/WebAppPublicBucketDeployment/CustomResource/Default (SystemBucketDeploymentConstructWebAppPublicBucketDeploymentCustomResource581E6ED2) Resource creation Initiated
+BlggWebsiteStack | 37/44 | 6:07:11 PM | CREATE_IN_PROGRESS   | Custom::CDKBucketDeployment                     | SystemBucketDeploymentConstruct/WebAppStaticBucketDeployment/CustomResource/Default (SystemBucketDeploymentConstructWebAppStaticBucketDeploymentCustomResource9FBBCA26) Resource creation Initiated
+BlggWebsiteStack | 38/44 | 6:07:11 PM | CREATE_COMPLETE      | Custom::CDKBucketDeployment                     | SystemBucketDeploymentConstruct/WebAppPublicBucketDeployment/CustomResource/Default (SystemBucketDeploymentConstructWebAppPublicBucketDeploymentCustomResource581E6ED2) 
+BlggWebsiteStack | 39/44 | 6:07:11 PM | CREATE_COMPLETE      | Custom::CDKBucketDeployment                     | SystemBucketDeploymentConstruct/WebAppStaticBucketDeployment/CustomResource/Default (SystemBucketDeploymentConstructWebAppStaticBucketDeploymentCustomResource9FBBCA26) 
+39/44 Currently in progress: BlggWebsiteStack, PreviewPointConstructPreviewPointDistribution875742C6, EntryPointConstructEntryPointDistribution138597BF
+BlggWebsiteStack | 40/44 | 6:09:29 PM | CREATE_COMPLETE      | AWS::CloudFront::Distribution                   | EntryPointConstruct/EntryPointDistribution (EntryPointConstructEntryPointDistribution138597BF) 
+BlggWebsiteStack | 41/44 | 6:09:33 PM | CREATE_COMPLETE      | AWS::CloudFront::Distribution                   | PreviewPointConstruct/PreviewPointDistribution (PreviewPointConstructPreviewPointDistribution875742C6) 
+BlggWebsiteStack | 41/44 | 6:09:33 PM | CREATE_IN_PROGRESS   | Custom::AWS                                     | SystemBucketDeploymentConstruct/EntryPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructEntryPointDistributionInvalidationCacheInvalidationResourceAC9314BD) 
+BlggWebsiteStack | 41/44 | 6:09:38 PM | CREATE_IN_PROGRESS   | Custom::AWS                                     | SystemBucketDeploymentConstruct/PreviewPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructPreviewPointDistributionInvalidationCacheInvalidationResource8F17841A) 
+BlggWebsiteStack | 41/44 | 6:09:47 PM | CREATE_IN_PROGRESS   | Custom::AWS                                     | SystemBucketDeploymentConstruct/EntryPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructEntryPointDistributionInvalidationCacheInvalidationResourceAC9314BD) Resource creation Initiated
+BlggWebsiteStack | 42/44 | 6:09:47 PM | CREATE_COMPLETE      | Custom::AWS                                     | SystemBucketDeploymentConstruct/EntryPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructEntryPointDistributionInvalidationCacheInvalidationResourceAC9314BD) 
+BlggWebsiteStack | 42/44 | 6:09:52 PM | CREATE_IN_PROGRESS   | Custom::AWS                                     | SystemBucketDeploymentConstruct/PreviewPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructPreviewPointDistributionInvalidationCacheInvalidationResource8F17841A) Resource creation Initiated
+BlggWebsiteStack | 43/44 | 6:09:52 PM | CREATE_COMPLETE      | Custom::AWS                                     | SystemBucketDeploymentConstruct/PreviewPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructPreviewPointDistributionInvalidationCacheInvalidationResource8F17841A) 
+BlggWebsiteStack | 44/44 | 6:09:55 PM | CREATE_COMPLETE      | AWS::CloudFormation::Stack                      | BlggWebsiteStack 
+
+ ✅  BlggWebsiteStack
+
+✨  Deployment time: 299.86s
+
+Outputs:
+BlggWebsiteStack.EntryPointDomainName = d1i6ip1x4oe3h9.cloudfront.net
+BlggWebsiteStack.PreviewPointDomainName = d1bcc9rq6vju0q.cloudfront.net
+Stack ARN:
+arn:aws:cloudformation:eu-west-1:537663360039:stack/BlggWebsiteStack/3b64b8d0-8ae3-11ee-92f8-0a1edf2e8713
+
+✨  Total time: 301.25s
+
+
 Reading output.
-Parameter stored: PreviewPointDomainName, Version: 2
-Parameter stored: EntryPointDomainName, Version: 2
+Parameter stored: PreviewPointDomainName, Version: 8
+Parameter stored: EntryPointDomainName, Version: 8

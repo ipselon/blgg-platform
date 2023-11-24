@@ -1,9 +1,9 @@
 {
-	"name": "scripts",
+	"name": "local-run",
 	"version": "0.1.0",
 	"private": true,
 	"bin": {
-		"scripts": "./bin.js"
+		"local-run": "./bin.js"
 	},
 	"files": [
 		"bin.js"

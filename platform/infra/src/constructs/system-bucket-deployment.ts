@@ -14,21 +14,28 @@ export interface SystemBucketConstructProps {
 export class SystemBucketDeploymentConstruct extends Construct {
     constructor(scope: Construct, id: string, props: SystemBucketConstructProps) {
         super(scope, id);
+
         console.log('Admin PWA Path: ', resolve('../admin-pwa/dist'));
-        // Deploy site contents to S3 bucket
         const adminPwaDeployment = new s3deploy.BucketDeployment(this, 'AdminPwaDeployment', {
             sources: [s3deploy.Source.asset(resolve('../admin-pwa/dist'))],
             destinationBucket: props.systemBucket,
             destinationKeyPrefix: 'admin', // Deploy contents to /admin directory in the bucket
         });
+
+        console.log('WebApp Public Path: ', resolve('../web-app/public'));
+        new s3deploy.BucketDeployment(this, 'WebAppPublicBucketDeployment', {
+            sources: [s3deploy.Source.asset(resolve('../web-app/public'))],
+            destinationBucket: props.systemBucket,
+        });
+
         console.log('WebApp Assets Path: ', resolve('../web-app/static'));
-        // Deploy site contents to S3 bucket
-        const webAppDeployment = new s3deploy.BucketDeployment(this, 'WebAppBucketDeployment', {
+        new s3deploy.BucketDeployment(this, 'WebAppStaticBucketDeployment', {
             sources: [s3deploy.Source.asset(resolve('../web-app/static'))],
             destinationBucket: props.systemBucket,
             destinationKeyPrefix: 'static', // Deploy contents to /admin directory in the bucket
         });
 
+        console.log('WebApp Assets uploaded');
         // Invalidate the cache for the entry point distribution
         new CacheInvalidationConstruct(this, 'EntryPointDistributionInvalidation', {
             distribution: props.entryPointDistribution,

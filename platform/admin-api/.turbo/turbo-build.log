@@ -1,7 +1,0 @@
-
-> admin-api@ build /Users/alex/Development/projects/ipselon/blgg-platform/platform/admin-api
-> NODE_ENV='production' rollup -c rollup.config.mjs
-
-[36m
-[1m/Users/alex/Development/projects/ipselon/blgg-platform/platform/admin-api/src/lambdas/probe/probe.handler.ts[22m → [1mdist/probe.js[22m...[39m
-[32mcreated [1mdist/probe.js[22m in [1m867ms[22m[39m

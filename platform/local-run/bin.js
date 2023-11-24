@@ -57,7 +57,7 @@ function setAWSCredentials(callback) {
     });
 }
 
-function runNpmScript(command) {
+function runCommand(command) {
     const workingDir = process.cwd();
 
     // Split the command into the command and arguments
@@ -95,12 +95,11 @@ setAWSCredentials(() => {
     // Fetch credentials from environment variables
     const awsAccessKeyId = env.AWS_ACCESS_KEY_ID;
     const awsSecretAccessKey = env.AWS_SECRET_ACCESS_KEY;
-    const awsSessionToken = env.AWS_SESSION_TOKEN; // This might be optional, depending on your setup
 
     if (!awsAccessKeyId || !awsSecretAccessKey) {
         console.error('Error: AWS credentials not found in environment variables.');
         process.exit(1);
     }
     const command = process.argv.slice(2);
-    runNpmScript(command);
+    runCommand(command);
 });

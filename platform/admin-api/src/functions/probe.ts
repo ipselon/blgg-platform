@@ -1,18 +1,19 @@
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda';
 // import { SSMClient, GetParameterCommand } from "@aws-sdk/client-ssm";
 import { DynamoDBClient, ScanCommand } from "@aws-sdk/client-dynamodb";
+import {PLATFORM_PROBE_TABLE_NAME} from 'common-utils';
 
 // const ssmClient = new SSMClient();
 const dynamoDbClient = new DynamoDBClient();
 
-console.log(JSON.stringify(process.env, null, 4));
+// console.log(JSON.stringify(process.env, null, 4));
 
 export const handler = async function(event: APIGatewayProxyEventV2): Promise<APIGatewayProxyResultV2> {
     console.log("request:", JSON.stringify(event, undefined, 2));
 
     // Fetch the DynamoDB table name from SSM Parameter Store
     // const tableName = await getTableNameFromSSM('probe-table-name');
-    const tableName = 'ProbeItems';
+    const tableName = PLATFORM_PROBE_TABLE_NAME;
 
     // Read items from the DynamoDB table
     const items = await getItemsFromDynamoDbTable(tableName);

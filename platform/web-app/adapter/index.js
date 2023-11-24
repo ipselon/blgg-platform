@@ -1,4 +1,3 @@
-const { createRequestHandler } = require('web-adapter');
-exports.handler = createRequestHandler({
-    build: require("../build/index.js"),
-});
+import { createRequestHandler } from 'web-adapter';
+import * as build from '../build/index.js';
+export const handler = createRequestHandler({build});

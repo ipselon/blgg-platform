@@ -1,18 +1,15 @@
 {
 	"$schema": "https://turbo.build/schema.json",
 	"pipeline": {
+		"bootstrap": {},
 		"build": {
 			"dependsOn": ["^build"],
-			"outputs": ["dist/**", "cdk.out/**", "build/**", "static/**"]
+			"outputs": ["dist/**", "build/**", "static/**"]
 		},
 		"deploy": {},
 		"destroy": {},
-		"preview": {
-			"dependsOn": ["build"]
-		},
-		"start": {
-			"dependsOn": ["build"]
-		},
+		"preview": {},
+		"start": {},
 		"dev": {
 			"cache": false,
 			"persistent": true

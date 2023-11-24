@@ -1,5 +1,6 @@
 // import { SSMClient, GetParameterCommand } from "@aws-sdk/client-ssm";
 import { DynamoDBClient, ScanCommand } from "@aws-sdk/client-dynamodb";
+import {PLATFORM_PROBE_TABLE_NAME} from 'common-utils';
 
 // const ssmClient = new SSMClient();
 const dynamoDbClient = new DynamoDBClient();
@@ -7,7 +8,7 @@ const dynamoDbClient = new DynamoDBClient();
 export async function getProbeItems() {
     // Fetch the DynamoDB table name from SSM Parameter Store
     // const tableName = await getTableNameFromSSM('probe-table-name');
-    const tableName = 'ProbeItems';
+    const tableName = PLATFORM_PROBE_TABLE_NAME;
 
     // Read items from the DynamoDB table
     const items = await getItemsFromDynamoDbTable(tableName);

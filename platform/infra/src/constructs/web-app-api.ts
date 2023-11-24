@@ -9,7 +9,7 @@ import * as apigwv2Integrations from '@aws-cdk/aws-apigatewayv2-integrations-alp
 import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
 
 export interface WebAppApiConstructProps {
-    probeTable: dynamodb.Table;
+    tables: Array<dynamodb.Table>;
 }
 
 export class WebAppApiConstruct extends Construct {
@@ -18,14 +18,15 @@ export class WebAppApiConstruct extends Construct {
 
     constructor(scope: Construct, id: string, props: WebAppApiConstructProps) {
         super(scope, id);
-        const {probeTable} = props;
+        const {tables} = props;
 
         console.log('WebApp API Path: ', resolve('../web-app/dist'));
         const lambdaHandler = new lambda.Function(this, 'WebAppAdapterLambda', {
             runtime: lambda.Runtime.NODEJS_18_X,
             handler: 'index.handler',
             code: lambda.Code.fromAsset(resolve('../web-app/dist')),
-            memorySize: 256
+            memorySize: 256,
+            description: 'Web Application Lambda. Remix adapter.'
         });
 
         // Grant the Lambda function permission to read all SSM parameters
@@ -34,8 +35,12 @@ export class WebAppApiConstruct extends Construct {
             resources: [`arn:aws:ssm:${cdk.Aws.REGION}:${cdk.Aws.ACCOUNT_ID}:parameter/*`],
         }));
 
-        // Grant the Lambda function read access to the DynamoDB table
-        probeTable.grantReadData(lambdaHandler);
+        if (tables.length > 0) {
+            for (const table of tables) {
+                // Grant the Lambda function read access to the DynamoDB table
+                table.grantReadData(lambdaHandler);
+            }
+        }
 
         // Define the HTTP API resource with the Lambda integration
         const lambdaIntegration = new apigwv2Integrations.HttpLambdaIntegration(

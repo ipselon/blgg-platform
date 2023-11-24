@@ -9,19 +9,19 @@ import {SystemBucketConstruct} from '../constructs/system-bucket';
 import {PreviewPointConstruct} from '../constructs/preview-point';
 import {SystemBucketDeploymentConstruct} from '../constructs/system-bucket-deployment';
 
-export interface BlggPlatformStackProps {
+export interface PlatformStackProps {
 
 }
 
-export class BlggPlatformStack extends Stack {
-    constructor(scope: Construct, id: string, props?: BlggPlatformStackProps) {
+export class PlatformStack extends Stack {
+    constructor(scope: Construct, id: string, props?: PlatformStackProps) {
         super(scope, id, props);
         const dynamoDbTablesConstruct = new DynamoDbTablesConstruct(this, 'DynamoDbTablesConstruct');
         const adminApiConstruct = new AdminApiConstruct(this, 'AdminApiConstruct', {
-            probeTable: dynamoDbTablesConstruct.table
+            tables: dynamoDbTablesConstruct.tables
         });
         const webAppApiConstruct = new WebAppApiConstruct(this, 'WebAppApiConstruct', {
-            probeTable: dynamoDbTablesConstruct.table
+            tables: dynamoDbTablesConstruct.tables
         });
 
         const systemBucketConstruct = new SystemBucketConstruct(this, 'SystemBucketConstruct');
