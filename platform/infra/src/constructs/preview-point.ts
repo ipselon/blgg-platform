@@ -32,6 +32,13 @@ export class PreviewPointConstruct extends Construct {
                     viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
                     responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT_AND_SECURITY_HEADERS,
                 },
+                '/favicon.ico': {
+                    origin: new origins.S3Origin(props.systemBucket, {
+                        originAccessIdentity: props.systemBucketOAI
+                    }),
+                    viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+                    responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT_AND_SECURITY_HEADERS,
+                },
                 '/favicon.svg': {
                     origin: new origins.S3Origin(props.systemBucket, {
                         originAccessIdentity: props.systemBucketOAI

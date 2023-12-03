@@ -8,37 +8,42 @@
         "id": "BlggWebsiteStack",
         "path": "BlggWebsiteStack",
         "children": {
-          "DynamoDbTablesConstruct": {
-            "id": "DynamoDbTablesConstruct",
-            "path": "BlggWebsiteStack/DynamoDbTablesConstruct",
+          "DbTablesConstruct": {
+            "id": "DbTablesConstruct",
+            "path": "BlggWebsiteStack/DbTablesConstruct",
             "children": {
-              "BlggWebsiteStackProbeItems": {
-                "id": "BlggWebsiteStackProbeItems",
-                "path": "BlggWebsiteStack/DynamoDbTablesConstruct/BlggWebsiteStackProbeItems",
+              "BlggWebsiteStackPages": {
+                "id": "BlggWebsiteStackPages",
+                "path": "BlggWebsiteStack/DbTablesConstruct/BlggWebsiteStackPages",
                 "children": {
                   "Resource": {
                     "id": "Resource",
-                    "path": "BlggWebsiteStack/DynamoDbTablesConstruct/BlggWebsiteStackProbeItems/Resource",
+                    "path": "BlggWebsiteStack/DbTablesConstruct/BlggWebsiteStackPages/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
                       "aws:cdk:cloudformation:props": {
                         "attributeDefinitions": [
                           {
-                            "attributeName": "id",
+                            "attributeName": "PK",
+                            "attributeType": "S"
+                          },
+                          {
+                            "attributeName": "SK",
                             "attributeType": "S"
                           }
                         ],
+                        "billingMode": "PAY_PER_REQUEST",
                         "keySchema": [
                           {
-                            "attributeName": "id",
+                            "attributeName": "PK",
                             "keyType": "HASH"
+                          },
+                          {
+                            "attributeName": "SK",
+                            "keyType": "RANGE"
                           }
                         ],
-                        "provisionedThroughput": {
-                          "readCapacityUnits": 5,
-                          "writeCapacityUnits": 5
-                        },
-                        "tableName": "BlggWebsiteStackProbeItems"
+                        "tableName": "BlggWebsiteStackPages"
                       }
                     },
                     "constructInfo": {
@@ -48,7 +53,60 @@
                   },
                   "ScalingRole": {
                     "id": "ScalingRole",
-                    "path": "BlggWebsiteStack/DynamoDbTablesConstruct/BlggWebsiteStackProbeItems/ScalingRole",
+                    "path": "BlggWebsiteStack/DbTablesConstruct/BlggWebsiteStackPages/ScalingRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.105.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_dynamodb.Table",
+                  "version": "2.105.0"
+                }
+              },
+              "BlggWebsiteStackSystem": {
+                "id": "BlggWebsiteStackSystem",
+                "path": "BlggWebsiteStack/DbTablesConstruct/BlggWebsiteStackSystem",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "BlggWebsiteStack/DbTablesConstruct/BlggWebsiteStackSystem/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
+                      "aws:cdk:cloudformation:props": {
+                        "attributeDefinitions": [
+                          {
+                            "attributeName": "PK",
+                            "attributeType": "S"
+                          },
+                          {
+                            "attributeName": "SK",
+                            "attributeType": "S"
+                          }
+                        ],
+                        "billingMode": "PAY_PER_REQUEST",
+                        "keySchema": [
+                          {
+                            "attributeName": "PK",
+                            "keyType": "HASH"
+                          },
+                          {
+                            "attributeName": "SK",
+                            "keyType": "RANGE"
+                          }
+                        ],
+                        "tableName": "BlggWebsiteStackSystem"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
+                      "version": "2.105.0"
+                    }
+                  },
+                  "ScalingRole": {
+                    "id": "ScalingRole",
+                    "path": "BlggWebsiteStack/DbTablesConstruct/BlggWebsiteStackSystem/ScalingRole",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.105.0"
@@ -66,192 +124,21 @@
               "version": "10.3.0"
             }
           },
-          "AdminApiConstruct": {
-            "id": "AdminApiConstruct",
-            "path": "BlggWebsiteStack/AdminApiConstruct",
+          "ApiConstruct": {
+            "id": "ApiConstruct",
+            "path": "BlggWebsiteStack/ApiConstruct",
             "children": {
-              "AdminApi": {
-                "id": "AdminApi",
-                "path": "BlggWebsiteStack/AdminApiConstruct/AdminApi",
-                "children": {
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "BlggWebsiteStack/AdminApiConstruct/AdminApi/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Api",
-                      "aws:cdk:cloudformation:props": {
-                        "name": "AdminApi",
-                        "protocolType": "HTTP"
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnApi",
-                      "version": "2.105.0"
-                    }
-                  },
-                  "DefaultStage": {
-                    "id": "DefaultStage",
-                    "path": "BlggWebsiteStack/AdminApiConstruct/AdminApi/DefaultStage",
-                    "children": {
-                      "Resource": {
-                        "id": "Resource",
-                        "path": "BlggWebsiteStack/AdminApiConstruct/AdminApi/DefaultStage/Resource",
-                        "attributes": {
-                          "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Stage",
-                          "aws:cdk:cloudformation:props": {
-                            "apiId": {
-                              "Ref": "AdminApiConstructAdminApiC5F590AD"
-                            },
-                            "autoDeploy": true,
-                            "stageName": "$default"
-                          }
-                        },
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnStage",
-                          "version": "2.105.0"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpStage",
-                      "version": "2.105.0-alpha.0"
-                    }
-                  },
-                  "GET--api--probe": {
-                    "id": "GET--api--probe",
-                    "path": "BlggWebsiteStack/AdminApiConstruct/AdminApi/GET--api--probe",
-                    "children": {
-                      "AdminApiLambdaIntegration_probe": {
-                        "id": "AdminApiLambdaIntegration_probe",
-                        "path": "BlggWebsiteStack/AdminApiConstruct/AdminApi/GET--api--probe/AdminApiLambdaIntegration_probe",
-                        "children": {
-                          "Resource": {
-                            "id": "Resource",
-                            "path": "BlggWebsiteStack/AdminApiConstruct/AdminApi/GET--api--probe/AdminApiLambdaIntegration_probe/Resource",
-                            "attributes": {
-                              "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Integration",
-                              "aws:cdk:cloudformation:props": {
-                                "apiId": {
-                                  "Ref": "AdminApiConstructAdminApiC5F590AD"
-                                },
-                                "integrationType": "AWS_PROXY",
-                                "integrationUri": {
-                                  "Fn::GetAtt": [
-                                    "AdminApiConstructAdminApiLambdaprobeABFF87C7",
-                                    "Arn"
-                                  ]
-                                },
-                                "payloadFormatVersion": "2.0"
-                              }
-                            },
-                            "constructInfo": {
-                              "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnIntegration",
-                              "version": "2.105.0"
-                            }
-                          }
-                        },
-                        "constructInfo": {
-                          "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpIntegration",
-                          "version": "2.105.0-alpha.0"
-                        }
-                      },
-                      "AdminApiLambdaIntegration_probe-Permission": {
-                        "id": "AdminApiLambdaIntegration_probe-Permission",
-                        "path": "BlggWebsiteStack/AdminApiConstruct/AdminApi/GET--api--probe/AdminApiLambdaIntegration_probe-Permission",
-                        "attributes": {
-                          "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
-                          "aws:cdk:cloudformation:props": {
-                            "action": "lambda:InvokeFunction",
-                            "functionName": {
-                              "Fn::GetAtt": [
-                                "AdminApiConstructAdminApiLambdaprobeABFF87C7",
-                                "Arn"
-                              ]
-                            },
-                            "principal": "apigateway.amazonaws.com",
-                            "sourceArn": {
-                              "Fn::Join": [
-                                "",
-                                [
-                                  "arn:",
-                                  {
-                                    "Ref": "AWS::Partition"
-                                  },
-                                  ":execute-api:",
-                                  {
-                                    "Ref": "AWS::Region"
-                                  },
-                                  ":",
-                                  {
-                                    "Ref": "AWS::AccountId"
-                                  },
-                                  ":",
-                                  {
-                                    "Ref": "AdminApiConstructAdminApiC5F590AD"
-                                  },
-                                  "/*/*/api/probe"
-                                ]
-                              ]
-                            }
-                          }
-                        },
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
-                          "version": "2.105.0"
-                        }
-                      },
-                      "Resource": {
-                        "id": "Resource",
-                        "path": "BlggWebsiteStack/AdminApiConstruct/AdminApi/GET--api--probe/Resource",
-                        "attributes": {
-                          "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Route",
-                          "aws:cdk:cloudformation:props": {
-                            "apiId": {
-                              "Ref": "AdminApiConstructAdminApiC5F590AD"
-                            },
-                            "authorizationType": "NONE",
-                            "routeKey": "GET /api/probe",
-                            "target": {
-                              "Fn::Join": [
-                                "",
-                                [
-                                  "integrations/",
-                                  {
-                                    "Ref": "AdminApiConstructAdminApiGETapiprobeAdminApiLambdaIntegrationprobe2073B4A5"
-                                  }
-                                ]
-                              ]
-                            }
-                          }
-                        },
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnRoute",
-                          "version": "2.105.0"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpRoute",
-                      "version": "2.105.0-alpha.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpApi",
-                  "version": "2.105.0-alpha.0"
-                }
-              },
-              "AdminApiLambda_probe": {
-                "id": "AdminApiLambda_probe",
-                "path": "BlggWebsiteStack/AdminApiConstruct/AdminApiLambda_probe",
+              "ApiLambda": {
+                "id": "ApiLambda",
+                "path": "BlggWebsiteStack/ApiConstruct/ApiLambda",
                 "children": {
                   "ServiceRole": {
                     "id": "ServiceRole",
-                    "path": "BlggWebsiteStack/AdminApiConstruct/AdminApiLambda_probe/ServiceRole",
+                    "path": "BlggWebsiteStack/ApiConstruct/ApiLambda/ServiceRole",
                     "children": {
                       "ImportServiceRole": {
                         "id": "ImportServiceRole",
-                        "path": "BlggWebsiteStack/AdminApiConstruct/AdminApiLambda_probe/ServiceRole/ImportServiceRole",
+                        "path": "BlggWebsiteStack/ApiConstruct/ApiLambda/ServiceRole/ImportServiceRole",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.Resource",
                           "version": "2.105.0"
@@ -259,7 +146,7 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "BlggWebsiteStack/AdminApiConstruct/AdminApiLambda_probe/ServiceRole/Resource",
+                        "path": "BlggWebsiteStack/ApiConstruct/ApiLambda/ServiceRole/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                           "aws:cdk:cloudformation:props": {
@@ -298,11 +185,11 @@
                       },
                       "DefaultPolicy": {
                         "id": "DefaultPolicy",
-                        "path": "BlggWebsiteStack/AdminApiConstruct/AdminApiLambda_probe/ServiceRole/DefaultPolicy",
+                        "path": "BlggWebsiteStack/ApiConstruct/ApiLambda/ServiceRole/DefaultPolicy",
                         "children": {
                           "Resource": {
                             "id": "Resource",
-                            "path": "BlggWebsiteStack/AdminApiConstruct/AdminApiLambda_probe/ServiceRole/DefaultPolicy/Resource",
+                            "path": "BlggWebsiteStack/ApiConstruct/ApiLambda/ServiceRole/DefaultPolicy/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                               "aws:cdk:cloudformation:props": {
@@ -347,7 +234,13 @@
                                       "Resource": [
                                         {
                                           "Fn::GetAtt": [
-                                            "DynamoDbTablesConstructBlggWebsiteStackProbeItemsF79B6D37",
+                                            "DbTablesConstructBlggWebsiteStackPages5154135C",
+                                            "Arn"
+                                          ]
+                                        },
+                                        {
+                                          "Fn::GetAtt": [
+                                            "DbTablesConstructBlggWebsiteStackSystem389364E4",
                                             "Arn"
                                           ]
                                         },
@@ -359,10 +252,10 @@
                                   ],
                                   "Version": "2012-10-17"
                                 },
-                                "policyName": "AdminApiConstructAdminApiLambdaprobeServiceRoleDefaultPolicy217803DE",
+                                "policyName": "ApiConstructApiLambdaServiceRoleDefaultPolicy6A831382",
                                 "roles": [
                                   {
-                                    "Ref": "AdminApiConstructAdminApiLambdaprobeServiceRole2D604FC4"
+                                    "Ref": "ApiConstructApiLambdaServiceRoleCEB6EFD4"
                                   }
                                 ]
                               }
@@ -386,11 +279,11 @@
                   },
                   "Code": {
                     "id": "Code",
-                    "path": "BlggWebsiteStack/AdminApiConstruct/AdminApiLambda_probe/Code",
+                    "path": "BlggWebsiteStack/ApiConstruct/ApiLambda/Code",
                     "children": {
                       "Stage": {
                         "id": "Stage",
-                        "path": "BlggWebsiteStack/AdminApiConstruct/AdminApiLambda_probe/Code/Stage",
+                        "path": "BlggWebsiteStack/ApiConstruct/ApiLambda/Code/Stage",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.AssetStaging",
                           "version": "2.105.0"
@@ -398,7 +291,7 @@
                       },
                       "AssetBucket": {
                         "id": "AssetBucket",
-                        "path": "BlggWebsiteStack/AdminApiConstruct/AdminApiLambda_probe/Code/AssetBucket",
+                        "path": "BlggWebsiteStack/ApiConstruct/ApiLambda/Code/AssetBucket",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                           "version": "2.105.0"
@@ -412,7 +305,7 @@
                   },
                   "Resource": {
                     "id": "Resource",
-                    "path": "BlggWebsiteStack/AdminApiConstruct/AdminApiLambda_probe/Resource",
+                    "path": "BlggWebsiteStack/ApiConstruct/ApiLambda/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                       "aws:cdk:cloudformation:props": {
@@ -420,18 +313,19 @@
                           "s3Bucket": {
                             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                           },
-                          "s3Key": "2c2caaacd44338ad725b83dc836bf464a76ee0652d508e5556594218ef000efb.zip"
+                          "s3Key": "27884486d0c9b7d3573bde87ad756cb495caed3147ef924452613fa3afe07277.zip"
                         },
-                        "description": "Admin API Lambda. The probe endpoint",
-                        "handler": "probe.handler",
+                        "description": "BlggWebsiteStack API Lambda.",
+                        "handler": "index.handler",
                         "memorySize": 256,
                         "role": {
                           "Fn::GetAtt": [
-                            "AdminApiConstructAdminApiLambdaprobeServiceRole2D604FC4",
+                            "ApiConstructApiLambdaServiceRoleCEB6EFD4",
                             "Arn"
                           ]
                         },
-                        "runtime": "nodejs18.x"
+                        "runtime": "nodejs18.x",
+                        "timeout": 300
                       }
                     },
                     "constructInfo": {
@@ -443,6 +337,178 @@
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_lambda.Function",
                   "version": "2.105.0"
+                }
+              },
+              "Api": {
+                "id": "Api",
+                "path": "BlggWebsiteStack/ApiConstruct/Api",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "BlggWebsiteStack/ApiConstruct/Api/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Api",
+                      "aws:cdk:cloudformation:props": {
+                        "description": "BlggWebsiteStack API Endpoint",
+                        "name": "Api",
+                        "protocolType": "HTTP"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnApi",
+                      "version": "2.105.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "BlggWebsiteStack/ApiConstruct/Api/DefaultRoute",
+                    "children": {
+                      "ApiLambdaIntegration": {
+                        "id": "ApiLambdaIntegration",
+                        "path": "BlggWebsiteStack/ApiConstruct/Api/DefaultRoute/ApiLambdaIntegration",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "BlggWebsiteStack/ApiConstruct/Api/DefaultRoute/ApiLambdaIntegration/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Integration",
+                              "aws:cdk:cloudformation:props": {
+                                "apiId": {
+                                  "Ref": "ApiConstructApiE672478E"
+                                },
+                                "integrationType": "AWS_PROXY",
+                                "integrationUri": {
+                                  "Fn::GetAtt": [
+                                    "ApiConstructApiLambdaA1689780",
+                                    "Arn"
+                                  ]
+                                },
+                                "payloadFormatVersion": "2.0"
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnIntegration",
+                              "version": "2.105.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpIntegration",
+                          "version": "2.105.0-alpha.0"
+                        }
+                      },
+                      "ApiLambdaIntegration-Permission": {
+                        "id": "ApiLambdaIntegration-Permission",
+                        "path": "BlggWebsiteStack/ApiConstruct/Api/DefaultRoute/ApiLambdaIntegration-Permission",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                          "aws:cdk:cloudformation:props": {
+                            "action": "lambda:InvokeFunction",
+                            "functionName": {
+                              "Fn::GetAtt": [
+                                "ApiConstructApiLambdaA1689780",
+                                "Arn"
+                              ]
+                            },
+                            "principal": "apigateway.amazonaws.com",
+                            "sourceArn": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "arn:",
+                                  {
+                                    "Ref": "AWS::Partition"
+                                  },
+                                  ":execute-api:",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  ":",
+                                  {
+                                    "Ref": "AWS::AccountId"
+                                  },
+                                  ":",
+                                  {
+                                    "Ref": "ApiConstructApiE672478E"
+                                  },
+                                  "/*/*"
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                          "version": "2.105.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "BlggWebsiteStack/ApiConstruct/Api/DefaultRoute/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Route",
+                          "aws:cdk:cloudformation:props": {
+                            "apiId": {
+                              "Ref": "ApiConstructApiE672478E"
+                            },
+                            "authorizationType": "NONE",
+                            "routeKey": "$default",
+                            "target": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "integrations/",
+                                  {
+                                    "Ref": "ApiConstructApiDefaultRouteApiLambdaIntegrationC71DB983"
+                                  }
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnRoute",
+                          "version": "2.105.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpRoute",
+                      "version": "2.105.0-alpha.0"
+                    }
+                  },
+                  "DefaultStage": {
+                    "id": "DefaultStage",
+                    "path": "BlggWebsiteStack/ApiConstruct/Api/DefaultStage",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "BlggWebsiteStack/ApiConstruct/Api/DefaultStage/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Stage",
+                          "aws:cdk:cloudformation:props": {
+                            "apiId": {
+                              "Ref": "ApiConstructApiE672478E"
+                            },
+                            "autoDeploy": true,
+                            "stageName": "$default"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnStage",
+                          "version": "2.105.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpStage",
+                      "version": "2.105.0-alpha.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpApi",
+                  "version": "2.105.0-alpha.0"
                 }
               }
             },
@@ -561,7 +627,13 @@
                                       "Resource": [
                                         {
                                           "Fn::GetAtt": [
-                                            "DynamoDbTablesConstructBlggWebsiteStackProbeItemsF79B6D37",
+                                            "DbTablesConstructBlggWebsiteStackPages5154135C",
+                                            "Arn"
+                                          ]
+                                        },
+                                        {
+                                          "Fn::GetAtt": [
+                                            "DbTablesConstructBlggWebsiteStackSystem389364E4",
                                             "Arn"
                                           ]
                                         },
@@ -634,7 +706,7 @@
                           "s3Bucket": {
                             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                           },
-                          "s3Key": "9a83b12e7904e5e9775b6ea4753280158a7dee34d80113c803884ccebd95e197.zip"
+                          "s3Key": "509bdfb43a5dad8bed1e983cd1b9d603110785979f425cf092a17ca68cd7246d.zip"
                         },
                         "description": "Web Application Lambda. Remix adapter.",
                         "handler": "index.handler",
@@ -1157,7 +1229,7 @@
                       "aws:cdk:cloudformation:type": "AWS::CloudFront::Function",
                       "aws:cdk:cloudformation:props": {
                         "autoPublish": true,
-                        "functionCode": "\n                function handler(event) {\n                    var request = event.request;\n                    var uri = request.uri;\n        \n                    // Check if URI is ending with '/admin' or '/admin/'\n                    if (uri.endsWith('/admin') || uri.endsWith('/admin/')) {\n                        // Rewrite URI to '/admin/index.html'\n                        request.uri = '/admin/index.html';\n                    }\n                    return request;\n                }\n            ",
+                        "functionCode": "\n                function handler(event) {\n                    var request = event.request;\n                    var uri = request.uri;\n        \n                    // Check if the URI is for a file (has a file extension)\n                    if (!uri.match(/\\/[^\\/]*\\.[^\\/]*$/)) {\n                        // Not a file, rewrite to /admin/index.html\n                        request.uri = '/admin/index.html';\n                    }\n                    return request;\n                }\n            ",
                         "functionConfig": {
                           "comment": {
                             "Fn::Join": [
@@ -1248,6 +1320,14 @@
                       "version": "10.3.0"
                     }
                   },
+                  "Origin7": {
+                    "id": "Origin7",
+                    "path": "BlggWebsiteStack/EntryPointConstruct/EntryPointDistribution/Origin7",
+                    "constructInfo": {
+                      "fqn": "constructs.Construct",
+                      "version": "10.3.0"
+                    }
+                  },
                   "Resource": {
                     "id": "Resource",
                     "path": "BlggWebsiteStack/EntryPointConstruct/EntryPointDistribution/Resource",
@@ -1283,24 +1363,26 @@
                             },
                             {
                               "domainName": {
-                                "Fn::GetAtt": [
-                                  "SystemBucketConstructSystemBucketEA96EAA7",
-                                  "RegionalDomainName"
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    {
+                                      "Ref": "ApiConstructApiE672478E"
+                                    },
+                                    ".execute-api.",
+                                    {
+                                      "Ref": "AWS::Region"
+                                    },
+                                    ".amazonaws.com"
+                                  ]
                                 ]
                               },
                               "id": "BlggWebsiteStackEntryPointConstructEntryPointDistributionOrigin2E3CF265C",
-                              "s3OriginConfig": {
-                                "originAccessIdentity": {
-                                  "Fn::Join": [
-                                    "",
-                                    [
-                                      "origin-access-identity/cloudfront/",
-                                      {
-                                        "Ref": "SystemBucketConstructSystemBucketOAI25EB3FA4"
-                                      }
-                                    ]
-                                  ]
-                                }
+                              "customOriginConfig": {
+                                "originSslProtocols": [
+                                  "TLSv1.2"
+                                ],
+                                "originProtocolPolicy": "https-only"
                               }
                             },
                             {
@@ -1327,26 +1409,24 @@
                             },
                             {
                               "domainName": {
-                                "Fn::Join": [
-                                  "",
-                                  [
-                                    {
-                                      "Ref": "AdminApiConstructAdminApiC5F590AD"
-                                    },
-                                    ".execute-api.",
-                                    {
-                                      "Ref": "AWS::Region"
-                                    },
-                                    ".amazonaws.com"
-                                  ]
+                                "Fn::GetAtt": [
+                                  "SystemBucketConstructSystemBucketEA96EAA7",
+                                  "RegionalDomainName"
                                 ]
                               },
                               "id": "BlggWebsiteStackEntryPointConstructEntryPointDistributionOrigin4F88AFE73",
-                              "customOriginConfig": {
-                                "originSslProtocols": [
-                                  "TLSv1.2"
-                                ],
-                                "originProtocolPolicy": "https-only"
+                              "s3OriginConfig": {
+                                "originAccessIdentity": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "origin-access-identity/cloudfront/",
+                                      {
+                                        "Ref": "SystemBucketConstructSystemBucketOAI25EB3FA4"
+                                      }
+                                    ]
+                                  ]
+                                }
                               }
                             },
                             {
@@ -1392,6 +1472,28 @@
                                   ]
                                 }
                               }
+                            },
+                            {
+                              "domainName": {
+                                "Fn::GetAtt": [
+                                  "SystemBucketConstructSystemBucketEA96EAA7",
+                                  "RegionalDomainName"
+                                ]
+                              },
+                              "id": "BlggWebsiteStackEntryPointConstructEntryPointDistributionOrigin7AD333AAF",
+                              "s3OriginConfig": {
+                                "originAccessIdentity": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "origin-access-identity/cloudfront/",
+                                      {
+                                        "Ref": "SystemBucketConstructSystemBucketOAI25EB3FA4"
+                                      }
+                                    ]
+                                  ]
+                                }
+                              }
                             }
                           ],
                           "defaultCacheBehavior": {
@@ -1415,26 +1517,24 @@
                           },
                           "cacheBehaviors": [
                             {
-                              "pathPattern": "/admin",
+                              "pathPattern": "/api/*",
                               "targetOriginId": "BlggWebsiteStackEntryPointConstructEntryPointDistributionOrigin2E3CF265C",
-                              "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+                              "allowedMethods": [
+                                "GET",
+                                "HEAD",
+                                "OPTIONS",
+                                "PUT",
+                                "PATCH",
+                                "POST",
+                                "DELETE"
+                              ],
+                              "cachePolicyId": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad",
                               "compress": true,
                               "responseHeadersPolicyId": "eaab4381-ed33-4a86-88ca-d9558dc6cd63",
-                              "viewerProtocolPolicy": "redirect-to-https",
-                              "functionAssociations": [
-                                {
-                                  "functionArn": {
-                                    "Fn::GetAtt": [
-                                      "EntryPointConstructAdminRewriteFunction62DF9626",
-                                      "FunctionARN"
-                                    ]
-                                  },
-                                  "eventType": "viewer-request"
-                                }
-                              ]
+                              "viewerProtocolPolicy": "redirect-to-https"
                             },
                             {
-                              "pathPattern": "/admin/*",
+                              "pathPattern": "/admin",
                               "targetOriginId": "BlggWebsiteStackEntryPointConstructEntryPointDistributionOrigin387D7C603",
                               "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
                               "compress": true,
@@ -1453,12 +1553,23 @@
                               ]
                             },
                             {
-                              "pathPattern": "/api/*",
+                              "pathPattern": "/admin/*",
                               "targetOriginId": "BlggWebsiteStackEntryPointConstructEntryPointDistributionOrigin4F88AFE73",
-                              "cachePolicyId": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad",
+                              "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
                               "compress": true,
                               "responseHeadersPolicyId": "eaab4381-ed33-4a86-88ca-d9558dc6cd63",
-                              "viewerProtocolPolicy": "redirect-to-https"
+                              "viewerProtocolPolicy": "redirect-to-https",
+                              "functionAssociations": [
+                                {
+                                  "functionArn": {
+                                    "Fn::GetAtt": [
+                                      "EntryPointConstructAdminRewriteFunction62DF9626",
+                                      "FunctionARN"
+                                    ]
+                                  },
+                                  "eventType": "viewer-request"
+                                }
+                              ]
                             },
                             {
                               "pathPattern": "/static/*",
@@ -1469,8 +1580,16 @@
                               "viewerProtocolPolicy": "redirect-to-https"
                             },
                             {
-                              "pathPattern": "/favicon.svg",
+                              "pathPattern": "/favicon.ico",
                               "targetOriginId": "BlggWebsiteStackEntryPointConstructEntryPointDistributionOrigin69AB08699",
+                              "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+                              "compress": true,
+                              "responseHeadersPolicyId": "eaab4381-ed33-4a86-88ca-d9558dc6cd63",
+                              "viewerProtocolPolicy": "redirect-to-https"
+                            },
+                            {
+                              "pathPattern": "/favicon.svg",
+                              "targetOriginId": "BlggWebsiteStackEntryPointConstructEntryPointDistributionOrigin7AD333AAF",
                               "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
                               "compress": true,
                               "responseHeadersPolicyId": "eaab4381-ed33-4a86-88ca-d9558dc6cd63",
@@ -1526,6 +1645,14 @@
                   "Origin3": {
                     "id": "Origin3",
                     "path": "BlggWebsiteStack/PreviewPointConstruct/PreviewPointDistribution/Origin3",
+                    "constructInfo": {
+                      "fqn": "constructs.Construct",
+                      "version": "10.3.0"
+                    }
+                  },
+                  "Origin4": {
+                    "id": "Origin4",
+                    "path": "BlggWebsiteStack/PreviewPointConstruct/PreviewPointDistribution/Origin4",
                     "constructInfo": {
                       "fqn": "constructs.Construct",
                       "version": "10.3.0"
@@ -1607,6 +1734,28 @@
                                   ]
                                 }
                               }
+                            },
+                            {
+                              "domainName": {
+                                "Fn::GetAtt": [
+                                  "SystemBucketConstructSystemBucketEA96EAA7",
+                                  "RegionalDomainName"
+                                ]
+                              },
+                              "id": "BlggWebsiteStackPreviewPointConstructPreviewPointDistributionOrigin4FADD5C43",
+                              "s3OriginConfig": {
+                                "originAccessIdentity": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "origin-access-identity/cloudfront/",
+                                      {
+                                        "Ref": "SystemBucketConstructSystemBucketOAI25EB3FA4"
+                                      }
+                                    ]
+                                  ]
+                                }
+                              }
                             }
                           ],
                           "defaultCacheBehavior": {
@@ -1636,8 +1785,16 @@
                               "viewerProtocolPolicy": "redirect-to-https"
                             },
                             {
-                              "pathPattern": "/favicon.svg",
+                              "pathPattern": "/favicon.ico",
                               "targetOriginId": "BlggWebsiteStackPreviewPointConstructPreviewPointDistributionOrigin3CD91193B",
+                              "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+                              "compress": true,
+                              "responseHeadersPolicyId": "eaab4381-ed33-4a86-88ca-d9558dc6cd63",
+                              "viewerProtocolPolicy": "redirect-to-https"
+                            },
+                            {
+                              "pathPattern": "/favicon.svg",
+                              "targetOriginId": "BlggWebsiteStackPreviewPointConstructPreviewPointDistributionOrigin4FADD5C43",
                               "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
                               "compress": true,
                               "responseHeadersPolicyId": "eaab4381-ed33-4a86-88ca-d9558dc6cd63",
@@ -2564,17 +2721,340 @@
               "version": "2.105.0"
             }
           },
-          "EntryPointDomainName": {
-            "id": "EntryPointDomainName",
-            "path": "BlggWebsiteStack/EntryPointDomainName",
+          "SysUserPoolConstruct": {
+            "id": "SysUserPoolConstruct",
+            "path": "BlggWebsiteStack/SysUserPoolConstruct",
+            "children": {
+              "SysUserVerificationEmailLambda": {
+                "id": "SysUserVerificationEmailLambda",
+                "path": "BlggWebsiteStack/SysUserPoolConstruct/SysUserVerificationEmailLambda",
+                "children": {
+                  "ServiceRole": {
+                    "id": "ServiceRole",
+                    "path": "BlggWebsiteStack/SysUserPoolConstruct/SysUserVerificationEmailLambda/ServiceRole",
+                    "children": {
+                      "ImportServiceRole": {
+                        "id": "ImportServiceRole",
+                        "path": "BlggWebsiteStack/SysUserPoolConstruct/SysUserVerificationEmailLambda/ServiceRole/ImportServiceRole",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.Resource",
+                          "version": "2.105.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "BlggWebsiteStack/SysUserPoolConstruct/SysUserVerificationEmailLambda/ServiceRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "lambda.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "managedPolicyArns": [
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                                  ]
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.105.0"
+                        }
+                      },
+                      "DefaultPolicy": {
+                        "id": "DefaultPolicy",
+                        "path": "BlggWebsiteStack/SysUserPoolConstruct/SysUserVerificationEmailLambda/ServiceRole/DefaultPolicy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "BlggWebsiteStack/SysUserPoolConstruct/SysUserVerificationEmailLambda/ServiceRole/DefaultPolicy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": [
+                                        "ssm:GetParameter",
+                                        "ssm:GetParameters",
+                                        "ssm:GetParametersByPath"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Fn::Join": [
+                                          "",
+                                          [
+                                            "arn:aws:ssm:",
+                                            {
+                                              "Ref": "AWS::Region"
+                                            },
+                                            ":",
+                                            {
+                                              "Ref": "AWS::AccountId"
+                                            },
+                                            ":parameter/*"
+                                          ]
+                                        ]
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "SysUserPoolConstructSysUserVerificationEmailLambdaServiceRoleDefaultPolicy6C23F034",
+                                "roles": [
+                                  {
+                                    "Ref": "SysUserPoolConstructSysUserVerificationEmailLambdaServiceRoleA25B274F"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                              "version": "2.105.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Policy",
+                          "version": "2.105.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.105.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "BlggWebsiteStack/SysUserPoolConstruct/SysUserVerificationEmailLambda/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                      "aws:cdk:cloudformation:props": {
+                        "code": {
+                          "zipFile": "\n                const { SSMClient, GetParameterCommand } = require('@aws-sdk/client-ssm');\n                const ssmClient = new SSMClient();\n                async function getSsmParameter(parameterName) {\n                    const command = new GetParameterCommand({ Name: parameterName });\n                    const response = await ssmClient.send(command);\n                    if (!response.Parameter?.Value) {\n                        throw new Error(`Parameter ${parameterName} not found`);\n                    }\n                    return response.Parameter.Value;\n                }\n                exports.handler = async (event) => {\n                    if (event.triggerSource === 'CustomMessage_SignUp' || event.triggerSource === 'CustomMessage_ResendCode') {\n                        const { codeParameter, userAttributes: {name, email} } = event.request;\n                        const domainName = await getSsmParameter('BlggWebsiteStackEntryPointDomain');\n                        const customUrl = `https://${domainName}/admin/sign-up?username=${email}&code=${codeParameter}`;\n                        event.response.emailSubject = \"Page Mosaic Email Verification\";\n                        event.response.emailMessage = `Hello, ${name}. You received this letter because you sign up to Page Mosaic Web Platform as administrator.\\n\\nPlease go to this url to complete the sign up: ${customUrl}`;\n                    } else if (event.triggerSource === 'CustomMessage_ForgotPassword') {\n                        const { codeParameter, userAttributes: {name, email} } = event.request;\n                        const domainName = await getSsmParameter('BlggWebsiteStackEntryPointDomain');\n                        const customUrl = `https://${domainName}/admin/password-recovery?username=${email}&code=${codeParameter}`;\n                        event.response.emailSubject = \"Page Mosaic Forgot Password Recovery\";\n                        event.response.emailMessage = `Hello, ${name}. It seems that you forgot your password.\\n\\nPlease go to this url to complete the password recovery: ${customUrl}`;                        \n                    }\n                    return event;\n                };\n           "
+                        },
+                        "handler": "index.handler",
+                        "role": {
+                          "Fn::GetAtt": [
+                            "SysUserPoolConstructSysUserVerificationEmailLambdaServiceRoleA25B274F",
+                            "Arn"
+                          ]
+                        },
+                        "runtime": "nodejs18.x"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                      "version": "2.105.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.Function",
+                  "version": "2.105.0"
+                }
+              },
+              "SysUserPool": {
+                "id": "SysUserPool",
+                "path": "BlggWebsiteStack/SysUserPoolConstruct/SysUserPool",
+                "children": {
+                  "CustomMessageCognito": {
+                    "id": "CustomMessageCognito",
+                    "path": "BlggWebsiteStack/SysUserPoolConstruct/SysUserPool/CustomMessageCognito",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                      "aws:cdk:cloudformation:props": {
+                        "action": "lambda:InvokeFunction",
+                        "functionName": {
+                          "Fn::GetAtt": [
+                            "SysUserPoolConstructSysUserVerificationEmailLambda733C0E1F",
+                            "Arn"
+                          ]
+                        },
+                        "principal": "cognito-idp.amazonaws.com",
+                        "sourceArn": {
+                          "Fn::GetAtt": [
+                            "SysUserPoolConstructSysUserPoolCD51550D",
+                            "Arn"
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                      "version": "2.105.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "BlggWebsiteStack/SysUserPoolConstruct/SysUserPool/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Cognito::UserPool",
+                      "aws:cdk:cloudformation:props": {
+                        "accountRecoverySetting": {
+                          "recoveryMechanisms": [
+                            {
+                              "name": "verified_email",
+                              "priority": 1
+                            }
+                          ]
+                        },
+                        "adminCreateUserConfig": {
+                          "allowAdminCreateUserOnly": false
+                        },
+                        "autoVerifiedAttributes": [
+                          "email"
+                        ],
+                        "emailVerificationMessage": "The verification code to your new account is {####}",
+                        "emailVerificationSubject": "Verify your new account",
+                        "lambdaConfig": {
+                          "customMessage": {
+                            "Fn::GetAtt": [
+                              "SysUserPoolConstructSysUserVerificationEmailLambda733C0E1F",
+                              "Arn"
+                            ]
+                          }
+                        },
+                        "policies": {
+                          "passwordPolicy": {
+                            "minimumLength": 8,
+                            "requireLowercase": true,
+                            "requireUppercase": true,
+                            "requireNumbers": true,
+                            "requireSymbols": true
+                          }
+                        },
+                        "schema": [
+                          {
+                            "name": "name",
+                            "mutable": false,
+                            "required": true
+                          }
+                        ],
+                        "smsVerificationMessage": "The verification code to your new account is {####}",
+                        "usernameAttributes": [
+                          "email"
+                        ],
+                        "verificationMessageTemplate": {
+                          "defaultEmailOption": "CONFIRM_WITH_CODE",
+                          "emailMessage": "The verification code to your new account is {####}",
+                          "emailSubject": "Verify your new account",
+                          "smsMessage": "The verification code to your new account is {####}"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cognito.CfnUserPool",
+                      "version": "2.105.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cognito.UserPool",
+                  "version": "2.105.0"
+                }
+              },
+              "SysUserPoolClient": {
+                "id": "SysUserPoolClient",
+                "path": "BlggWebsiteStack/SysUserPoolConstruct/SysUserPoolClient",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "BlggWebsiteStack/SysUserPoolConstruct/SysUserPoolClient/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Cognito::UserPoolClient",
+                      "aws:cdk:cloudformation:props": {
+                        "allowedOAuthFlows": [
+                          "implicit",
+                          "code"
+                        ],
+                        "allowedOAuthFlowsUserPoolClient": true,
+                        "allowedOAuthScopes": [
+                          "profile",
+                          "phone",
+                          "email",
+                          "openid",
+                          "aws.cognito.signin.user.admin"
+                        ],
+                        "callbackUrLs": [
+                          "https://example.com"
+                        ],
+                        "explicitAuthFlows": [
+                          "ALLOW_USER_PASSWORD_AUTH",
+                          "ALLOW_REFRESH_TOKEN_AUTH"
+                        ],
+                        "supportedIdentityProviders": [
+                          "COGNITO"
+                        ],
+                        "userPoolId": {
+                          "Ref": "SysUserPoolConstructSysUserPoolCD51550D"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cognito.CfnUserPoolClient",
+                      "version": "2.105.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cognito.UserPoolClient",
+                  "version": "2.105.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.3.0"
+            }
+          },
+          "BlggWebsiteStackEntryPointDomain": {
+            "id": "BlggWebsiteStackEntryPointDomain",
+            "path": "BlggWebsiteStack/BlggWebsiteStackEntryPointDomain",
             "constructInfo": {
               "fqn": "aws-cdk-lib.CfnOutput",
               "version": "2.105.0"
             }
           },
-          "PreviewPointDomainName": {
-            "id": "PreviewPointDomainName",
-            "path": "BlggWebsiteStack/PreviewPointDomainName",
+          "BlggWebsiteStackPreviewPointDomain": {
+            "id": "BlggWebsiteStackPreviewPointDomain",
+            "path": "BlggWebsiteStack/BlggWebsiteStackPreviewPointDomain",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.105.0"
+            }
+          },
+          "BlggWebsiteStackSysUserPoolId": {
+            "id": "BlggWebsiteStackSysUserPoolId",
+            "path": "BlggWebsiteStack/BlggWebsiteStackSysUserPoolId",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.105.0"
+            }
+          },
+          "BlggWebsiteStackSysUserPoolClientId": {
+            "id": "BlggWebsiteStackSysUserPoolClientId",
+            "path": "BlggWebsiteStack/BlggWebsiteStackSysUserPoolClientId",
             "constructInfo": {
               "fqn": "aws-cdk-lib.CfnOutput",
               "version": "2.105.0"

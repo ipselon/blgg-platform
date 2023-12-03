@@ -17,6 +17,9 @@ export default defineConfig({
       origin: '*'
     },
     port: 8080,
+    proxy: {
+      '/api': 'http://localhost:3030',
+    }
   },
   preview: {
     host: '0.0.0.0',

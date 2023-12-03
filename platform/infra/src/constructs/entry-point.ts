@@ -6,7 +6,7 @@ import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
 import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 
 export interface EntryPointConstructProps {
-    adminHttpApiGatewayOrigin: origins.HttpOrigin;
+    httpApiGatewayOrigin: origins.HttpOrigin;
     webAppHttpApiGatewayOrigin: origins.HttpOrigin;
     systemBucket: s3.Bucket;
     systemBucketOAI: cloudfront.OriginAccessIdentity;
@@ -36,9 +36,9 @@ export class EntryPointConstruct extends Construct {
                     var request = event.request;
                     var uri = request.uri;
         
-                    // Check if URI is ending with '/admin' or '/admin/'
-                    if (uri.endsWith('/admin') || uri.endsWith('/admin/')) {
-                        // Rewrite URI to '/admin/index.html'
+                    // Check if the URI is for a file (has a file extension)
+                    if (!uri.match(/\\/[^\\/]*\\.[^\\/]*$/)) {
+                        // Not a file, rewrite to /admin/index.html
                         request.uri = '/admin/index.html';
                     }
                     return request;
@@ -60,6 +60,13 @@ export class EntryPointConstruct extends Construct {
                 cachePolicy: webAppApiCachePolicy,
             },
             additionalBehaviors: {
+                '/api/*': {
+                    origin: props.httpApiGatewayOrigin,
+                    allowedMethods: cloudfront.AllowedMethods.ALLOW_ALL,
+                    viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+                    responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT_AND_SECURITY_HEADERS,
+                    cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED
+                },
                 '/admin': {
                     origin: new origins.S3Origin(props.systemBucket, {
                         originAccessIdentity: props.systemBucketOAI
@@ -82,13 +89,14 @@ export class EntryPointConstruct extends Construct {
                         eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
                     }],
                 },
-                '/api/*': {
-                    origin: props.adminHttpApiGatewayOrigin,
+                '/static/*': {
+                    origin: new origins.S3Origin(props.systemBucket, {
+                        originAccessIdentity: props.systemBucketOAI
+                    }),
                     viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
                     responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT_AND_SECURITY_HEADERS,
-                    cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED
                 },
-                '/static/*': {
+                '/favicon.ico': {
                     origin: new origins.S3Origin(props.systemBucket, {
                         originAccessIdentity: props.systemBucketOAI
                     }),

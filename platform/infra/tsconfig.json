@@ -10,10 +10,7 @@
     "target": "ES2022",  // Specify ECMAScript target version
     "esModuleInterop": true,  // Enables compatibility with default imports
     "strict": true,  // Enable all strict type-checking options
-    "baseUrl": "./src",
-    "paths": {
-      "common-utils": ["../common-utils/src/index.ts"]
-    },
+    "baseUrl": "./src"
   },
   "files": ["./src/infra.ts"],
   "include": ["./src/**/*"],

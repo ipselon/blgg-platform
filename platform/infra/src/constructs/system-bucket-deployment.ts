@@ -41,11 +41,10 @@ export class SystemBucketDeploymentConstruct extends Construct {
             distribution: props.entryPointDistribution,
             paths: ['/admin/*', '/static/*'],
         });
-        // Invalidate the cache for the preview point distribution
+        // // Invalidate the cache for the preview point distribution
         new CacheInvalidationConstruct(this, 'PreviewPointDistributionInvalidation', {
             distribution: props.previewPointDistribution,
             paths: ['/static/*'],
         });
-
     }
 }

@@ -6,7 +6,9 @@
 			"dependsOn": ["^build"],
 			"outputs": ["dist/**", "build/**", "static/**"]
 		},
-		"deploy": {},
+		"deploy": {
+			"dependsOn": ["build"]
+		},
 		"destroy": {},
 		"preview": {},
 		"start": {},

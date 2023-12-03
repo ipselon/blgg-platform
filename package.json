@@ -18,11 +18,10 @@
     "build-platform": "local-run turbo run build",
     "deploy-platform": "local-run turbo run deploy",
     "destroy-platform": "local-run turbo run destroy",
-    "admin-pwa": "local-run turbo run dev --filter=admin-pwa",
-    "admin-pwa-dev": "local-run turbo run preview --filter=admin-pwa",
-    "admin-api-dev": "local-run turbo run preview --filter=admin-api",
-    "web-app": "local-run turbo run dev --filter=web-app",
-    "web-app-dev": "local-run turbo run start --filter=web-app"
+    "api": "local-run turbo run dev --filter=api",
+    "admin-pwa": "turbo run dev --filter=admin-pwa",
+    "admin-pwa-preview": "turbo run preview --filter=admin-pwa",
+    "web-app": "local-run turbo run dev --filter=web-app"
   },
   "engines": {
     "node": "18.x"
