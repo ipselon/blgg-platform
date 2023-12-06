@@ -1,26 +1,29 @@
 import React, {useState, useEffect} from 'react';
 import {useFetcher} from "react-router-dom";
-import {SysUserProfileData} from '@/data/SysUserProfileData';
 import {Card, CardHeader, CardDescription, CardContent} from '@/components/ui/card';
-import {LucidePencil, LucideRotateCw} from 'lucide-react';
+import {LucideRotateCcw, LucidePencil, LucideRotateCw} from 'lucide-react';
 import {Label} from '@/components/ui/label';
 import {Input} from '@/components/ui/input';
 import {Button} from '@/components/ui/button';
 import {ActionDataRequestError} from '@/components/utils/ActionDataRequestError';
 import {ActionDataFieldError} from '@/components/utils/ActionDataFieldError';
-import {FORM_ACTION_RESET, FORM_ACTION_SUBMIT} from '@/utils/FormUtils';
+import {MainPageData} from '@/data/MainPageData';
+import {Textarea} from '@/components/ui/textarea';
 import {DelayedLoading} from '@/components/utils/DelayedLoading';
 import {ScrollArea} from '@/components/ui/scroll-area';
+import {FORM_ACTION_SUBMIT, FORM_ACTION_RESET} from '@/utils/FormUtils';
 
-interface SysUserProfileFormProps {
-    sysUserProfileData?: SysUserProfileData;
+interface MainPageFormProps {
+    mainPageData?: MainPageData;
     isLoadingData?: boolean;
 }
 
-export function SysUserProfileForm(props: SysUserProfileFormProps) {
-    const {sysUserProfileData, isLoadingData = false} = props;
+export function MainPageForm(props: MainPageFormProps) {
+    const {mainPageData, isLoadingData = false} = props;
     const fetcher = useFetcher();
     const [isEditing, setEditing] = useState<boolean>(false);
+    console.log('state: ', fetcher.state);
+    console.log('data: ', fetcher.data);
 
     useEffect(() => {
         if (fetcher.state === 'idle' && fetcher.data?.ok) {
@@ -41,9 +44,9 @@ export function SysUserProfileForm(props: SysUserProfileFormProps) {
     const isInAction = fetcher.state === 'loading' || fetcher.state === 'submitting' || isLoadingData;
     return (
         <fetcher.Form method="post" onReset={handleReset} className="flex flex-col gap-2 w-full h-full p-4">
-            <input name="action" type="hidden" defaultValue={FORM_ACTION_SUBMIT}/>
-            <input name="pk" type="hidden" defaultValue={sysUserProfileData?.PK?.S || ''}/>
-            <input name="sk" type="hidden" defaultValue={sysUserProfileData?.SK?.S || ''}/>
+            <input name="action" type="hidden" defaultValue={FORM_ACTION_SUBMIT} />
+            <input name="pk" type="hidden" defaultValue={mainPageData?.PK?.S || ''} />
+            <input name="sk" type="hidden" defaultValue={mainPageData?.SK?.S || ''} />
             <div className="flex flex-row gap-2">
                 {isEditing
                     ? (
@@ -81,13 +84,13 @@ export function SysUserProfileForm(props: SysUserProfileFormProps) {
                                 isLoading={isLoadingData}
                                 loadingElement={(
                                     <>
-                                        <LucideRotateCw className="mr-2 h-3 w-3 animate-spin"/>
+                                        <LucideRotateCw className="mr-2 h-3 w-3 animate-spin" />
                                         Loading...
                                     </>
                                 )}
                                 element={(
                                     <>
-                                        <LucidePencil className="mr-2 h-3 w-3"/>
+                                        <LucidePencil className="mr-2 h-3 w-3" />
                                         Edit
                                     </>
                                 )}
@@ -98,33 +101,43 @@ export function SysUserProfileForm(props: SysUserProfileFormProps) {
             </div>
             <div className="grow overflow-hidden">
                 <ScrollArea className="w-full h-full">
-                    <Card className="w-[350px]">
+                    <Card className="w-[500px]">
                         <CardHeader>
-                            <CardDescription>Here you can view and update the system user profile data</CardDescription>
+                            <CardDescription>Set the Home page content here</CardDescription>
                             <ActionDataRequestError actionData={fetcher.data}/>
                         </CardHeader>
                         <CardContent>
                             <div className="flex flex-col gap-4">
                                 <div className="flex flex-col gap-2">
-                                    <Label htmlFor="email">Email</Label>
+                                    <Label htmlFor="email">Title</Label>
                                     <Input
-                                        name="email"
+                                        name="title"
                                         type="text"
                                         autoFocus={true}
-                                        disabled={!isEditing}
-                                        defaultValue={sysUserProfileData?.UserEmail?.S || ''}
+                                        disabled={!isEditing || isInAction}
+                                        defaultValue={mainPageData?.Title?.S || ''}
                                     />
-                                    <ActionDataFieldError actionData={fetcher.data} fieldName="email"/>
+                                    <ActionDataFieldError actionData={fetcher.data} fieldName="title"/>
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                    <Label htmlFor="fullName">Full Name</Label>
+                                    <Label htmlFor="heroTitle">Hero Title</Label>
                                     <Input
-                                        name="fullName"
+                                        name="heroTitle"
                                         type="text"
-                                        disabled={!isEditing}
-                                        defaultValue={sysUserProfileData?.UserFullName?.S || ''}
+                                        disabled={!isEditing || isInAction}
+                                        defaultValue={mainPageData?.HeroTitle?.S || ''}
                                     />
-                                    <ActionDataFieldError actionData={fetcher.data} fieldName="fullName"/>
+                                    <ActionDataFieldError actionData={fetcher.data} fieldName="heroTitle"/>
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <Label htmlFor="body">Body</Label>
+                                    <Textarea
+                                        name="body"
+                                        disabled={!isEditing || isInAction}
+                                        defaultValue={mainPageData?.Body?.S || ''}
+                                        rows={6}
+                                    />
+                                    <ActionDataFieldError actionData={fetcher.data} fieldName="body"/>
                                 </div>
                             </div>
                         </CardContent>

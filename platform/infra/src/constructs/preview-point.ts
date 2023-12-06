@@ -20,8 +20,8 @@ export class PreviewPointConstruct extends Construct {
             defaultBehavior: {
                 origin: props.webAppHttpApiGatewayOrigin,
                 allowedMethods: cloudfront.AllowedMethods.ALLOW_ALL,
+                originRequestPolicy: cloudfront.OriginRequestPolicy.ALL_VIEWER_EXCEPT_HOST_HEADER,
                 viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-                responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT_AND_SECURITY_HEADERS,
                 cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
             },
             additionalBehaviors: {
@@ -29,22 +29,19 @@ export class PreviewPointConstruct extends Construct {
                     origin: new origins.S3Origin(props.systemBucket, {
                         originAccessIdentity: props.systemBucketOAI
                     }),
-                    viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-                    responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT_AND_SECURITY_HEADERS,
+                    viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS
                 },
                 '/favicon.ico': {
                     origin: new origins.S3Origin(props.systemBucket, {
                         originAccessIdentity: props.systemBucketOAI
                     }),
-                    viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-                    responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT_AND_SECURITY_HEADERS,
+                    viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS
                 },
                 '/favicon.svg': {
                     origin: new origins.S3Origin(props.systemBucket, {
                         originAccessIdentity: props.systemBucketOAI
                     }),
-                    viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-                    responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT_AND_SECURITY_HEADERS,
+                    viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS
                 },
             }
         });

@@ -54,17 +54,17 @@ export class EntryPointConstruct extends Construct {
                 : undefined,
             defaultBehavior: {
                 origin: props.webAppHttpApiGatewayOrigin,
+                originRequestPolicy: cloudfront.OriginRequestPolicy.ALL_VIEWER_EXCEPT_HOST_HEADER,
                 allowedMethods: cloudfront.AllowedMethods.ALLOW_ALL,
                 viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-                responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT_AND_SECURITY_HEADERS,
                 cachePolicy: webAppApiCachePolicy,
             },
             additionalBehaviors: {
                 '/api/*': {
                     origin: props.httpApiGatewayOrigin,
+                    originRequestPolicy: cloudfront.OriginRequestPolicy.ALL_VIEWER_EXCEPT_HOST_HEADER,
                     allowedMethods: cloudfront.AllowedMethods.ALLOW_ALL,
                     viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-                    responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT_AND_SECURITY_HEADERS,
                     cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED
                 },
                 '/admin': {
@@ -72,7 +72,6 @@ export class EntryPointConstruct extends Construct {
                         originAccessIdentity: props.systemBucketOAI
                     }),
                     viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-                    responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT_AND_SECURITY_HEADERS,
                     functionAssociations: [{
                         function: adminRewriteFunction,
                         eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
@@ -83,7 +82,6 @@ export class EntryPointConstruct extends Construct {
                         originAccessIdentity: props.systemBucketOAI
                     }),
                     viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-                    responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT_AND_SECURITY_HEADERS,
                     functionAssociations: [{
                         function: adminRewriteFunction,
                         eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
@@ -94,21 +92,18 @@ export class EntryPointConstruct extends Construct {
                         originAccessIdentity: props.systemBucketOAI
                     }),
                     viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-                    responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT_AND_SECURITY_HEADERS,
                 },
                 '/favicon.ico': {
                     origin: new origins.S3Origin(props.systemBucket, {
                         originAccessIdentity: props.systemBucketOAI
                     }),
                     viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-                    responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT_AND_SECURITY_HEADERS,
                 },
                 '/favicon.svg': {
                     origin: new origins.S3Origin(props.systemBucket, {
                         originAccessIdentity: props.systemBucketOAI
                     }),
                     viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-                    responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT_AND_SECURITY_HEADERS,
                 },
             }
         });

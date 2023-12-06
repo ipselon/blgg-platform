@@ -222,13 +222,17 @@
                                     {
                                       "Action": [
                                         "dynamodb:BatchGetItem",
+                                        "dynamodb:BatchWriteItem",
                                         "dynamodb:ConditionCheckItem",
+                                        "dynamodb:DeleteItem",
                                         "dynamodb:DescribeTable",
                                         "dynamodb:GetItem",
                                         "dynamodb:GetRecords",
                                         "dynamodb:GetShardIterator",
+                                        "dynamodb:PutItem",
                                         "dynamodb:Query",
-                                        "dynamodb:Scan"
+                                        "dynamodb:Scan",
+                                        "dynamodb:UpdateItem"
                                       ],
                                       "Effect": "Allow",
                                       "Resource": [
@@ -313,7 +317,7 @@
                           "s3Bucket": {
                             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                           },
-                          "s3Key": "27884486d0c9b7d3573bde87ad756cb495caed3147ef924452613fa3afe07277.zip"
+                          "s3Key": "23c3c27fc0d8c68671d85d6220164c78d1e02dded24744f4da7fb59a4ae93a7e.zip"
                         },
                         "description": "BlggWebsiteStack API Lambda.",
                         "handler": "index.handler",
@@ -615,13 +619,17 @@
                                     {
                                       "Action": [
                                         "dynamodb:BatchGetItem",
+                                        "dynamodb:BatchWriteItem",
                                         "dynamodb:ConditionCheckItem",
+                                        "dynamodb:DeleteItem",
                                         "dynamodb:DescribeTable",
                                         "dynamodb:GetItem",
                                         "dynamodb:GetRecords",
                                         "dynamodb:GetShardIterator",
+                                        "dynamodb:PutItem",
                                         "dynamodb:Query",
-                                        "dynamodb:Scan"
+                                        "dynamodb:Scan",
+                                        "dynamodb:UpdateItem"
                                       ],
                                       "Effect": "Allow",
                                       "Resource": [
@@ -1512,7 +1520,7 @@
                               "Ref": "EntryPointConstructWebAppApiApiCachePolicy33D4742A"
                             },
                             "compress": true,
-                            "responseHeadersPolicyId": "eaab4381-ed33-4a86-88ca-d9558dc6cd63",
+                            "originRequestPolicyId": "b689b0a8-53d0-40ab-baf2-68738e2966ac",
                             "viewerProtocolPolicy": "redirect-to-https"
                           },
                           "cacheBehaviors": [
@@ -1530,7 +1538,7 @@
                               ],
                               "cachePolicyId": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad",
                               "compress": true,
-                              "responseHeadersPolicyId": "eaab4381-ed33-4a86-88ca-d9558dc6cd63",
+                              "originRequestPolicyId": "b689b0a8-53d0-40ab-baf2-68738e2966ac",
                               "viewerProtocolPolicy": "redirect-to-https"
                             },
                             {
@@ -1538,7 +1546,6 @@
                               "targetOriginId": "BlggWebsiteStackEntryPointConstructEntryPointDistributionOrigin387D7C603",
                               "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
                               "compress": true,
-                              "responseHeadersPolicyId": "eaab4381-ed33-4a86-88ca-d9558dc6cd63",
                               "viewerProtocolPolicy": "redirect-to-https",
                               "functionAssociations": [
                                 {
@@ -1557,7 +1564,6 @@
                               "targetOriginId": "BlggWebsiteStackEntryPointConstructEntryPointDistributionOrigin4F88AFE73",
                               "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
                               "compress": true,
-                              "responseHeadersPolicyId": "eaab4381-ed33-4a86-88ca-d9558dc6cd63",
                               "viewerProtocolPolicy": "redirect-to-https",
                               "functionAssociations": [
                                 {
@@ -1576,7 +1582,6 @@
                               "targetOriginId": "BlggWebsiteStackEntryPointConstructEntryPointDistributionOrigin5B5ABBCE6",
                               "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
                               "compress": true,
-                              "responseHeadersPolicyId": "eaab4381-ed33-4a86-88ca-d9558dc6cd63",
                               "viewerProtocolPolicy": "redirect-to-https"
                             },
                             {
@@ -1584,7 +1589,6 @@
                               "targetOriginId": "BlggWebsiteStackEntryPointConstructEntryPointDistributionOrigin69AB08699",
                               "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
                               "compress": true,
-                              "responseHeadersPolicyId": "eaab4381-ed33-4a86-88ca-d9558dc6cd63",
                               "viewerProtocolPolicy": "redirect-to-https"
                             },
                             {
@@ -1592,7 +1596,6 @@
                               "targetOriginId": "BlggWebsiteStackEntryPointConstructEntryPointDistributionOrigin7AD333AAF",
                               "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
                               "compress": true,
-                              "responseHeadersPolicyId": "eaab4381-ed33-4a86-88ca-d9558dc6cd63",
                               "viewerProtocolPolicy": "redirect-to-https"
                             }
                           ],
@@ -1772,7 +1775,7 @@
                             ],
                             "cachePolicyId": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad",
                             "compress": true,
-                            "responseHeadersPolicyId": "eaab4381-ed33-4a86-88ca-d9558dc6cd63",
+                            "originRequestPolicyId": "b689b0a8-53d0-40ab-baf2-68738e2966ac",
                             "viewerProtocolPolicy": "redirect-to-https"
                           },
                           "cacheBehaviors": [
@@ -1781,7 +1784,6 @@
                               "targetOriginId": "BlggWebsiteStackPreviewPointConstructPreviewPointDistributionOrigin29673ECB0",
                               "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
                               "compress": true,
-                              "responseHeadersPolicyId": "eaab4381-ed33-4a86-88ca-d9558dc6cd63",
                               "viewerProtocolPolicy": "redirect-to-https"
                             },
                             {
@@ -1789,7 +1791,6 @@
                               "targetOriginId": "BlggWebsiteStackPreviewPointConstructPreviewPointDistributionOrigin3CD91193B",
                               "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
                               "compress": true,
-                              "responseHeadersPolicyId": "eaab4381-ed33-4a86-88ca-d9558dc6cd63",
                               "viewerProtocolPolicy": "redirect-to-https"
                             },
                             {
@@ -1797,7 +1798,6 @@
                               "targetOriginId": "BlggWebsiteStackPreviewPointConstructPreviewPointDistributionOrigin4FADD5C43",
                               "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
                               "compress": true,
-                              "responseHeadersPolicyId": "eaab4381-ed33-4a86-88ca-d9558dc6cd63",
                               "viewerProtocolPolicy": "redirect-to-https"
                             }
                           ],

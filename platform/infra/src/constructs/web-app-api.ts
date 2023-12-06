@@ -38,7 +38,7 @@ export class WebAppApiConstruct extends Construct {
         if (tables.length > 0) {
             for (const table of tables) {
                 // Grant the Lambda function read access to the DynamoDB table
-                table.grantReadData(lambdaHandler);
+                table.grantReadWriteData(lambdaHandler);
             }
         }
 

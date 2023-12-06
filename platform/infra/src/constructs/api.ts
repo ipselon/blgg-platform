@@ -41,7 +41,7 @@ export class ApiConstruct extends Construct {
         if (tables.length > 0) {
             for (const table of tables) {
                 // Grant the Lambda function read access to the DynamoDB table
-                table.grantReadData(lambdaHandler);
+                table.grantReadWriteData(lambdaHandler);
             }
         }
 
@@ -52,10 +52,7 @@ export class ApiConstruct extends Construct {
 
         this.httpApi = new apigwv2.HttpApi(this, 'Api', {
             defaultIntegration: lambdaIntegration,
-            description: `${PLATFORM_STACK_NAME} API Endpoint`,
-            corsPreflight: {
-                allowHeaders: ['*']
-            }
+            description: `${PLATFORM_STACK_NAME} API Endpoint`
         });
 
         // Define the HTTP Admin API Gateway endpoint as a custom origin

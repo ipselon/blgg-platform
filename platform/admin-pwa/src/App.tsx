@@ -2,21 +2,18 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import {SignUpRoute, signUpAction} from '@/roots/auth/SignUpRoute';
 import {LoginRoute, loginAction} from '@/roots/auth/LoginRoute';
 import {MainRoute, mainLoader, mainAction} from '@/roots/main/MainRoute';
-import {FirstRoute} from '@/features/first/FirstRoute';
-import {SecondRoute} from '@/features/second/SecondRoute';
-import {SubFirstRoute} from '@/subfeatures/subFirst/SubFirstRoute';
-import {SubSecondRoute, subSecondLoader} from '@/subfeatures/subSecond/SubSecondRoute';
-import {SubThirdRoute} from '@/subfeatures/subThird/SubThirdRoute';
-import {SubFourthRoute} from '@/subfeatures/subFourth/SubFourthRoute';
 import {PasswordRecoveryRoute, passwordRecoveryAction} from '@/roots/auth/PasswordRecoveryRoute';
 import {PasswordResetConfirmRoute} from '@/roots/auth/PasswordResetConfirmRoute';
 import {PasswordResetRoute, passwordResetAction} from '@/roots/auth/PasswordResetRoute';
 import {SettingsRoute} from '@/features/settings/SettingsRoute';
-import {
-    SysUserProfileRoute,
-    sysUserProfileAction,
-    sysUserProfileLoader
-} from '@/subfeatures/sysUserProfile/SysUserProfileRoute';
+import {SysUserProfileRoute} from '@/subfeatures/sysUserProfile/SysUserProfileRoute';
+import {PagesRoute} from '@/features/pages/PagesRoute';
+import {mainPageAction} from '@/subfeatures/mainPage/mainPage.action';
+import {mainPageLoader, mainPageLoaderGuard} from '@/subfeatures/mainPage/mainPage.loader';
+import {MainPageRoute} from '@/subfeatures/mainPage/MainPageRoute';
+import {sysUserProfileLoaderGuard, sysUserProfileLoader} from '@/subfeatures/sysUserProfile/sysUserProfile.loader';
+import {sysUserProfileAction} from '@/subfeatures/sysUserProfile/sysUserProfile.action';
+import {WelcomeRoute} from '@/features/welcome/WelcomeRoute';
 
 const router = createBrowserRouter([
     {
@@ -27,6 +24,24 @@ const router = createBrowserRouter([
         action: mainAction,
         children: [
             {
+                path: '',
+                index: true,
+                element: <WelcomeRoute />
+            },
+            {
+                path: 'pages',
+                element: <PagesRoute />,
+                children: [
+                    {
+                        path: 'main-page',
+                        action: mainPageAction,
+                        loader: mainPageLoader,
+                        shouldRevalidate: mainPageLoaderGuard,
+                        element: <MainPageRoute />
+                    }
+                ]
+            },
+            {
                 path: 'settings',
                 element: <SettingsRoute />,
                 children: [
@@ -34,39 +49,10 @@ const router = createBrowserRouter([
                         path: 'sys-user-profile',
                         action: sysUserProfileAction,
                         loader: sysUserProfileLoader,
+                        shouldRevalidate: sysUserProfileLoaderGuard,
                         element: <SysUserProfileRoute />
                     }
                 ]
-            },
-            {
-                path: 'first',
-                element: <FirstRoute />,
-                children: [
-                    {
-                        path: 'sub-first',
-                        element: <SubFirstRoute />
-                    },
-                    {
-                        path: 'sub-second',
-                        loader: subSecondLoader,
-                        element: <SubSecondRoute />
-                    }
-                ]
-            },
-            {
-                path: '/second',
-                element: <SecondRoute />,
-                children: [
-                    {
-                        path: 'sub-third',
-                        element: <SubThirdRoute />
-                    },
-                    {
-                        path: 'sub-fourth',
-                        element: <SubFourthRoute />
-                    }
-                ]
-
             }
         ]
     },

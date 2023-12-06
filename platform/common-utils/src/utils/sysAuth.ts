@@ -27,10 +27,3 @@ export type UserToken = {
     expiredAt: number;
     username: string;
 };
-
-export type UserProfile = {
-    email: string;
-    fullName: string;
-    bio?: string;
-    avatarUrl?: string;
-};

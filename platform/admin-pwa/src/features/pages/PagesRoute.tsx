@@ -4,7 +4,7 @@ import {ToolbarSection} from '@/components/layouts/ToolbarSection';
 import {CentralSection} from '@/components/layouts/CentralSection';
 import {ButtonLink} from '@/components/utils/ButtonLink';
 
-export function SecondRoute() {
+export function PagesRoute() {
     return (
         <>
             <ToolbarSection>
@@ -13,25 +13,9 @@ export function SecondRoute() {
                         <NavigationMenuList>
                             <NavigationMenuItem asChild={true}>
                                 <ButtonLink
-                                    to="/second/sub-third"
+                                    to="/pages/main-page"
                                     end={true}
-                                    label="Sub Third"
-                                    className="w-full justify-start"
-                                />
-                            </NavigationMenuItem>
-                            <NavigationMenuItem asChild={true}>
-                                <ButtonLink
-                                    to="/second/sub-fourth"
-                                    end={true}
-                                    label="Sub Fourth"
-                                    className="w-full justify-start"
-                                />
-                            </NavigationMenuItem>
-                            <NavigationMenuItem asChild={true}>
-                                <ButtonLink
-                                    to="/first/sub-first"
-                                    end={true}
-                                    label="Sub First"
+                                    label="Home"
                                     className="w-full justify-start"
                                 />
                             </NavigationMenuItem>

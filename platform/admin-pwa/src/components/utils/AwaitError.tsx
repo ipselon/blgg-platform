@@ -10,5 +10,5 @@ export function AwaitError() {
             navigate('/login');
         }
     }, [error]);
-    return <div>{error.message}</div>;
+    return <div className="text-xs text-red-600">{error.message}</div>;
 }

@@ -15,7 +15,7 @@ export function SettingsRoute() {
                                 <ButtonLink
                                     to="/settings/sys-user-profile"
                                     end={true}
-                                    label="System User Profile"
+                                    label="System User"
                                     className="w-full justify-start"
                                 />
                             </NavigationMenuItem>

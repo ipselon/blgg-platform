@@ -3,9 +3,9 @@ import {useState, useEffect} from 'react';
 export function DelayedFallback() {
     const [show, setShow] = useState(false);
     useEffect(() => {
-        let timeout = setTimeout(() => setShow(true), 300)
+        let timeout = setTimeout(() => setShow(true), 300);
         return () => {
-            clearTimeout(timeout)
+            clearTimeout(timeout);
         }
     }, []);
 

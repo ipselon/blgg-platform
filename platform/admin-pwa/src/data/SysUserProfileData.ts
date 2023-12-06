@@ -34,7 +34,6 @@ class SysUserProfileDataSingleton {
     }
 
     async getData(): SysUserProfileDataRequest {
-        console.log('Try to get data...');
         if (this.instance && !this.hasExpired()) {
             return this.instance;
         }
@@ -49,20 +48,20 @@ class SysUserProfileDataSingleton {
         return this.initializationPromise;
     }
 
-    async setData(sysUserProfileData: SysUserProfileData): Promise<void> {
-        if (sysUserProfileData) {
-            const profile: UserProfile = {
-                email: sysUserProfileData.email,
-                fullName: sysUserProfileData.fullName
-            };
-            const accessToken: string | undefined = await accessTokenSingleton.getAccessToken();
-            if (accessToken) {
-                await post<any>('/api/post-sys-user-profile', {profile}, accessToken);
-                this.instance = undefined;
-                return;
-            }
-            throw Error('Missing access token');
+    async setData(formDataObject: Record<string, FormDataEntryValue | null>): Promise<void> {
+        const userProfile: UserProfile = {
+            PK: {S: formDataObject.pk as string},
+            SK: {S: formDataObject.sk as string},
+            UserEmail: {S: formDataObject.email as string},
+            UserFullName: {S: formDataObject.fullName as string}
+        };
+        const accessToken: string | undefined = await accessTokenSingleton.getAccessToken();
+        if (accessToken) {
+            await post<any>('/api/post-sys-user-profile', {profile: userProfile}, accessToken);
+            this.instance = undefined;
+            return;
         }
+        throw Error('Missing access token');
     }
 }
 

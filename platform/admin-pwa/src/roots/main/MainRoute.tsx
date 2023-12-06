@@ -6,8 +6,6 @@ import {AwaitError} from '@/components/utils/AwaitError';
 import {DelayedFallback} from '@/components/utils/DelayedFallback';
 import {sysUserDataSingleton, SysUserDataRequest} from '@/data/SysUserData';
 import {AccessTokenRequest, accessTokenSingleton} from '@/utils/AccessToken';
-import {post} from '@/utils/ClientApi';
-import {AuthResponse} from 'common-utils';
 
 export interface MainRouteLoaderResponse {
     accessTokenRequest: AccessTokenRequest;

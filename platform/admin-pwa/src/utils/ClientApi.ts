@@ -17,7 +17,7 @@ export async function get<T>(
         });
     }
     try {
-        response = await fetch(url, {
+        response = await fetch(encodeURI(url), {
             method: 'GET',
             headers: {
                 xtoken: token ?? '',
@@ -58,7 +58,7 @@ export async function post<T>(
         });
     }
     try {
-        response = await fetch(url, {
+        response = await fetch(encodeURI(url), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -96,7 +96,7 @@ export async function postStream(
     const abortController = new AbortController();
     let response;
     try {
-        response = await fetch(url, {
+        response = await fetch(encodeURI(url), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -149,7 +149,7 @@ export async function postStream(
 export async function del<T>(url: string, body: any, token?: string): Promise<T> {
     let response;
     try {
-        response = await fetch(url, {
+        response = await fetch(encodeURI(url), {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -175,7 +175,7 @@ export async function del<T>(url: string, body: any, token?: string): Promise<T>
 export async function putFile(url: string, file: File, token?: string) {
     let response;
     try {
-        response = await fetch(url, {
+        response = await fetch(encodeURI(url), {
             method: 'PUT',
             headers: {
                 xtoken: token ?? '',
@@ -211,7 +211,7 @@ export function putFile1(
         xhr.abort();
     }
     return new Promise<void>((resolve, reject) => {
-        xhr.open('PUT', url, true);
+        xhr.open('PUT', encodeURI(url), true);
         // Listen to the upload progress.
         xhr.upload.onprogress = function(e) {
             if (e.lengthComputable) {

@@ -1,5 +1,4 @@
 import {getStorageRecord, setStorageRecord} from '@/utils/localStorage';
-import {SequentialTaskQueue} from 'sequential-task-queue';
 import {UserToken, UserAttributes} from 'common-utils';
 
 export type SysUserData = {
@@ -10,11 +9,9 @@ export type SysUserDataRequest = Promise<SysUserData>;
 
 class SysUserDataSingleton {
     private getDataPromise: SysUserDataRequest | undefined;
-    private setDataQueue: SequentialTaskQueue | undefined;
 
     constructor() {
         this.getDataPromise = undefined;
-        this.setDataQueue = undefined;
     }
 
     private async initializeGetData(): SysUserDataRequest {
@@ -37,11 +34,6 @@ class SysUserDataSingleton {
     }
 
     async setData(sysUserData: SysUserData): Promise<void> {
-        // // if (!this.setDataQueue) {
-        // //     this.setDataQueue = new SequentialTaskQueue();
-        // // }
-        // this.setDataQueue.push(() => setStorageRecord('userAttributes', sysUserData.userAttributes, 'auth'));
-        // this.setDataQueue.push(() => setStorageRecord('userToken', sysUserData.userToken, 'auth'));
         await setStorageRecord('userAttributes', sysUserData.userAttributes, 'auth');
         await setStorageRecord('userToken', sysUserData.userToken, 'auth');
     }
