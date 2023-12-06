@@ -11,6 +11,7 @@ import getSysUserProfile from './get-sys-user-profile';
 import postSysUserProfile from './post-sys-user-profile';
 import getPageContent from './get-page-content';
 import postPageContent from './post-page-content';
+import getPreview from './get-preview';
 
 const router = Router();
 
@@ -25,5 +26,6 @@ router.use(getSysUserProfile);
 router.use(postSysUserProfile);
 router.use(getPageContent);
 router.use(postPageContent);
+router.use(getPreview);
 
 export default router;

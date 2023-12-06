@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useFetcher} from "react-router-dom";
 import {Card, CardHeader, CardDescription, CardContent} from '@/components/ui/card';
-import {LucideRotateCcw, LucidePencil, LucideRotateCw} from 'lucide-react';
+import {LucidePencil, LucideRotateCw, LucideExternalLink} from 'lucide-react';
 import {Label} from '@/components/ui/label';
 import {Input} from '@/components/ui/input';
 import {Button} from '@/components/ui/button';
@@ -12,6 +12,7 @@ import {Textarea} from '@/components/ui/textarea';
 import {DelayedLoading} from '@/components/utils/DelayedLoading';
 import {ScrollArea} from '@/components/ui/scroll-area';
 import {FORM_ACTION_SUBMIT, FORM_ACTION_RESET} from '@/utils/FormUtils';
+import {openPreview} from '@/utils/PreviewUtils';
 
 interface MainPageFormProps {
     mainPageData?: MainPageData;
@@ -22,8 +23,6 @@ export function MainPageForm(props: MainPageFormProps) {
     const {mainPageData, isLoadingData = false} = props;
     const fetcher = useFetcher();
     const [isEditing, setEditing] = useState<boolean>(false);
-    console.log('state: ', fetcher.state);
-    console.log('data: ', fetcher.data);
 
     useEffect(() => {
         if (fetcher.state === 'idle' && fetcher.data?.ok) {
@@ -41,12 +40,20 @@ export function MainPageForm(props: MainPageFormProps) {
         setEditing(true);
     };
 
+    const handlePreview = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        e.preventDefault();
+        openPreview().catch((e: any) => {
+            console.error(e);
+        });
+    };
+
     const isInAction = fetcher.state === 'loading' || fetcher.state === 'submitting' || isLoadingData;
     return (
         <fetcher.Form method="post" onReset={handleReset} className="flex flex-col gap-2 w-full h-full p-4">
-            <input name="action" type="hidden" defaultValue={FORM_ACTION_SUBMIT} />
-            <input name="pk" type="hidden" defaultValue={mainPageData?.PK?.S || ''} />
-            <input name="sk" type="hidden" defaultValue={mainPageData?.SK?.S || ''} />
+            <input name="action" type="hidden" defaultValue={FORM_ACTION_SUBMIT}/>
+            <input name="pk" type="hidden" defaultValue={mainPageData?.PK?.S || ''}/>
+            <input name="sk" type="hidden" defaultValue={mainPageData?.SK?.S || ''}/>
             <div className="flex flex-row gap-2">
                 {isEditing
                     ? (
@@ -73,29 +80,41 @@ export function MainPageForm(props: MainPageFormProps) {
                         </>
                     )
                     : (
-                        <Button
-                            type="button"
-                            size="sm"
-                            variant="outline"
-                            disabled={isLoadingData}
-                            onClick={handleStartEditing}
-                        >
-                            <DelayedLoading
-                                isLoading={isLoadingData}
-                                loadingElement={(
-                                    <>
-                                        <LucideRotateCw className="mr-2 h-3 w-3 animate-spin" />
-                                        Loading...
-                                    </>
-                                )}
-                                element={(
-                                    <>
-                                        <LucidePencil className="mr-2 h-3 w-3" />
-                                        Edit
-                                    </>
-                                )}
-                            />
-                        </Button>
+                        <>
+                            <Button
+                                type="button"
+                                size="sm"
+                                variant="outline"
+                                disabled={isLoadingData}
+                                onClick={handleStartEditing}
+                            >
+                                <DelayedLoading
+                                    isLoading={isLoadingData}
+                                    loadingElement={(
+                                        <>
+                                            <LucideRotateCw className="mr-2 h-3 w-3 animate-spin"/>
+                                            Loading...
+                                        </>
+                                    )}
+                                    element={(
+                                        <>
+                                            <LucidePencil className="mr-2 h-3 w-3"/>
+                                            Edit
+                                        </>
+                                    )}
+                                />
+                            </Button>
+                            <Button
+                                type="button"
+                                size="sm"
+                                variant="outline"
+                                disabled={isLoadingData}
+                                onClick={handlePreview}
+                            >
+                                <LucideExternalLink className="mr-2 h-3 w-3" />
+                                Preview Page
+                            </Button>
+                        </>
                     )
                 }
             </div>

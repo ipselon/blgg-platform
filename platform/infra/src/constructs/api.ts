@@ -22,7 +22,6 @@ export class ApiConstruct extends Construct {
         const {tables} = props;
 
         const apiDirectoryPath = resolve('../api/dist');
-        console.log('API Path: ', apiDirectoryPath);
         const lambdaHandler = new lambda.Function(this, 'ApiLambda', {
             runtime: lambda.Runtime.NODEJS_18_X,
             handler: 'index.handler',

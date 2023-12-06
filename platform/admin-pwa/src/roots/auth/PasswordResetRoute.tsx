@@ -29,8 +29,6 @@ export async function passwordResetAction({request}: LoaderFunctionArgs) {
             let formData = await request.formData();
             const data = Object.fromEntries(formData);
             const validationResult = forgotFormSchema.safeParse(data);
-            console.log('DATA: ', data);
-            console.log('Validation: ', validationResult);
             if (!validationResult.success) {
                 const formatted = validationResult.error.format();
                 return json(formatted);
@@ -54,8 +52,7 @@ export async function passwordResetAction({request}: LoaderFunctionArgs) {
 export function PasswordResetRoute() {
     const actionData: any = useActionData();
     let navigation = useNavigation();
-    console.log('Action data: ', actionData);
-
+    const isLoading = !!navigation.formData?.get('username');
     return (
         <div className="w-full h-full flex flex-col items-center justify-center bg-slate-100">
             <Form method="post">
@@ -64,9 +61,6 @@ export function PasswordResetRoute() {
                         <CardTitle>Reset Password</CardTitle>
                         <CardDescription>Reset password of your account</CardDescription>
                         <ActionDataRequestError actionData={actionData}/>
-                        {!!navigation.formData?.get('username') && (
-                            <p className="text-xs">Resetting password. Please wait...</p>
-                        )}
                     </CardHeader>
                     <CardContent>
                         <div className="grid w-full items-center gap-6">
@@ -78,7 +72,7 @@ export function PasswordResetRoute() {
                         </div>
                     </CardContent>
                     <CardFooter className="flex justify-end">
-                        <Button type="submit">
+                        <Button type="submit" disabled={isLoading}>
                             Reset Password
                         </Button>
                     </CardFooter>

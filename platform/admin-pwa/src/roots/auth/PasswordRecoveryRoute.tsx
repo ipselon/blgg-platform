@@ -28,8 +28,6 @@ export async function passwordRecoveryAction({request}: LoaderFunctionArgs) {
             let formData = await request.formData();
             const data = Object.fromEntries(formData);
             const validationResult = formSchema.safeParse(data);
-            console.log('DATA: ', data);
-            console.log('Validation: ', validationResult);
             if (!validationResult.success) {
                 const formatted = validationResult.error.format();
                 return json(formatted);
@@ -60,9 +58,6 @@ export function PasswordRecoveryRoute() {
     let params = new URLSearchParams(location.search);
     const code = params.get('code');
     const username = params.get('username');
-
-    console.log('Action data: ', actionData);
-
     return (
         <div className="w-full h-full flex flex-col items-center justify-center bg-slate-100">
             <Form method="post">

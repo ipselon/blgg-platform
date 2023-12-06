@@ -11,7 +11,6 @@ class MainPageDataSingleton {
     async getPageContent(): MainPageDataRequest {
         const accessToken: string | undefined = await accessTokenSingleton.getAccessToken();
         if (accessToken) {
-            await new Promise((resolve) => { setTimeout(resolve, 2000); });
             return get<MainPageData>(`/api/get-page-content?pk=Page_main&sk=Content_main`, accessToken);
         }
         throw Error('Missing access token');

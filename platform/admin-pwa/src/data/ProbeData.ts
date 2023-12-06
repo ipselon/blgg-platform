@@ -29,7 +29,6 @@ class ProbeDataSingleton {
     }
 
     async getData(): ProbeDataRequest {
-        console.log('Try to get data...');
         if (this.instance && !this.hasExpired()) {
             return this.instance;
         }

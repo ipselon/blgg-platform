@@ -317,7 +317,7 @@
                           "s3Bucket": {
                             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                           },
-                          "s3Key": "23c3c27fc0d8c68671d85d6220164c78d1e02dded24744f4da7fb59a4ae93a7e.zip"
+                          "s3Key": "d92830c809d351eab60c973ca36ebbbae9cc9f5fd46e41b254b0819eaa315837.zip"
                         },
                         "description": "BlggWebsiteStack API Lambda.",
                         "handler": "index.handler",
@@ -714,7 +714,7 @@
                           "s3Bucket": {
                             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                           },
-                          "s3Key": "509bdfb43a5dad8bed1e983cd1b9d603110785979f425cf092a17ca68cd7246d.zip"
+                          "s3Key": "eda9594bdf67e6bc16604cdc2239b070cea2c9f52996f8c6ed8594b524f49418.zip"
                         },
                         "description": "Web Application Lambda. Remix adapter.",
                         "handler": "index.handler",

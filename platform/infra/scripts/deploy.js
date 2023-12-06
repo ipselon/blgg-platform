@@ -29,7 +29,7 @@ const CDK_OUTPUT_FILE = 'cdk-outputs.json';
 // closeSync(log);
 execSync(`cdk deploy --require-approval never --auto-approve --outputs-file ${CDK_OUTPUT_FILE} --profile ${AWS_PROFILE_NAME}`, {stdio: 'inherit'});
 
-console.log('Reading output.');
+// console.log('Reading output.');
 // Check if the output file was created
 if (!existsSync(CDK_OUTPUT_FILE)) {
     console.error('Error: CDK output file not found');
@@ -65,7 +65,7 @@ const putParameter = async (name, value) => {
     try {
         const command = new PutParameterCommand(params);
         const response = await ssmClient.send(command);
-        console.log(`Parameter stored: ${name}, Version: ${response.Version}`);
+        // console.log(`Parameter stored: ${name}, Version: ${response.Version}`);
     } catch (err) {
         console.error(`Error storing parameter ${name}:`, err);
     }
@@ -96,7 +96,7 @@ const signUpAdminUser = async () => {
                     },
                     {
                         Name: 'name',
-                        Value: 'Default Admin User'
+                        Value: 'Admin User'
                     },
                 ]
             }));
@@ -119,6 +119,11 @@ putParameter(PLATFORM_ENTRY_POINT_DOMAIN_SSM_PARAM, entryPointDomainName)
     })
     .then(() => {
         return signUpAdminUser();
+    })
+    .then(() => {
+        console.log('It seems that the platform has been successfully deployed.');
+        console.log(`Please open the website at: https://${entryPointDomainName}`);
+        console.log(`Please open the admin panel at: https://${entryPointDomainName}/admin`);
     })
     .catch(error => {
         console.error(error.message);

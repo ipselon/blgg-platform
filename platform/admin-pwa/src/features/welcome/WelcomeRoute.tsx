@@ -12,18 +12,22 @@ export function WelcomeRoute() {
             </ToolbarSection>
             <CentralSection>
                 <ScrollArea className="w-full h-full p-4">
-                    <div className="flex flex-col gap-4">
+                    <div className="w-full flex flex-col gap-4">
                         <div>
-                            <h2 className="text-xl">Welcome to Page Mosaic Platform Landing</h2>
+                            <h2 className="text-xl">Welcome</h2>
                         </div>
                         <div>
-                            <h2>The platform has only two features so far:</h2>
+                            <p className="text-sm">The platform has two features so far:</p>
                         </div>
                         <div>
-                            <Link className="text-xs hover:underline" to="/pages/main-page">Home Page Content</Link>
-                        </div>
-                        <div>
-                            <Link className="text-xs hover:underline" to="/settings/sys-user-profile">System User Profile</Link>
+                            <ul className="ml-4 list-disc">
+                                <li>
+                                    <Link className="text-blue-700 text-sm hover:underline" to="/pages/main-page">Home Page Content</Link>
+                                </li>
+                                <li>
+                                    <Link className="text-blue-700 text-sm hover:underline" to="/settings/sys-user-profile">System User Profile</Link>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </ScrollArea>

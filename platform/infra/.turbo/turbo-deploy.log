@@ -3,50 +3,56 @@
 > node ./scripts/deploy.js
 
 Please wait. Deploying resources...
-API Path:  /Users/alex/Development/projects/ipselon/blgg-platform/platform/api/dist
-WebApp API Path:  /Users/alex/Development/projects/ipselon/blgg-platform/platform/web-app/dist
-Admin PWA Path:  /Users/alex/Development/projects/ipselon/blgg-platform/platform/admin-pwa/dist
-WebApp Public Path:  /Users/alex/Development/projects/ipselon/blgg-platform/platform/web-app/public
-WebApp Assets Path:  /Users/alex/Development/projects/ipselon/blgg-platform/platform/web-app/static
-WebApp Assets uploaded
 
-✨  Synthesis time: 1.15s
+✨  Synthesis time: 1.18s
 
-BlggWebsiteStack:  start: Building 23c3c27fc0d8c68671d85d6220164c78d1e02dded24744f4da7fb59a4ae93a7e:current_account-current_region
-BlggWebsiteStack:  success: Built 23c3c27fc0d8c68671d85d6220164c78d1e02dded24744f4da7fb59a4ae93a7e:current_account-current_region
-BlggWebsiteStack:  start: Building 0878356dc526c9188857d2638e6b6407d0a61d845017a92aa80ede9be3e539c3:current_account-current_region
-BlggWebsiteStack:  success: Built 0878356dc526c9188857d2638e6b6407d0a61d845017a92aa80ede9be3e539c3:current_account-current_region
-BlggWebsiteStack:  start: Publishing 23c3c27fc0d8c68671d85d6220164c78d1e02dded24744f4da7fb59a4ae93a7e:current_account-current_region
-BlggWebsiteStack:  start: Publishing 0878356dc526c9188857d2638e6b6407d0a61d845017a92aa80ede9be3e539c3:current_account-current_region
-BlggWebsiteStack:  start: Building 08c2e32392cc218b6890ee89168eab8477a7cdcc0fb05e7a2e7153cb89ce8d56:current_account-current_region
-BlggWebsiteStack:  success: Built 08c2e32392cc218b6890ee89168eab8477a7cdcc0fb05e7a2e7153cb89ce8d56:current_account-current_region
-BlggWebsiteStack:  start: Publishing 08c2e32392cc218b6890ee89168eab8477a7cdcc0fb05e7a2e7153cb89ce8d56:current_account-current_region
-BlggWebsiteStack:  success: Published 08c2e32392cc218b6890ee89168eab8477a7cdcc0fb05e7a2e7153cb89ce8d56:current_account-current_region
-BlggWebsiteStack:  success: Published 0878356dc526c9188857d2638e6b6407d0a61d845017a92aa80ede9be3e539c3:current_account-current_region
-BlggWebsiteStack:  success: Published 23c3c27fc0d8c68671d85d6220164c78d1e02dded24744f4da7fb59a4ae93a7e:current_account-current_region
+BlggWebsiteStack:  start: Building d92830c809d351eab60c973ca36ebbbae9cc9f5fd46e41b254b0819eaa315837:current_account-current_region
+BlggWebsiteStack:  success: Built d92830c809d351eab60c973ca36ebbbae9cc9f5fd46e41b254b0819eaa315837:current_account-current_region
+BlggWebsiteStack:  start: Building eda9594bdf67e6bc16604cdc2239b070cea2c9f52996f8c6ed8594b524f49418:current_account-current_region
+BlggWebsiteStack:  success: Built eda9594bdf67e6bc16604cdc2239b070cea2c9f52996f8c6ed8594b524f49418:current_account-current_region
+BlggWebsiteStack:  start: Publishing d92830c809d351eab60c973ca36ebbbae9cc9f5fd46e41b254b0819eaa315837:current_account-current_region
+BlggWebsiteStack:  start: Publishing eda9594bdf67e6bc16604cdc2239b070cea2c9f52996f8c6ed8594b524f49418:current_account-current_region
+BlggWebsiteStack:  start: Building d743b7ace3d7469a0124260b0aa347e43fd083216d41dc3d67d3eff0d7e7f08f:current_account-current_region
+BlggWebsiteStack:  success: Built d743b7ace3d7469a0124260b0aa347e43fd083216d41dc3d67d3eff0d7e7f08f:current_account-current_region
+BlggWebsiteStack:  start: Building cc6f42fb8afee4c9c8781ff8594c17af3344c5d5ef3f064ec21d21a1ab6f0db4:current_account-current_region
+BlggWebsiteStack:  success: Built cc6f42fb8afee4c9c8781ff8594c17af3344c5d5ef3f064ec21d21a1ab6f0db4:current_account-current_region
+BlggWebsiteStack:  start: Publishing d743b7ace3d7469a0124260b0aa347e43fd083216d41dc3d67d3eff0d7e7f08f:current_account-current_region
+BlggWebsiteStack:  start: Publishing cc6f42fb8afee4c9c8781ff8594c17af3344c5d5ef3f064ec21d21a1ab6f0db4:current_account-current_region
+BlggWebsiteStack:  start: Building 64c71601c95b4c9ce993be83430ee7e081046f8c7009122aecb556a2fdb06d46:current_account-current_region
+BlggWebsiteStack:  success: Built 64c71601c95b4c9ce993be83430ee7e081046f8c7009122aecb556a2fdb06d46:current_account-current_region
+BlggWebsiteStack:  start: Publishing 64c71601c95b4c9ce993be83430ee7e081046f8c7009122aecb556a2fdb06d46:current_account-current_region
+BlggWebsiteStack:  success: Published 64c71601c95b4c9ce993be83430ee7e081046f8c7009122aecb556a2fdb06d46:current_account-current_region
+BlggWebsiteStack:  success: Published d743b7ace3d7469a0124260b0aa347e43fd083216d41dc3d67d3eff0d7e7f08f:current_account-current_region
+BlggWebsiteStack:  success: Published cc6f42fb8afee4c9c8781ff8594c17af3344c5d5ef3f064ec21d21a1ab6f0db4:current_account-current_region
+BlggWebsiteStack:  success: Published eda9594bdf67e6bc16604cdc2239b070cea2c9f52996f8c6ed8594b524f49418:current_account-current_region
+BlggWebsiteStack:  success: Published d92830c809d351eab60c973ca36ebbbae9cc9f5fd46e41b254b0819eaa315837:current_account-current_region
 BlggWebsiteStack: deploying... [1/1]
 BlggWebsiteStack: creating CloudFormation changeset...
-BlggWebsiteStack | 0/9 | 11:46:38 AM | UPDATE_IN_PROGRESS   | AWS::Lambda::Function                           | ApiConstruct/ApiLambda (ApiConstructApiLambdaA1689780) 
-BlggWebsiteStack | 0/9 | 11:46:32 AM | UPDATE_IN_PROGRESS   | AWS::CloudFormation::Stack                      | BlggWebsiteStack User Initiated
-BlggWebsiteStack | 0/9 | 11:46:37 AM | UPDATE_IN_PROGRESS   | Custom::CDKBucketDeployment                     | SystemBucketDeploymentConstruct/AdminPwaDeployment/CustomResource/Default (SystemBucketDeploymentConstructAdminPwaDeploymentCustomResourceC8A3FD21) 
-BlggWebsiteStack | 0/9 | 11:46:37 AM | UPDATE_IN_PROGRESS   | Custom::AWS                                     | SystemBucketDeploymentConstruct/PreviewPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructPreviewPointDistributionInvalidationCacheInvalidationResource8F17841A) 
-BlggWebsiteStack | 0/9 | 11:46:37 AM | UPDATE_IN_PROGRESS   | Custom::AWS                                     | SystemBucketDeploymentConstruct/EntryPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructEntryPointDistributionInvalidationCacheInvalidationResourceAC9314BD) 
-BlggWebsiteStack | 1/9 | 11:46:45 AM | UPDATE_COMPLETE      | AWS::Lambda::Function                           | ApiConstruct/ApiLambda (ApiConstructApiLambdaA1689780) 
-BlggWebsiteStack | 1/9 | 11:46:49 AM | UPDATE_IN_PROGRESS   | Custom::AWS                                     | SystemBucketDeploymentConstruct/EntryPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructEntryPointDistributionInvalidationCacheInvalidationResourceAC9314BD) Requested update required the provider to create a new physical resource
-BlggWebsiteStack | 2/9 | 11:46:49 AM | UPDATE_COMPLETE      | Custom::AWS                                     | SystemBucketDeploymentConstruct/EntryPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructEntryPointDistributionInvalidationCacheInvalidationResourceAC9314BD) 
-BlggWebsiteStack | 2/9 | 11:46:51 AM | UPDATE_IN_PROGRESS   | Custom::AWS                                     | SystemBucketDeploymentConstruct/PreviewPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructPreviewPointDistributionInvalidationCacheInvalidationResource8F17841A) Requested update required the provider to create a new physical resource
-BlggWebsiteStack | 3/9 | 11:46:51 AM | UPDATE_COMPLETE      | Custom::AWS                                     | SystemBucketDeploymentConstruct/PreviewPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructPreviewPointDistributionInvalidationCacheInvalidationResource8F17841A) 
-BlggWebsiteStack | 4/9 | 11:47:23 AM | UPDATE_COMPLETE      | Custom::CDKBucketDeployment                     | SystemBucketDeploymentConstruct/AdminPwaDeployment/CustomResource/Default (SystemBucketDeploymentConstructAdminPwaDeploymentCustomResourceC8A3FD21) 
-BlggWebsiteStack | 5/9 | 11:47:27 AM | UPDATE_COMPLETE_CLEA | AWS::CloudFormation::Stack                      | BlggWebsiteStack 
-BlggWebsiteStack | 5/9 | 11:47:28 AM | DELETE_IN_PROGRESS   | AWS::CloudFormation::CustomResource             | SystemBucketDeploymentConstruct/EntryPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructEntryPointDistributionInvalidationCacheInvalidationResourceAC9314BD) 
-BlggWebsiteStack | 5/9 | 11:47:28 AM | DELETE_IN_PROGRESS   | AWS::CloudFormation::CustomResource             | SystemBucketDeploymentConstruct/PreviewPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructPreviewPointDistributionInvalidationCacheInvalidationResource8F17841A) 
-BlggWebsiteStack | 4/9 | 11:47:30 AM | DELETE_COMPLETE      | AWS::CloudFormation::CustomResource             | SystemBucketDeploymentConstruct/EntryPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructEntryPointDistributionInvalidationCacheInvalidationResourceAC9314BD) 
-BlggWebsiteStack | 3/9 | 11:47:31 AM | DELETE_COMPLETE      | AWS::CloudFormation::CustomResource             | SystemBucketDeploymentConstruct/PreviewPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructPreviewPointDistributionInvalidationCacheInvalidationResource8F17841A) 
-BlggWebsiteStack | 4/9 | 11:47:31 AM | UPDATE_COMPLETE      | AWS::CloudFormation::Stack                      | BlggWebsiteStack 
+BlggWebsiteStack |  0/14 | 3:32:11 PM | UPDATE_IN_PROGRESS   | AWS::Lambda::Function                           | ApiConstruct/ApiLambda (ApiConstructApiLambdaA1689780) 
+BlggWebsiteStack |  0/14 | 3:32:11 PM | UPDATE_IN_PROGRESS   | AWS::Lambda::Function                           | WebAppApiConstruct/WebAppAdapterLambda (WebAppApiConstructWebAppAdapterLambda643C244D) 
+BlggWebsiteStack |  0/14 | 3:32:05 PM | UPDATE_IN_PROGRESS   | AWS::CloudFormation::Stack                      | BlggWebsiteStack User Initiated
+BlggWebsiteStack |  0/14 | 3:32:10 PM | UPDATE_IN_PROGRESS   | Custom::AWS                                     | SystemBucketDeploymentConstruct/PreviewPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructPreviewPointDistributionInvalidationCacheInvalidationResource8F17841A) 
+BlggWebsiteStack |  0/14 | 3:32:10 PM | UPDATE_IN_PROGRESS   | Custom::AWS                                     | SystemBucketDeploymentConstruct/EntryPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructEntryPointDistributionInvalidationCacheInvalidationResourceAC9314BD) 
+BlggWebsiteStack |  0/14 | 3:32:10 PM | UPDATE_IN_PROGRESS   | Custom::CDKBucketDeployment                     | SystemBucketDeploymentConstruct/AdminPwaDeployment/CustomResource/Default (SystemBucketDeploymentConstructAdminPwaDeploymentCustomResourceC8A3FD21) 
+BlggWebsiteStack |  0/14 | 3:32:10 PM | UPDATE_IN_PROGRESS   | Custom::CDKBucketDeployment                     | SystemBucketDeploymentConstruct/WebAppStaticBucketDeployment/CustomResource/Default (SystemBucketDeploymentConstructWebAppStaticBucketDeploymentCustomResource9FBBCA26) 
+BlggWebsiteStack |  1/14 | 3:32:17 PM | UPDATE_COMPLETE      | AWS::Lambda::Function                           | WebAppApiConstruct/WebAppAdapterLambda (WebAppApiConstructWebAppAdapterLambda643C244D) 
+BlggWebsiteStack |  2/14 | 3:32:17 PM | UPDATE_COMPLETE      | AWS::Lambda::Function                           | ApiConstruct/ApiLambda (ApiConstructApiLambdaA1689780) 
+BlggWebsiteStack |  2/14 | 3:32:23 PM | UPDATE_IN_PROGRESS   | Custom::AWS                                     | SystemBucketDeploymentConstruct/EntryPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructEntryPointDistributionInvalidationCacheInvalidationResourceAC9314BD) Requested update required the provider to create a new physical resource
+BlggWebsiteStack |  2/14 | 3:32:24 PM | UPDATE_IN_PROGRESS   | Custom::AWS                                     | SystemBucketDeploymentConstruct/PreviewPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructPreviewPointDistributionInvalidationCacheInvalidationResource8F17841A) Requested update required the provider to create a new physical resource
+BlggWebsiteStack |  3/14 | 3:32:24 PM | UPDATE_COMPLETE      | Custom::AWS                                     | SystemBucketDeploymentConstruct/EntryPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructEntryPointDistributionInvalidationCacheInvalidationResourceAC9314BD) 
+BlggWebsiteStack |  4/14 | 3:32:24 PM | UPDATE_COMPLETE      | Custom::AWS                                     | SystemBucketDeploymentConstruct/PreviewPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructPreviewPointDistributionInvalidationCacheInvalidationResource8F17841A) 
+BlggWebsiteStack |  5/14 | 3:32:56 PM | UPDATE_COMPLETE      | Custom::CDKBucketDeployment                     | SystemBucketDeploymentConstruct/AdminPwaDeployment/CustomResource/Default (SystemBucketDeploymentConstructAdminPwaDeploymentCustomResourceC8A3FD21) 
+BlggWebsiteStack |  6/14 | 3:32:56 PM | UPDATE_COMPLETE      | Custom::CDKBucketDeployment                     | SystemBucketDeploymentConstruct/WebAppStaticBucketDeployment/CustomResource/Default (SystemBucketDeploymentConstructWebAppStaticBucketDeploymentCustomResource9FBBCA26) 
+BlggWebsiteStack |  7/14 | 3:33:00 PM | UPDATE_COMPLETE_CLEA | AWS::CloudFormation::Stack                      | BlggWebsiteStack 
+BlggWebsiteStack |  7/14 | 3:33:01 PM | DELETE_IN_PROGRESS   | AWS::CloudFormation::CustomResource             | SystemBucketDeploymentConstruct/EntryPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructEntryPointDistributionInvalidationCacheInvalidationResourceAC9314BD) 
+BlggWebsiteStack |  7/14 | 3:33:01 PM | DELETE_IN_PROGRESS   | AWS::CloudFormation::CustomResource             | SystemBucketDeploymentConstruct/PreviewPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructPreviewPointDistributionInvalidationCacheInvalidationResource8F17841A) 
+BlggWebsiteStack |  6/14 | 3:33:03 PM | DELETE_COMPLETE      | AWS::CloudFormation::CustomResource             | SystemBucketDeploymentConstruct/EntryPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructEntryPointDistributionInvalidationCacheInvalidationResourceAC9314BD) 
+BlggWebsiteStack |  5/14 | 3:33:03 PM | DELETE_COMPLETE      | AWS::CloudFormation::CustomResource             | SystemBucketDeploymentConstruct/PreviewPointDistributionInvalidation/CacheInvalidationResource/Resource/Default (SystemBucketDeploymentConstructPreviewPointDistributionInvalidationCacheInvalidationResource8F17841A) 
+BlggWebsiteStack |  6/14 | 3:33:03 PM | UPDATE_COMPLETE      | AWS::CloudFormation::Stack                      | BlggWebsiteStack 
 
  ✅  BlggWebsiteStack
 
-✨  Deployment time: 94.08s
+✨  Deployment time: 93.96s
 
 Outputs:
 BlggWebsiteStack.BlggWebsiteStackEntryPointDomain = d1l194tyb6rwwp.cloudfront.net
@@ -56,11 +62,14 @@ BlggWebsiteStack.BlggWebsiteStackSysUserPoolId = eu-west-1_ww9tNPgPo
 Stack ARN:
 arn:aws:cloudformation:eu-west-1:537663360039:stack/BlggWebsiteStack/7ebe5e60-8de0-11ee-aa26-0afb810d82df
 
-✨  Total time: 95.23s
+✨  Total time: 95.13s
 
 
 Reading output.
-Parameter stored: BlggWebsiteStackEntryPointDomain, Version: 27
-Parameter stored: BlggWebsiteStackPreviewPointDomain, Version: 27
-Parameter stored: BlggWebsiteStackSysUserPoolId, Version: 27
-Parameter stored: BlggWebsiteStackSysUserPoolClientId, Version: 27
+Parameter stored: BlggWebsiteStackEntryPointDomain, Version: 28
+Parameter stored: BlggWebsiteStackPreviewPointDomain, Version: 28
+Parameter stored: BlggWebsiteStackSysUserPoolId, Version: 28
+Parameter stored: BlggWebsiteStackSysUserPoolClientId, Version: 28
+It seems that the platform has been successfully deployed.
+Please open the website at: https://d1l194tyb6rwwp.cloudfront.net
+Please open the admin panel at: https://d1l194tyb6rwwp.cloudfront.net/admin

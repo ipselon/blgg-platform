@@ -20,7 +20,6 @@ export class WebAppApiConstruct extends Construct {
         super(scope, id);
         const {tables} = props;
 
-        console.log('WebApp API Path: ', resolve('../web-app/dist'));
         const lambdaHandler = new lambda.Function(this, 'WebAppAdapterLambda', {
             runtime: lambda.Runtime.NODEJS_18_X,
             handler: 'index.handler',

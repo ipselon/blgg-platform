@@ -20,8 +20,6 @@ export async function sysUserProfileAction({request}: LoaderFunctionArgs) {
             if (action === FORM_ACTION_SUBMIT) {
                 const data = Object.fromEntries(formData);
                 const validationResult = formSchema.safeParse(data);
-                console.log('DATA: ', data);
-                console.log('Validation: ', validationResult);
                 if (!validationResult.success) {
                     const formatted = validationResult.error.format();
                     return json(formatted);

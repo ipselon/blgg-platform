@@ -1,5 +1,9 @@
 import { SSMClient, GetParameterCommand } from "@aws-sdk/client-ssm";
-import {PLATFORM_SYS_USER_POOL_ID_SSM_PARAM, PLATFORM_SYS_USER_POOL_CLIENT_ID_SSM_PARAM} from 'common-utils';
+import {
+    PLATFORM_SYS_USER_POOL_ID_SSM_PARAM,
+    PLATFORM_SYS_USER_POOL_CLIENT_ID_SSM_PARAM,
+    PLATFORM_PREVIEW_POINT_DOMAIN_SSM_PARAM
+} from 'common-utils';
 
 export type CognitoUserPoolConfig = {
     UserPoolId: string;
@@ -33,4 +37,8 @@ export async function getSysUserPoolConfig(): Promise<CognitoUserPoolConfig> {
         };
     }
     return sysUserPoolConfig;
+}
+
+export async function getPreviewPointDomain(): Promise<string> {
+    return getSsmParameter(PLATFORM_PREVIEW_POINT_DOMAIN_SSM_PARAM);
 }

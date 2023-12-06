@@ -11,7 +11,7 @@ const formSchema = z.object({
         message: "Full name must be at least 2 characters.",
     }),
     body: z.string().min(2, {
-        message: "Full name must be at least 2 characters.",
+        message: "Body must be at least 2 characters.",
     }),
 });
 
@@ -20,17 +20,13 @@ export async function mainPageAction({request}: LoaderFunctionArgs) {
         case "POST": {
             let formData = await request.formData();
             const action = formData.get('action');
-            console.log('Action: ', action);
             if (action === FORM_ACTION_SUBMIT) {
                 const data = Object.fromEntries(formData);
                 const validationResult = formSchema.safeParse(data);
-                console.log('DATA: ', data);
-                console.log('Validation: ', validationResult);
                 if (!validationResult.success) {
                     const formatted = validationResult.error.format();
                     return json(formatted);
                 }
-                console.log('Trying to update the content');
                 try {
                     await mainPageDataSingleton.updatePageContent(data);
                 } catch (e: any) {

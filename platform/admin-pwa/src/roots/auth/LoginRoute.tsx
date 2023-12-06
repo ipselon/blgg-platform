@@ -41,8 +41,6 @@ export async function loginAction({request}: LoaderFunctionArgs) {
             let formData = await request.formData();
             const data = Object.fromEntries(formData);
             const validationResult = loginFormSchema.safeParse(data);
-            console.log('DATA: ', data);
-            console.log('Validation: ', validationResult);
             if (!validationResult.success) {
                 const formatted = validationResult.error.format();
                 return json(formatted);
@@ -74,8 +72,7 @@ export async function loginAction({request}: LoaderFunctionArgs) {
 export function LoginRoute() {
     const actionData: any = useActionData();
     let navigation = useNavigation();
-    console.log('Action data: ', actionData);
-
+    const isLoading = !!navigation.formData?.get('username');
     return (
         <div className="w-full h-full flex flex-col items-center justify-center bg-slate-100">
             <Form method="post">
@@ -84,9 +81,6 @@ export function LoginRoute() {
                         <CardTitle>Login</CardTitle>
                         <CardDescription>Login as administrator.</CardDescription>
                         <ActionDataRequestError actionData={actionData}/>
-                        {!!navigation.formData?.get('username') && (
-                            <p className="text-xs">Trying to log in. Please wait...</p>
-                        )}
                     </CardHeader>
                     <CardContent>
                         <div className="grid w-full items-center gap-6">
@@ -106,7 +100,7 @@ export function LoginRoute() {
                         <Button variant="outline" type="button" asChild={true}>
                             <Link to="/password-reset">Forgot</Link>
                         </Button>
-                        <Button type="submit">
+                        <Button type="submit" disabled={isLoading}>
                             Login
                         </Button>
                     </CardFooter>
