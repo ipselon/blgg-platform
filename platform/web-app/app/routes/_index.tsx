@@ -1,8 +1,13 @@
 import type {MetaFunction, LoaderFunctionArgs} from "@remix-run/node";
 import {json} from '@remix-run/node';
 import {useLoaderData} from '@remix-run/react';
-import {getMainPageContent} from '~/api/mainPage.server';
+import {getMainPageContent, MainPageContent} from '~/api/mainPage.server';
 import {MarkdownText} from '~/components/MarkdownText';
+
+interface LoaderResponse {
+    mainPageContent?: MainPageContent;
+    error?: string;
+}
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
     return [
@@ -14,14 +19,22 @@ export const meta: MetaFunction<typeof loader> = ({data}) => {
 export const loader = async (args: LoaderFunctionArgs) => {
     // const {request} = args;
     // const url = new URL(request.url);
-    const mainPageContent = await getMainPageContent();
-    return json(mainPageContent);
+    const result: LoaderResponse = {
+        mainPageContent: undefined,
+        error: undefined
+    }
+    try {
+        const mainPageContent = await getMainPageContent();
+        return json(mainPageContent);
+    } catch (e: any) {
+        throw json(e.message, {status: 500});
+    }
 };
 
 export default function Index() {
-    const {body, heroTitle} = useLoaderData<typeof loader>();
+    const {title, heroTitle, body} = useLoaderData<typeof loader>();
     return (
-        <section className="spacetext h-screen flex items-center main-hero">
+        <section className="spacetext flex items-center main-hero">
             <div className="relative max-w-7xl mx-auto items-center gap-12 rounded-3xl p-8 lg:p-20 w-full flex flex-col">
                 <div className="max-w-xl text-center mx-auto">
                     <div>
@@ -36,7 +49,7 @@ export default function Index() {
                     </div>
                 </div>
                 <div className="max-w-xl mx-auto">
-                    <div className="text-white px-6 py-2 rounded-lg bg-white/10 prose lg:prose-xl">
+                    <div className="text-white px-6 py-4 rounded-lg bg-white/10 prose lg:prose-xl">
                         <article className="prose-invert lg:prose-invert lg:prose-xl">
                             <MarkdownText markdown={body} />
                         </article>

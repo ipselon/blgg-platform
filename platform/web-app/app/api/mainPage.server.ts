@@ -19,5 +19,5 @@ export async function getMainPageContent(): Promise<MainPageContent> {
             body: mainPageDbItem.Body.S
         }
     }
-    throw Error('Missing page content');
+    throw Error('Missing the Home page content');
 }
